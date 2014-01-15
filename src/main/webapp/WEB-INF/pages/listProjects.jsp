@@ -240,12 +240,30 @@
                                                                 <i class="icon-briefcase"></i>
                                                                 Project name
                                                             </th>
+                                                            <th>
+                                                                <i class="icon-cogs"></i>
+                                                                Environments
+                                                            </th>
+                                                            <th>
+                                                                <i class="icon-check"></i>
+                                                                Change status
+                                                            </th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <c:forEach var="project" items="${projects}" varStatus="status">
                                                             <tr>
                                                                 <td>${project.name}</td>
+                                                                <td style="text-align: center;">
+                                                                    <a href="/environment/edit?projectId=${project.id}" class="btn btn-info btn-minier">
+                                                                        <i class="icon-cogs"></i> Edit environments
+                                                                    </a>
+                                                                </td>
+                                                                <td style="text-align: center;">
+                                                                        <a href="/environment/edit?projectId=${project.id}" class="btn btn-danger btn-minier">
+                                                                            <i class="icon-trash"></i> Disable
+                                                                        </a>
+                                                                </td>
                                                             </tr>
                                                         </c:forEach>
                                                     </tbody>

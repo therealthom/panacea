@@ -233,7 +233,7 @@
                                 <!-- PAGE CONTENT BEGINS -->
                                 <form:form method="post" action="saveProject" modelAttribute="project">
                                     <div class="form-group">
-                                        <label for="name" class="col-xs-2 control-label no-padding-right">Nombre:</label>
+                                        <label for="name" class="col-xs-2 control-label no-padding-right">New project name:</label>
                                         <div class="col-xs-10">
                                             <span class="block input-icon input-icon-right">
                                                 <form:input name="name" id="name" path="name" value="${project.name}" />
