@@ -146,7 +146,7 @@
                         </li>
 
                         <li>
-                            <a href="projects.html">
+                            <a href="<c:url value="/project/listProjects" />">
                                 <i class="icon-briefcase"></i>
                                 <span class="menu-text"> Projects </span>
                             </a>
