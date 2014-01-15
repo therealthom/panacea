@@ -188,7 +188,10 @@
                         </script>
 
                         <ul class="breadcrumb">
-                            <li class="active">Welcome</li>
+                            <li class="active">
+                                <i class="icon-desktop"></i>
+                                &nbsp;Welcome
+                            </li>
                         </ul><!-- .breadcrumb -->
                     </div>
 
@@ -215,18 +218,16 @@
         <!-- basic scripts -->
 
         <!--[if !IE]> -->
-
         <script type="text/javascript">
             window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
         </script>
-
         <!-- <![endif]-->
 
-        <!--[if IE]>
-<script type="text/javascript">
-window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
-</script>
-<![endif]-->
+        <!--[if IE] -->
+        <script type="text/javascript">
+            window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+        </script>
+        <!--[endif]-->
 
         <script type="text/javascript">
             if ("ontouchend" in document)
