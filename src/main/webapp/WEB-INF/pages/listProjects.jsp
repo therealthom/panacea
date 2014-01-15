@@ -192,12 +192,13 @@
                             <div class="col-xs-12">
                                 <!-- PAGE CONTENT BEGINS -->
                                 <div class="widget-box">
-                                    <div class="widget-header header-color-dark">
+                                    <div class="widget-header">
                                         <h4 class="lighter"><i class="icon-bars"></i> Project list </h4>
                                         <div class="widget-toolbar">
-                                            <a href="<c:url value="/project/createProject" />" class="btn btn-sm btn-info">
+                                            <a href="<c:url value="/project/createProject" />" class="btn btn-minier btn-inverse" >
                                                 <i class="icon-plus"></i>
-                                                New project
+                                                New project&nbsp;
+                                                <i class="icon-briefcase"></i>
                                             </a>
                                         </div>
                                     </div>
@@ -230,7 +231,7 @@
                                                             <tr>
                                                                 <td>${project.name}</td>
                                                                 <td style="text-align: center;">
-                                                                    <a href="/environment/edit?projectId=${project.id}" class="btn btn-info btn-minier">
+                                                                    <a href="../environment/listEnvironments?projectId=${project.id}" class="btn btn-info btn-minier">
                                                                         <i class="icon-cogs"></i> Edit environments
                                                                     </a>
                                                                 </td>
