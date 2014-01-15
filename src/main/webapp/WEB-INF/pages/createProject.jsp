@@ -1,10 +1,29 @@
+<%-- 
+    Document   : createProject
+    Created on : 15-ene-2014, 14:44:04
+    Author     : oscar
+--%>
+
+<%-- 
+    Document   : listProjects
+    Created on : 15-ene-2014, 13:17:31
+    Author     : oscar
+--%>
+
+<%-- 
+    Document   : systemSettings.jsp
+    Created on : 15-ene-2014, 10:51:44
+    Author     : oscar
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>Dashboard</title>
+        <title>Panacea Web</title>
 
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -127,9 +146,9 @@
 
                     <div class="sidebar-shortcuts" id="sidebar-shortcuts">
                         <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-                            <a class="btn btn-success" href="<c:url value="/home/dashboard" />">
+                            <button class="btn btn-success">
                                 <i class="icon-desktop"></i>
-                            </a>
+                            </button>
                         </div>
 
                         <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
@@ -139,37 +158,30 @@
 
                     <ul class="nav nav-list">
                         <li>
-                            <a href="<c:url value="/setup/init" />">
+                            <a href="systemSettings.html">
                                 <i class="icon-wrench"></i>
                                 <span class="menu-text"> System settings </span>
                             </a>
                         </li>
 
                         <li>
-                            <a href="<c:url value="/project/listProjects" />">
+                            <a href="userAdmin.html">
+                                <i class="icon-group"></i>
+                                <span class="menu-text"> User admin </span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="projects.html">
                                 <i class="icon-briefcase"></i>
                                 <span class="menu-text"> Projects </span>
                             </a>
                         </li>
 
                         <li>
-                            <a href="<c:url value="/promotion/list" />">
+                            <a href="promotions.html">
                                 <i class="icon-thumbs-up"></i>
                                 <span class="menu-text"> Promotions </span>
-                            </a>
-                        </li>
-                        
-                        <li>
-                            <a href="<c:url value="/log/list" />">
-                                <i class="icon-group"></i>
-                                <span class="menu-text"> Log </span>
-                            </a>
-                        </li>
-                        
-                        <li>
-                            <a href="userAdmin.html">
-                                <i class="icon-group"></i>
-                                <span class="menu-text"> User admin </span>
                             </a>
                         </li>
 
@@ -197,18 +209,44 @@
                         </script>
 
                         <ul class="breadcrumb">
+                            <li>
+                                <a href="<c:url value="/home/dashboard" />">
+                                    <i class="icon-desktop"></i>
+                                    &nbsp;Home
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<c:url value="/project/listProjects" />">
+                                    <i class="icon-bars"></i>
+                                    &nbsp;Projects
+                                </a>
+                            </li>
                             <li class="active">
-                                <i class="icon-desktop"></i>
-                                &nbsp;Welcome
+                                <i class="icon-briefcase"></i>
+                                New Project
                             </li>
                         </ul><!-- .breadcrumb -->
                     </div>
-
                     <div class="page-content">
-                        <div class="row">
+                        <div class="row-fluid">
                             <div class="col-xs-12">
                                 <!-- PAGE CONTENT BEGINS -->
-                                Bienvenido
+                                <form:form method="post" action="saveProject" modelAttribute="project">
+                                    <div class="form-group">
+                                        <label for="name" class="col-xs-2 control-label no-padding-right">New project name:</label>
+                                        <div class="col-xs-10">
+                                            <span class="block input-icon input-icon-right">
+                                                <form:input name="name" id="name" path="name" value="${project.name}" />
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 clearfix form-actions">
+                                        <button class="btn btn-success" type="submit">
+                                            <i class="icon-ok bigger-sm"></i>
+                                            Save new project
+                                        </button>
+                                    </div>
+                                </form:form>
                                 <!-- PAGE CONTENT ENDS -->
                             </div><!-- /.col -->
                         </div><!-- /.row -->
