@@ -21,26 +21,30 @@ public class SetupController {
 
     @RequestMapping(value = "/init", method = RequestMethod.GET)
     public String setup(ModelMap model) {
-        Setup setup = setupServiceImpl.findSetup(1L);
+        Setup setup = setupServiceImpl.findSetup(1L);        
         if (setup == null) {
             setup = new Setup();
+            setup.setSvnHost("-");
+            setup.setSvnPort("-");
+            setup.setSvnUsername("-");
+            setup.setSvnPassword("-");
+            setup.setJenkinsHost("-");
+            setup.setJenkinsPort("-");
+            setup.setJenkinsUsername("-");
+            setup.setJenkinsPassword("-");
+            setupServiceImpl.saveSetup(setup);            
         }
-        model.addAttribute("command", setup);
+        System.out.println("setup id1 -> " + setup.getId());
+        model.addAttribute("setup", setup);
         return "editSetup";
     }
 
     @RequestMapping(value = "/editSetup", method = RequestMethod.POST)
     public String editSetup(ModelMap model, Setup setup) {
-        setup.setSvnHost("a");
-        setup.setSvnPort("b");
-        setup.setSvnUsername("c");
-        setup.setSvnPassword("d");
-        setup.setJenkinsHost("e");
-        setup.setJenkinsPort("f");
-        setup.setJenkinsUsername("g");
-        setup.setJenkinsPassword("h");
-        setupServiceImpl.saveSetup(setup);
-        model.addAttribute("setup", setup);
+        Setup setupTmp = Setup.findSetup(setup.getId());
+        System.out.println("setup id2 -> " + setupTmp.getId());        
+        setupServiceImpl.updateSetup(setup);
+        model.addAttribute("setup", setupTmp);
         return "editSetup";
     }
 }

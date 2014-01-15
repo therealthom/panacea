@@ -208,9 +208,7 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <!-- PAGE CONTENT BEGINS -->
-                                <h4>  
-                                   <a href="<c:url value="/setup/init" />">Setup</a>  
-                                </h4>
+                                Bienvenido
                                 <!-- PAGE CONTENT ENDS -->
                             </div><!-- /.col -->
                         </div><!-- /.row -->

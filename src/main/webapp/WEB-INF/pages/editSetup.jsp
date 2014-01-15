@@ -129,7 +129,7 @@
                     <div class="sidebar-shortcuts" id="sidebar-shortcuts">
                         <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">                            
                             <a class="btn btn-success" href="<c:url value="/home/dashboard" />">
-                                
+
                                 <i class="icon-desktop"></i>
                             </a>                            
                         </div>
@@ -160,14 +160,14 @@
                                 <span class="menu-text"> Promotions </span>
                             </a>
                         </li>
-                        
+
                         <li>
                             <a href="log.html">
                                 <i class="icon-group"></i>
                                 <span class="menu-text"> Log </span>
                             </a>
                         </li>
-                        
+
                         <li>
                             <a href="userAdmin.html">
                                 <i class="icon-group"></i>
@@ -207,10 +207,79 @@
                     </div>
 
                     <div class="page-content">
+                        <div class="page-header">
+                            <h1>
+                                Settings Config
+                                <small>
+                                    <i class="icon-double-angle-right"></i>
+                                </small>
+                            </h1>
+                        </div><!-- /.page-header -->
+
                         <div class="row">
                             <div class="col-xs-12">
                                 <!-- PAGE CONTENT BEGINS -->
-                                
+                                <form:form class="form-horizontal" method="post" modelAttribute="setup" action="editSetup">
+                                    <form:hidden path="id" value="${setup.id}"/>                                    
+                                    <div class="form-group">
+                                        <form:label path="svnHost" class="col-sm-3 control-label no-padding-right">SVN Host</form:label>
+                                            <div class="col-sm-9">
+                                            <form:input path="svnHost" value="${setup.svnHost}" class="col-xs-10 col-sm-5" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <form:label path="svnPort" class="col-sm-3 control-label no-padding-right">SVN Port</form:label>
+                                            <div class="col-sm-9">
+                                            <form:input path="svnPort" value="${setup.svnPort}" class="col-xs-10 col-sm-5" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">    
+                                        <form:label path="svnUsername" class="col-sm-3 control-label no-padding-right">SVN Username</form:label>
+                                            <div class="col-sm-9">
+                                            <form:input path="svnUsername" value="${setup.svnUsername}" class="col-xs-10 col-sm-5" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <form:label path="svnPassword" class="col-sm-3 control-label no-padding-right">SVN Password</form:label>
+                                            <div class="col-sm-9">
+                                            <form:input path="svnPassword" value="${setup.svnPassword}" class="col-xs-10 col-sm-5" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <form:label path="jenkinsHost" class="col-sm-3 control-label no-padding-right">Jenkins Host</form:label>
+                                            <div class="col-sm-9">
+                                            <form:input path="jenkinsHost" value="${setup.jenkinsHost}" class="col-xs-10 col-sm-5" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <form:label path="jenkinsPort" class="col-sm-3 control-label no-padding-right">Jenkins Port</form:label>
+                                            <div class="col-sm-9">
+                                            <form:input path="jenkinsPort" value="${setup.jenkinsPort}" class="col-xs-10 col-sm-5" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <form:label path="jenkinsUsername" class="col-sm-3 control-label no-padding-right">Jenkins Username</form:label>
+                                            <div class="col-sm-9">
+                                            <form:input path="jenkinsUsername" value="${setup.jenkinsUsername}" class="col-xs-10 col-sm-5" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <form:label path="jenkinsPassword" class="col-sm-3 control-label no-padding-right">Jenkins Password</form:label>
+                                            <div class="col-sm-9">
+                                            <form:input path="jenkinsPassword" value="${setup.jenkinsPassword}" class="col-xs-10 col-sm-5" />
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix form-actions">
+                                        <div class="col-md-offset-3 col-md-9">
+                                            <button class="btn btn-info" type="submit">
+                                                <i class="icon-ok bigger-110"></i>
+                                                Editar
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </form:form>
                                 <!-- PAGE CONTENT ENDS -->
                             </div><!-- /.col -->
                         </div><!-- /.row -->
@@ -233,7 +302,7 @@
 
         <!--[if IE] -->
         <script type="text/javascript">
-            window.jQuery || document.write("<script src='../assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+            window.jQuery || document.write("<script src='../assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
         </script>
         <!--[endif]-->
 

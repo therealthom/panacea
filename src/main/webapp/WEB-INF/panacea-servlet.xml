@@ -21,7 +21,7 @@
         http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
 
     <mvc:annotation-driven />
-    <mvc:resources mapping="/assets/**" location="/assets/" />
+    <mvc:resources mapping="/assets/**" location="/assets/" />   
     
     <context:property-placeholder location="classpath*:META-INF/spring/*.properties" />
     
