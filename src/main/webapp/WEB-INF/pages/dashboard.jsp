@@ -61,7 +61,7 @@
                     <a href="#" class="navbar-brand">
                         <small>
                             <i class="icon-tasks"></i>
-                            Continuous Integration Tool
+                            Panacea-web: Continuous Integration for everyone
                         </small>
                     </a><!-- /.brand -->
                 </div><!-- /.navbar-header -->
@@ -200,7 +200,6 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <!-- PAGE CONTENT BEGINS -->
-                                <h2>Panacea Web | Continuous Integration for Everyone</h2>  
                                 <h4>  
                                     <a href="home/user">User</a>  
                                 </h4>
