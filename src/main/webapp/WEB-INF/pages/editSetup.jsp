@@ -63,7 +63,7 @@
                     <a href="#" class="navbar-brand">
                         <small>
                             <i class="icon-tasks"></i>
-                            Panacea-web: Continuous Integration for everyone - System Configs
+                            Panacea-web: Continuous Integration for everyone
                         </small>
                     </a><!-- /.brand -->
                 </div><!-- /.navbar-header -->
@@ -155,7 +155,7 @@
                         </li>
 
                         <li>
-                            <a href="promotions.html">
+                            <a href="<c:url value="/promotion/list" />">
                                 <i class="icon-thumbs-up"></i>
                                 <span class="menu-text"> Promotions </span>
                             </a>

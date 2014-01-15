@@ -4,7 +4,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>Log</title>
+        <title>Promotion Requests</title>
 
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -211,7 +211,7 @@
 
                                 <div class="page-header">
                                     <h1>
-                                        Logging
+                                        Promotion Requests
                                         <small>
                                             <i class="icon-double-angle-right"></i>
                                         </small>
@@ -226,74 +226,27 @@
                                                     <tr>
                                                         <th>Proyecto</th>
                                                         <th>Usuario</th>
-                                                        <th>Descripcion</th>
-                                                        <th>Fecha</th>
+                                                        <th>Comentarios</th>
+                                                        <th>Fecha de Promoción</th>
                                                         <th></th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>     
-                                                    <c:forEach items="${logs}" var="log">
-                                                    <tr>
-                                                        <td>
-                                                           ${log.username}
-                                                        </td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td>
-                                                            <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
-                                                                <button class="btn btn-xs btn-success">
-                                                                    <i class="icon-ok bigger-120"></i>
-                                                                </button>
-
-                                                                <button class="btn btn-xs btn-info">
-                                                                    <i class="icon-edit bigger-120"></i>
-                                                                </button>
-
-                                                                <button class="btn btn-xs btn-danger">
-                                                                    <i class="icon-trash bigger-120"></i>
-                                                                </button>
-
-                                                                <button class="btn btn-xs btn-warning">
-                                                                    <i class="icon-flag bigger-120"></i>
-                                                                </button>
-                                                            </div>
-
-                                                            <div class="visible-xs visible-sm hidden-md hidden-lg">
-                                                                <div class="inline position-relative">
-                                                                    <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown">
-                                                                        <i class="icon-cog icon-only bigger-110"></i>
-                                                                    </button>
-
-                                                                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                                        <li>
-                                                                            <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                                                                <span class="blue">
-                                                                                    <i class="icon-zoom-in bigger-120"></i>
-                                                                                </span>
-                                                                            </a>
-                                                                        </li>
-
-                                                                        <li>
-                                                                            <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                                                                <span class="green">
-                                                                                    <i class="icon-edit bigger-120"></i>
-                                                                                </span>
-                                                                            </a>
-                                                                        </li>
-
-                                                                        <li>
-                                                                            <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-                                                                                <span class="red">
-                                                                                    <i class="icon-trash bigger-120"></i>
-                                                                                </span>
-                                                                            </a>
-                                                                        </li>
-                                                                    </ul>
+                                                <tbody>                                                    
+                                                    <c:forEach items="${promotions}" var="promotion">
+                                                        <tr>
+                                                            <td>${promotion}</td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td>
+                                                                <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
+                                                                    <a href="<c:url value="/promotion/show?promotionId=${promotion.id}" />" class="btn btn-xs btn-info">
+                                                                        <i class="icon-edit bigger-120"></i>
+                                                                        Ver Detalle
+                                                                    </a>
                                                                 </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
+                                                            </td>
+                                                        </tr>
                                                     </c:forEach>
                                                 </tbody>
                                             </table>

@@ -40,7 +40,7 @@ public class PromotionRequest implements Serializable {
      */
     @Size(min = 1, max = 100)
     private String username;
-
+        
     /**
      */
     @NotNull

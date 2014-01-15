@@ -4,7 +4,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>Log</title>
+        <title>Promotion Request Details</title>
 
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -208,98 +208,143 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <!-- PAGE CONTENT BEGINS -->
-
-                                <div class="page-header">
-                                    <h1>
-                                        Logging
-                                        <small>
-                                            <i class="icon-double-angle-right"></i>
-                                        </small>
-                                    </h1>
-                                </div><!-- /.page-header -->
-
                                 <div class="row">
-                                    <div class="col-xs-12">
-                                        <div class="table-responsive">
-                                            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Proyecto</th>
-                                                        <th>Usuario</th>
-                                                        <th>Descripcion</th>
-                                                        <th>Fecha</th>
-                                                        <th></th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>     
-                                                    <c:forEach items="${logs}" var="log">
-                                                    <tr>
-                                                        <td>
-                                                           ${log.username}
-                                                        </td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td>
-                                                            <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
-                                                                <button class="btn btn-xs btn-success">
-                                                                    <i class="icon-ok bigger-120"></i>
-                                                                </button>
+                                    <div class="col-sm-10 col-sm-offset-1">
+                                        <div class="widget-box transparent invoice-box">
+                                            <div class="widget-header widget-header-large">
+                                                <h3 class="grey lighter pull-left position-relative">
+                                                    Promotion Request Details
+                                                </h3>
 
-                                                                <button class="btn btn-xs btn-info">
-                                                                    <i class="icon-edit bigger-120"></i>
-                                                                </button>
+                                                <div class="widget-toolbar no-border invoice-info">
+                                                    <span class="invoice-info-label">Promotion</span>
+                                                    <span class="red">${promotion.id}</span>
 
-                                                                <button class="btn btn-xs btn-danger">
-                                                                    <i class="icon-trash bigger-120"></i>
-                                                                </button>
+                                                    <br />
+                                                    <span class="invoice-info-label">Date:</span>
+                                                    <span class="blue">${promotion.dateCreated}</span>
+                                                </div>
+                                            </div>
 
-                                                                <button class="btn btn-xs btn-warning">
-                                                                    <i class="icon-flag bigger-120"></i>
-                                                                </button>
-                                                            </div>
-
-                                                            <div class="visible-xs visible-sm hidden-md hidden-lg">
-                                                                <div class="inline position-relative">
-                                                                    <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown">
-                                                                        <i class="icon-cog icon-only bigger-110"></i>
-                                                                    </button>
-
-                                                                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                                        <li>
-                                                                            <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                                                                <span class="blue">
-                                                                                    <i class="icon-zoom-in bigger-120"></i>
-                                                                                </span>
-                                                                            </a>
-                                                                        </li>
-
-                                                                        <li>
-                                                                            <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                                                                <span class="green">
-                                                                                    <i class="icon-edit bigger-120"></i>
-                                                                                </span>
-                                                                            </a>
-                                                                        </li>
-
-                                                                        <li>
-                                                                            <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-                                                                                <span class="red">
-                                                                                    <i class="icon-trash bigger-120"></i>
-                                                                                </span>
-                                                                            </a>
-                                                                        </li>
-                                                                    </ul>
+                                            <div class="widget-body">
+                                                <div class="widget-main padding-24">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="row">
+                                                                <div class="col-xs-11 label label-lg label-info arrowed-in arrowed-right">
+                                                                    <b>Project Info</b>
                                                                 </div>
                                                             </div>
-                                                        </td>
-                                                    </tr>
-                                                    </c:forEach>
-                                                </tbody>
-                                            </table>
-                                        </div><!-- /.table-responsive -->
-                                    </div><!-- /span -->
-                                </div><!-- /row -->
+
+                                                            <div class="row">
+                                                                <ul class="list-unstyled spaced">
+                                                                    <li>
+                                                                        <i class="icon-caret-right blue"></i>
+                                                                        Street, City
+                                                                    </li>
+
+                                                                    <li>
+                                                                        <i class="icon-caret-right blue"></i>
+                                                                        Zip Code
+                                                                    </li>
+
+                                                                    <li>
+                                                                        <i class="icon-caret-right blue"></i>
+                                                                        State, Country
+                                                                    </li>
+
+                                                                    <li>
+                                                                        <i class="icon-caret-right blue"></i>
+                                                                        Phone:
+                                                                        <b class="red">111-111-111</b>
+                                                                    </li>
+
+                                                                    <li class="divider"></li>
+
+                                                                    <li>
+                                                                        <i class="icon-caret-right blue"></i>
+                                                                        Paymant Info
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div><!-- /span -->
+
+                                                        <div class="col-sm-6">
+                                                            <div class="row">
+                                                                <div class="col-xs-11 label label-lg label-success arrowed-in arrowed-right">
+                                                                    <b>Environmens</b>
+                                                                </div>
+                                                            </div>
+
+                                                            <div>
+                                                                <ul class="list-unstyled  spaced">
+                                                                    <li>
+                                                                        <i class="icon-caret-right green"></i>
+                                                                        Street, City
+                                                                    </li>
+
+                                                                    <li>
+                                                                        <i class="icon-caret-right green"></i>
+                                                                        Zip Code
+                                                                    </li>
+
+                                                                    <li>
+                                                                        <i class="icon-caret-right green"></i>
+                                                                        State, Country
+                                                                    </li>
+
+                                                                    <li class="divider"></li>
+
+                                                                    <li>
+                                                                        <i class="icon-caret-right green"></i>
+                                                                        Contact Info
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div><!-- /span -->
+                                                    </div><!-- row -->
+
+                                                    <div class="space"></div>
+
+                                                    <div class="row">
+                                                        <div class="col-xs-12 label label-warning label-lg label-info">
+                                                            <b>Documents</b>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="space"></div>
+                                                    <a class="btn btn-purple btn-sm pull-right" href="<c:url value="/document/new?promotionId=${promotion.id}" />">
+                                                        <i class="icon-cloud-upload"></i>
+                                                        Upload Document
+                                                    </a>
+
+                                                    <div>
+                                                        <table class="table table-striped table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Filename</th>
+                                                                    <th class="hidden-xs">File</th>
+                                                                </tr>
+                                                            </thead>
+
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="center">1</td>
+                                                                    <td>
+                                                                        <a href="#"></a>
+                                                                    </td>                                                                    
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+                                                    <div class="hr hr8 hr-double hr-dotted"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- PAGE CONTENT ENDS -->                                
                             </div><!-- /.col -->
                         </div><!-- /.row -->
                     </div><!-- /.page-content -->

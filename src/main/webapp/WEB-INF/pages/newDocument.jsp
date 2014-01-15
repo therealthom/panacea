@@ -1,10 +1,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>Log</title>
+        <title>Add New Document</title>
 
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -208,98 +209,33 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <!-- PAGE CONTENT BEGINS -->
-
                                 <div class="page-header">
                                     <h1>
-                                        Logging
+                                        New Document
                                         <small>
                                             <i class="icon-double-angle-right"></i>
                                         </small>
                                     </h1>
                                 </div><!-- /.page-header -->
 
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <div class="table-responsive">
-                                            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Proyecto</th>
-                                                        <th>Usuario</th>
-                                                        <th>Descripcion</th>
-                                                        <th>Fecha</th>
-                                                        <th></th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>     
-                                                    <c:forEach items="${logs}" var="log">
-                                                    <tr>
-                                                        <td>
-                                                           ${log.username}
-                                                        </td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td>
-                                                            <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
-                                                                <button class="btn btn-xs btn-success">
-                                                                    <i class="icon-ok bigger-120"></i>
-                                                                </button>
-
-                                                                <button class="btn btn-xs btn-info">
-                                                                    <i class="icon-edit bigger-120"></i>
-                                                                </button>
-
-                                                                <button class="btn btn-xs btn-danger">
-                                                                    <i class="icon-trash bigger-120"></i>
-                                                                </button>
-
-                                                                <button class="btn btn-xs btn-warning">
-                                                                    <i class="icon-flag bigger-120"></i>
-                                                                </button>
-                                                            </div>
-
-                                                            <div class="visible-xs visible-sm hidden-md hidden-lg">
-                                                                <div class="inline position-relative">
-                                                                    <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown">
-                                                                        <i class="icon-cog icon-only bigger-110"></i>
-                                                                    </button>
-
-                                                                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                                        <li>
-                                                                            <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                                                                <span class="blue">
-                                                                                    <i class="icon-zoom-in bigger-120"></i>
-                                                                                </span>
-                                                                            </a>
-                                                                        </li>
-
-                                                                        <li>
-                                                                            <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                                                                <span class="green">
-                                                                                    <i class="icon-edit bigger-120"></i>
-                                                                                </span>
-                                                                            </a>
-                                                                        </li>
-
-                                                                        <li>
-                                                                            <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-                                                                                <span class="red">
-                                                                                    <i class="icon-trash bigger-120"></i>
-                                                                                </span>
-                                                                            </a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    </c:forEach>
-                                                </tbody>
-                                            </table>
-                                        </div><!-- /.table-responsive -->
-                                    </div><!-- /span -->
-                                </div><!-- /row -->
+                                <form:form class="form-horizontal" method="post" modelAttribute="document" action="upload" enctype="multipart/form-data">
+                                    <form:hidden path="promotionRequest" value="${document.promotionRequest}"/>
+                                    <div class="form-group">
+                                        <form:label path="name" class="col-sm-3 control-label no-padding-right">Name</form:label>
+                                        <div class="col-sm-9">
+                                            <form:input path="name" value="${document.name}" class="col-xs-10 col-sm-5" />
+                                        </div>
+                                    </div>
+                                    <div class="clearfix form-actions">
+                                        <div class="col-md-offset-3 col-md-9">
+                                            <button class="btn btn-info" type="submit">
+                                                <i class="icon-ok"></i>
+                                                Upload
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form:form>
+                                <!-- PAGE CONTENT ENDS -->
                             </div><!-- /.col -->
                         </div><!-- /.row -->
                     </div><!-- /.page-content -->

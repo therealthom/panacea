@@ -57,6 +57,10 @@ public class Environment implements Serializable {
     @NotNull
     @ManyToOne
     private Project project;
+    
+    /**
+     */
+    private boolean active;
 
     @PersistenceContext
     transient EntityManager entityManager;
@@ -179,6 +183,14 @@ public class Environment implements Serializable {
         this.password = password;
     }
 
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+    
+    public boolean isActive () {
+        return this.active;
+    }
+    
     public Project getProject() {
         return this.project;
     }
