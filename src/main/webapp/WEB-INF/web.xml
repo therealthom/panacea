@@ -35,5 +35,10 @@
 
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>    
+    </listener>
+    
+    <welcome-file-list>
+        <welcome-file>home/dashboard</welcome-file>
+    </welcome-file-list>
+          
 </web-app>
