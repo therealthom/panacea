@@ -150,36 +150,7 @@
                         </div>
                     </div><!-- #sidebar-shortcuts -->
 
-                    <ul class="nav nav-list">
-                        <li>
-                            <a href="systemSettings.html">
-                                <i class="icon-wrench"></i>
-                                <span class="menu-text"> System settings </span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="userAdmin.html">
-                                <i class="icon-group"></i>
-                                <span class="menu-text"> User admin </span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="projects.html">
-                                <i class="icon-briefcase"></i>
-                                <span class="menu-text"> Projects </span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="promotions.html">
-                                <i class="icon-thumbs-up"></i>
-                                <span class="menu-text"> Promotions </span>
-                            </a>
-                        </li>
-
-                    </ul><!-- /.nav-list -->
+                    <jsp:include page="menu.jsp" />
 
                     <div class="sidebar-collapse" id="sidebar-collapse">
                         <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
@@ -248,6 +219,10 @@
                                                                 <i class="icon-check"></i>
                                                                 Change status
                                                             </th>
+                                                            <th>
+                                                                <i class="icon-external-link-sign"></i>
+                                                                Build and promote
+                                                            </th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -260,9 +235,21 @@
                                                                     </a>
                                                                 </td>
                                                                 <td style="text-align: center;">
+                                                                    <c:if test="${project.active == true}">
                                                                         <a href="/environment/edit?projectId=${project.id}" class="btn btn-danger btn-minier">
                                                                             <i class="icon-trash"></i> Disable
                                                                         </a>
+                                                                    </c:if>
+                                                                    <c:if test="${project.active == false}">
+                                                                        <a href="/environment/edit?projectId=${project.id}" class="btn btn-success btn-minier">
+                                                                            <i class="icon-check"></i> Enable
+                                                                        </a>
+                                                                    </c:if>
+                                                                </td>
+                                                                <td style="text-align: center;">
+                                                                    <a href="/promotion/new?projectId=${project.id}" class="btn btn-purple btn-minier">
+                                                                        <i class="icon-external-link-sign"></i> Build and promote
+                                                                    </a>
                                                                 </td>
                                                             </tr>
                                                         </c:forEach>
@@ -314,4 +301,4 @@
 
         <!-- inline scripts related to this page -->
     </body>
-</html> 
+</html>

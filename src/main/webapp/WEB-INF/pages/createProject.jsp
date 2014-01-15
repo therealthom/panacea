@@ -156,36 +156,7 @@
                         </div>
                     </div><!-- #sidebar-shortcuts -->
 
-                    <ul class="nav nav-list">
-                        <li>
-                            <a href="systemSettings.html">
-                                <i class="icon-wrench"></i>
-                                <span class="menu-text"> System settings </span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="userAdmin.html">
-                                <i class="icon-group"></i>
-                                <span class="menu-text"> User admin </span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="projects.html">
-                                <i class="icon-briefcase"></i>
-                                <span class="menu-text"> Projects </span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="promotions.html">
-                                <i class="icon-thumbs-up"></i>
-                                <span class="menu-text"> Promotions </span>
-                            </a>
-                        </li>
-
-                    </ul><!-- /.nav-list -->
+                    <jsp:include page="menu.jsp" />
 
                     <div class="sidebar-collapse" id="sidebar-collapse">
                         <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>

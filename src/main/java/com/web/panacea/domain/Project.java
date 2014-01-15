@@ -160,4 +160,18 @@ public class Project implements Serializable {
     public void setEnvironments(Set<Environment> environments) {
         this.environments = environments;
     }
+
+    /**
+     * @return the active
+     */
+    public Boolean getActive() {
+        return active;
+    }
+
+    /**
+     * @param active the active to set
+     */
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
 }

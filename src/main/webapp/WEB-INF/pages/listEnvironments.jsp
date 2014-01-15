@@ -1,11 +1,29 @@
+<%-- 
+    Document   : listEnvironments
+    Created on : 15-ene-2014, 17:00:52
+    Author     : oscar
+--%>
+
+<%-- 
+    Document   : listProjects
+    Created on : 15-ene-2014, 13:17:31
+    Author     : oscar
+--%>
+
+<%-- 
+    Document   : systemSettings.jsp
+    Created on : 15-ene-2014, 10:51:44
+    Author     : oscar
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>System settings</title>
+        <title>Panacea Web</title>
 
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -63,7 +81,7 @@
                     <a href="#" class="navbar-brand">
                         <small>
                             <i class="icon-tasks"></i>
-                            Panacea-web: Continuous Integration for everyone - System Configs
+                            Panacea-web: Continuous Integration for everyone
                         </small>
                     </a><!-- /.brand -->
                 </div><!-- /.navbar-header -->
@@ -127,11 +145,10 @@
                     </script>
 
                     <div class="sidebar-shortcuts" id="sidebar-shortcuts">
-                        <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">                            
-                            <a class="btn btn-success" href="<c:url value="/home/dashboard" />">
-
+                        <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+                            <button class="btn btn-success">
                                 <i class="icon-desktop"></i>
-                            </a>                            
+                            </button>
                         </div>
 
                         <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
@@ -163,87 +180,91 @@
                         </script>
 
                         <ul class="breadcrumb">
+                            <li>
+                                <a href="<c:url value="/home/dashboard" />">
+                                    <i class="icon-desktop"></i>
+                                    &nbsp;Home
+                                </a>
+                            </li>
                             <li class="active">
-                                <i class="icon-desktop"></i>
-                                &nbsp;Welcome
+                                <i class="icon-bars"></i>
+                                Projects
                             </li>
                         </ul><!-- .breadcrumb -->
                     </div>
 
                     <div class="page-content">
-                        <div class="page-header">
-                            <h1>
-                                Settings Config
-                                <small>
-                                    <i class="icon-double-angle-right"></i>
-                                </small>
-                            </h1>
-                        </div><!-- /.page-header -->
-
                         <div class="row">
                             <div class="col-xs-12">
                                 <!-- PAGE CONTENT BEGINS -->
-                                <form:form class="form-horizontal" method="post" modelAttribute="setup" action="editSetup">
-                                    <form:hidden path="id" value="${setup.id}"/>                                    
-                                    <div class="form-group">
-                                        <form:label path="svnHost" class="col-sm-3 control-label no-padding-right">SVN Host</form:label>
-                                            <div class="col-sm-9">
-                                            <form:input path="svnHost" value="${setup.svnHost}" class="col-xs-10 col-sm-5" />
+                                <div class="widget-box">
+                                    <div class="widget-header header-color-dark">
+                                        <h4 class="lighter"><i class="icon-bars"></i> Project list </h4>
+                                        <div class="widget-toolbar">
+                                            <a href="<c:url value="/project/createProject" />" class="btn btn-sm btn-info">
+                                                <i class="icon-plus"></i>
+                                                New project
+                                            </a>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <form:label path="svnPort" class="col-sm-3 control-label no-padding-right">SVN Port</form:label>
-                                            <div class="col-sm-9">
-                                            <form:input path="svnPort" value="${setup.svnPort}" class="col-xs-10 col-sm-5" />
+                                    <div class="widget-body">
+                                        <div class="widget-main">
+                                            <form:form method="post" action="showProject" modelAttribute="projects">
+                                                <table class="table table-striped table-bordered table-hover">
+                                                    <thead class="thin-border-bottom">
+                                                        <tr>
+                                                            <th>
+                                                                <i class="icon-briefcase"></i>
+                                                                Project name
+                                                            </th>
+                                                            <th>
+                                                                <i class="icon-cogs"></i>
+                                                                Environments
+                                                            </th>
+                                                            <th>
+                                                                <i class="icon-check"></i>
+                                                                Change status
+                                                            </th>
+                                                            <th>
+                                                                <i class="icon-external-link-sign"></i>
+                                                                Build and promote
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <c:forEach var="project" items="${projects}" varStatus="status">
+                                                            <tr>
+                                                                <td>${project.name}</td>
+                                                                <td style="text-align: center;">
+                                                                    <a href="/environment/edit?projectId=${project.id}" class="btn btn-info btn-minier">
+                                                                        <i class="icon-cogs"></i> Edit environments
+                                                                    </a>
+                                                                </td>
+                                                                <td style="text-align: center;">
+                                                                    <c:if test="${project.active == true}">
+                                                                        <a href="/environment/edit?projectId=${project.id}" class="btn btn-danger btn-minier">
+                                                                            <i class="icon-trash"></i> Disable
+                                                                        </a>
+                                                                    </c:if>
+                                                                    <c:if test="${project.active == false}">
+                                                                        <a href="/environment/edit?projectId=${project.id}" class="btn btn-success btn-minier">
+                                                                            <i class="icon-check"></i> Enable
+                                                                        </a>
+                                                                    </c:if>
+                                                                </td>
+                                                                <td style="text-align: center;">
+                                                                    <a href="/promotion/new?projectId=${project.id}" class="btn btn-purple btn-minier">
+                                                                        <i class="icon-external-link-sign"></i> Build and promote
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        </c:forEach>
+                                                    </tbody>
+                                                </table>
+                                            </form:form>
                                         </div>
                                     </div>
-                                    <div class="form-group">    
-                                        <form:label path="svnUsername" class="col-sm-3 control-label no-padding-right">SVN Username</form:label>
-                                            <div class="col-sm-9">
-                                            <form:input path="svnUsername" value="${setup.svnUsername}" class="col-xs-10 col-sm-5" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <form:label path="svnPassword" class="col-sm-3 control-label no-padding-right">SVN Password</form:label>
-                                            <div class="col-sm-9">
-                                            <form:input path="svnPassword" value="${setup.svnPassword}" class="col-xs-10 col-sm-5" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <form:label path="jenkinsHost" class="col-sm-3 control-label no-padding-right">Jenkins Host</form:label>
-                                            <div class="col-sm-9">
-                                            <form:input path="jenkinsHost" value="${setup.jenkinsHost}" class="col-xs-10 col-sm-5" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <form:label path="jenkinsPort" class="col-sm-3 control-label no-padding-right">Jenkins Port</form:label>
-                                            <div class="col-sm-9">
-                                            <form:input path="jenkinsPort" value="${setup.jenkinsPort}" class="col-xs-10 col-sm-5" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <form:label path="jenkinsUsername" class="col-sm-3 control-label no-padding-right">Jenkins Username</form:label>
-                                            <div class="col-sm-9">
-                                            <form:input path="jenkinsUsername" value="${setup.jenkinsUsername}" class="col-xs-10 col-sm-5" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <form:label path="jenkinsPassword" class="col-sm-3 control-label no-padding-right">Jenkins Password</form:label>
-                                            <div class="col-sm-9">
-                                            <form:input path="jenkinsPassword" value="${setup.jenkinsPassword}" class="col-xs-10 col-sm-5" />
-                                        </div>
-                                    </div>
-
-                                    <div class="clearfix form-actions">
-                                        <div class="col-md-offset-3 col-md-9">
-                                            <button class="btn btn-info" type="submit">
-                                                <i class="icon-ok bigger-110"></i>
-                                                Editar
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                </form:form>
+                                </div>
                                 <!-- PAGE CONTENT ENDS -->
                             </div><!-- /.col -->
                         </div><!-- /.row -->
@@ -266,7 +287,7 @@
 
         <!--[if IE] -->
         <script type="text/javascript">
-            window.jQuery || document.write("<script src='../assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
+            window.jQuery || document.write("<script src='../assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
         </script>
         <!--[endif]-->
 
