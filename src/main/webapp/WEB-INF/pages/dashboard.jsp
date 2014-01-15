@@ -73,7 +73,8 @@
                         <li class="light-blue">
                             <a data-toggle="dropdown" href="#" class="dropdown-toggle">
                                 <span class="user-info">
-                                    <small>Welcome</small>
+                                    <i class="icon-th"></i>
+                                    Actions
                                 </span>
 
                                 <i class="icon-caret-down"></i>
