@@ -34,17 +34,23 @@ public class SetupController {
             setup.setJenkinsPassword("-");
             setupServiceImpl.saveSetup(setup);            
         }
-        System.out.println("setup id1 -> " + setup.getId());
         model.addAttribute("setup", setup);
         return "editSetup";
     }
 
     @RequestMapping(value = "/editSetup", method = RequestMethod.POST)
     public String editSetup(ModelMap model, Setup setup) {
-        Setup setupTmp = Setup.findSetup(setup.getId());
-        System.out.println("setup id2 -> " + setupTmp.getId());        
-        setupServiceImpl.updateSetup(setup);
-        model.addAttribute("setup", setupTmp);
+        Setup tmp = Setup.findSetup(setup.getId());
+        tmp.setSvnHost(setup.getSvnHost());
+        tmp.setSvnPort(setup.getSvnPort());
+        tmp.setSvnUsername(setup.getSvnUsername());
+        tmp.setSvnPassword(setup.getSvnPassword());
+        tmp.setJenkinsHost(setup.getJenkinsHost());
+        tmp.setJenkinsPort(setup.getJenkinsPort());
+        tmp.setJenkinsUsername(setup.getJenkinsUsername());
+        tmp.setJenkinsPassword(setup.getJenkinsPassword());
+        Setup result = setupServiceImpl.updateSetup(tmp);
+        model.addAttribute("setup", result);
         return "editSetup";
     }
 }

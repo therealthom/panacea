@@ -1,11 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>System settings</title>
+        <title>Log</title>
 
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -63,7 +62,7 @@
                     <a href="#" class="navbar-brand">
                         <small>
                             <i class="icon-tasks"></i>
-                            Panacea-web: Continuous Integration for everyone - System Configs
+                            Panacea-web: Continuous Integration for everyone - Logging
                         </small>
                     </a><!-- /.brand -->
                 </div><!-- /.navbar-header -->
@@ -127,11 +126,10 @@
                     </script>
 
                     <div class="sidebar-shortcuts" id="sidebar-shortcuts">
-                        <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">                            
+                        <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
                             <a class="btn btn-success" href="<c:url value="/home/dashboard" />">
-
                                 <i class="icon-desktop"></i>
-                            </a>                            
+                            </a>
                         </div>
 
                         <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
@@ -207,80 +205,101 @@
                     </div>
 
                     <div class="page-content">
-                        <div class="page-header">
-                            <h1>
-                                Settings Config
-                                <small>
-                                    <i class="icon-double-angle-right"></i>
-                                </small>
-                            </h1>
-                        </div><!-- /.page-header -->
-
                         <div class="row">
                             <div class="col-xs-12">
                                 <!-- PAGE CONTENT BEGINS -->
-                                <form:form class="form-horizontal" method="post" modelAttribute="setup" action="editSetup">
-                                    <form:hidden path="id" value="${setup.id}"/>                                    
-                                    <div class="form-group">
-                                        <form:label path="svnHost" class="col-sm-3 control-label no-padding-right">SVN Host</form:label>
-                                            <div class="col-sm-9">
-                                            <form:input path="svnHost" value="${setup.svnHost}" class="col-xs-10 col-sm-5" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <form:label path="svnPort" class="col-sm-3 control-label no-padding-right">SVN Port</form:label>
-                                            <div class="col-sm-9">
-                                            <form:input path="svnPort" value="${setup.svnPort}" class="col-xs-10 col-sm-5" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">    
-                                        <form:label path="svnUsername" class="col-sm-3 control-label no-padding-right">SVN Username</form:label>
-                                            <div class="col-sm-9">
-                                            <form:input path="svnUsername" value="${setup.svnUsername}" class="col-xs-10 col-sm-5" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <form:label path="svnPassword" class="col-sm-3 control-label no-padding-right">SVN Password</form:label>
-                                            <div class="col-sm-9">
-                                            <form:input path="svnPassword" value="${setup.svnPassword}" class="col-xs-10 col-sm-5" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <form:label path="jenkinsHost" class="col-sm-3 control-label no-padding-right">Jenkins Host</form:label>
-                                            <div class="col-sm-9">
-                                            <form:input path="jenkinsHost" value="${setup.jenkinsHost}" class="col-xs-10 col-sm-5" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <form:label path="jenkinsPort" class="col-sm-3 control-label no-padding-right">Jenkins Port</form:label>
-                                            <div class="col-sm-9">
-                                            <form:input path="jenkinsPort" value="${setup.jenkinsPort}" class="col-xs-10 col-sm-5" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <form:label path="jenkinsUsername" class="col-sm-3 control-label no-padding-right">Jenkins Username</form:label>
-                                            <div class="col-sm-9">
-                                            <form:input path="jenkinsUsername" value="${setup.jenkinsUsername}" class="col-xs-10 col-sm-5" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <form:label path="jenkinsPassword" class="col-sm-3 control-label no-padding-right">Jenkins Password</form:label>
-                                            <div class="col-sm-9">
-                                            <form:input path="jenkinsPassword" value="${setup.jenkinsPassword}" class="col-xs-10 col-sm-5" />
-                                        </div>
-                                    </div>
 
-                                    <div class="clearfix form-actions">
-                                        <div class="col-md-offset-3 col-md-9">
-                                            <button class="btn btn-info" type="submit">
-                                                <i class="icon-ok bigger-110"></i>
-                                                Editar
-                                            </button>
-                                        </div>
-                                    </div>
+                                <div class="page-header">
+                                    <h1>
+                                        Logging
+                                        <small>
+                                            <i class="icon-double-angle-right"></i>
+                                        </small>
+                                    </h1>
+                                </div><!-- /.page-header -->
 
-                                </form:form>
-                                <!-- PAGE CONTENT ENDS -->
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="table-responsive">
+                                            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Proyecto</th>
+                                                        <th>Usuario</th>
+                                                        <th>Descripcion</th>
+                                                        <th>Fecha</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>                                                    
+                                                    <tr>
+                                                        <td
+                                                            ><c:forEach items="${logs}" var="log">
+                                                                ${log.username}
+                                                            </c:forEach>
+                                                        </td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td>
+                                                            <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
+                                                                <button class="btn btn-xs btn-success">
+                                                                    <i class="icon-ok bigger-120"></i>
+                                                                </button>
+
+                                                                <button class="btn btn-xs btn-info">
+                                                                    <i class="icon-edit bigger-120"></i>
+                                                                </button>
+
+                                                                <button class="btn btn-xs btn-danger">
+                                                                    <i class="icon-trash bigger-120"></i>
+                                                                </button>
+
+                                                                <button class="btn btn-xs btn-warning">
+                                                                    <i class="icon-flag bigger-120"></i>
+                                                                </button>
+                                                            </div>
+
+                                                            <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                                <div class="inline position-relative">
+                                                                    <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown">
+                                                                        <i class="icon-cog icon-only bigger-110"></i>
+                                                                    </button>
+
+                                                                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                                        <li>
+                                                                            <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                                <span class="blue">
+                                                                                    <i class="icon-zoom-in bigger-120"></i>
+                                                                                </span>
+                                                                            </a>
+                                                                        </li>
+
+                                                                        <li>
+                                                                            <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                                <span class="green">
+                                                                                    <i class="icon-edit bigger-120"></i>
+                                                                                </span>
+                                                                            </a>
+                                                                        </li>
+
+                                                                        <li>
+                                                                            <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                                <span class="red">
+                                                                                    <i class="icon-trash bigger-120"></i>
+                                                                                </span>
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div><!-- /.table-responsive -->
+                                    </div><!-- /span -->
+                                </div><!-- /row -->
                             </div><!-- /.col -->
                         </div><!-- /.row -->
                     </div><!-- /.page-content -->
@@ -322,4 +341,4 @@
 
         <!-- inline scripts related to this page -->
     </body>
-</html>
+</html> 

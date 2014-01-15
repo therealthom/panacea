@@ -160,7 +160,7 @@
                         </li>
                         
                         <li>
-                            <a href="log.html">
+                            <a href="<c:url value="/log/list" />">
                                 <i class="icon-group"></i>
                                 <span class="menu-text"> Log </span>
                             </a>
