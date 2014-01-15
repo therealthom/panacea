@@ -1,10 +1,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
         <meta charset="utf-8" />
-        <title>Dashboard</title>
+        <title>System settings</title>
 
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -62,7 +63,7 @@
                     <a href="#" class="navbar-brand">
                         <small>
                             <i class="icon-tasks"></i>
-                            Panacea-web: Continuous Integration for everyone - Dashboard
+                            Panacea-web: Continuous Integration for everyone - System Configs
                         </small>
                     </a><!-- /.brand -->
                 </div><!-- /.navbar-header -->
@@ -126,10 +127,11 @@
                     </script>
 
                     <div class="sidebar-shortcuts" id="sidebar-shortcuts">
-                        <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+                        <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">                            
                             <a class="btn btn-success" href="<c:url value="/home/dashboard" />">
+                                
                                 <i class="icon-desktop"></i>
-                            </a>
+                            </a>                            
                         </div>
 
                         <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
@@ -208,9 +210,7 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <!-- PAGE CONTENT BEGINS -->
-                                <h4>  
-                                   <a href="<c:url value="/setup/init" />">Setup</a>  
-                                </h4>
+                                
                                 <!-- PAGE CONTENT ENDS -->
                             </div><!-- /.col -->
                         </div><!-- /.row -->
@@ -253,4 +253,4 @@
 
         <!-- inline scripts related to this page -->
     </body>
-</html> 
+</html>
