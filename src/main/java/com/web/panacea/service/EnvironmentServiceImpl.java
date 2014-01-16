@@ -1,6 +1,7 @@
 package com.web.panacea.service;
 
 import com.web.panacea.domain.Environment;
+import com.web.panacea.domain.Project;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +24,10 @@ public class EnvironmentServiceImpl implements EnvironmentService {
 
     public List<Environment> findAllEnvironments() {
         return Environment.findAllEnvironments();
+    }
+    
+    public List<Environment> findAllByProject(Project project) {
+        return Environment.findAllByProject(project);
     }
 
     public List<Environment> findEnvironmentEntries(int firstResult, int maxResults) {

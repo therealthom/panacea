@@ -1,6 +1,7 @@
 package com.web.panacea.service;
 
 import com.web.panacea.domain.Environment;
+import com.web.panacea.domain.Project;
 import java.util.List;
 
 public interface EnvironmentService {
@@ -18,5 +19,7 @@ public interface EnvironmentService {
     public abstract void saveEnvironment(Environment environment);
 
     public abstract Environment updateEnvironment(Environment environment);
+    
+    public abstract List<Environment> findAllByProject(Project project);
 
 }

@@ -4,18 +4,6 @@
     Author     : oscar
 --%>
 
-<%-- 
-    Document   : listProjects
-    Created on : 15-ene-2014, 13:17:31
-    Author     : oscar
---%>
-
-<%-- 
-    Document   : systemSettings.jsp
-    Created on : 15-ene-2014, 10:51:44
-    Author     : oscar
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
@@ -207,7 +195,7 @@
                                         <label for="name" class="col-xs-2 control-label no-padding-right">New project name:</label>
                                         <div class="col-xs-10">
                                             <span class="block input-icon input-icon-right">
-                                                <form:input name="name" id="name" path="name" value="${project.name}" />
+                                                <form:input name="name" id="name" path="name" value="${project.name}" class="form-control" />
                                             </span>
                                         </div>
                                     </div>
@@ -260,4 +248,4 @@
 
         <!-- inline scripts related to this page -->
     </body>
-</html> 
+</html>
