@@ -22,6 +22,7 @@ import javax.validation.constraints.Size;
 @Configurable
 public class Document implements Serializable {
 
+    private byte [] file;
     /**
      */
     @NotNull
@@ -32,7 +33,7 @@ public class Document implements Serializable {
      */
     @NotNull
     @Size(min = 2, max = 100)
-    private String name;
+    private String filename;
 
     public PromotionRequest getPromotionRequest() {
         return this.promotionRequest;
@@ -42,12 +43,12 @@ public class Document implements Serializable {
         this.promotionRequest = promotionRequest;
     }
 
-    public String getName() {
-        return this.name;
+    public String getFilename() {
+        return this.filename;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 
     @Id
@@ -154,5 +155,19 @@ public class Document implements Serializable {
 
     public String toString() {
         return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
+
+    /**
+     * @return the file
+     */
+    public byte[] getFile() {
+        return file;
+    }
+
+    /**
+     * @param file the file to set
+     */
+    public void setFile(byte[] file) {
+        this.file = file;
     }
 }

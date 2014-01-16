@@ -283,20 +283,15 @@
 
                                                     <div>
                                                         <table class="table table-striped table-bordered">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Filename</th>
-                                                                    <th class="hidden-xs">File</th>
-                                                                </tr>
-                                                            </thead>
-
                                                             <tbody>
-                                                                <tr>
-                                                                    <td class="center">1</td>
-                                                                    <td>
-                                                                        <a href="#"></a>
-                                                                    </td>                                                                    
-                                                                </tr>
+
+                                                                <c:forEach items="${promotion.documents}" var="document">
+                                                                    <tr>
+                                                                        <td>
+                                                                            <a href="#">${document.filename}</a>
+                                                                        </td>                                                                    
+                                                                    </tr>
+                                                                </c:forEach>    
                                                             </tbody>
                                                         </table>
                                                     </div>

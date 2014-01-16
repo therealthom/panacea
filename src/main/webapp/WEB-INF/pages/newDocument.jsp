@@ -181,23 +181,22 @@
                                     </h1>
                                 </div><!-- /.page-header -->
 
-                                <form:form class="form-horizontal" method="post" modelAttribute="document" action="upload" enctype="multipart/form-data">
-                                    <form:hidden path="promotionRequest" value="${document.promotionRequest}"/>
+                                <form class="form-horizontal" method="post" action="upload" enctype="multipart/form-data">
+                                    <input type="hidden" name="promotionId" value="${promotionId}"/>
                                     <div class="form-group">
-                                        <form:label path="name" class="col-sm-3 control-label no-padding-right">Name</form:label>
+                                        <label for="file" class="col-sm-3 control-label no-padding-right">Name</label>
                                         <div class="col-sm-9">
-                                            <form:input path="name" value="${document.name}" class="col-xs-10 col-sm-5" />
+                                            <input id="file" type="file" name="file" />        
                                         </div>
-                                    </div>
+                                    </div>    
                                     <div class="clearfix form-actions">
                                         <div class="col-md-offset-3 col-md-9">
                                             <button class="btn btn-info" type="submit">
-                                                <i class="icon-ok"></i>
-                                                Upload
-                                            </button>
+                                                <i class="icon-ok"></i> Upload
+                                             </button>
                                         </div>
                                     </div>
-                                </form:form>
+                                </form>
                                 <!-- PAGE CONTENT ENDS -->
                             </div><!-- /.col -->
                         </div><!-- /.row -->
