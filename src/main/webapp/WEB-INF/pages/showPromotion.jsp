@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -179,14 +180,6 @@
                                                     Promotion Request Details
                                                 </h3>
 
-                                                <div class="widget-toolbar no-border invoice-info">
-                                                    <span class="invoice-info-label">Promotion</span>
-                                                    <span class="red">${promotion.id}</span>
-
-                                                    <br />
-                                                    <span class="invoice-info-label">Date:</span>
-                                                    <span class="blue">${promotion.dateCreated}</span>
-                                                </div>
                                             </div>
 
                                             <div class="widget-body">
@@ -202,8 +195,14 @@
                                                             <div class="row">
                                                                 <ul class="list-unstyled spaced">
                                                                     <li>
-                                                                        <i class="icon-caret-right blue"></i>
-                                                                        Name : ${promotion.project.name}
+                                                                        Project name: <span class="label label-xlg label-primary arrowed arrowed-right">${promotion.project.name}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        Promotion Id: <span class="label label-xlg label-primary arrowed arrowed-right">${promotion.id}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        Promotion Date: <span class="label label-xlg label-primary arrowed arrowed-right"><fmt:formatDate pattern="dd-MMM-yyyy" 
+                                                                                        value="${promotion.dateCreated}" /></span>
                                                                     </li>
                                                                 </ul>
                                                             </div>
@@ -220,17 +219,29 @@
                                                                 <table class="table table-striped table-bordered">
                                                                     <thead>
                                                                         <tr>
-                                                                            <td>Name</td>
-                                                                            <td>Host</td>
-                                                                            <td>Port</td>
+                                                                            <th>Name</th>
+                                                                            <th>Host</th>
+                                                                            <th>Port</th>
+                                                                            <th></th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>    
                                                                         <c:forEach items="${promotion.project.environments}" var="environment">
                                                                             <tr>
-                                                                                <td>${environment.name}</td>
+                                                                                <td>
+                                                                                    <span class="label label-xlg label-light arrowed-in-right">
+                                                                                        ${environment.name}
+                                                                                    </span>
+                                                                                </td>
                                                                                 <td>${environment.host}</td>
                                                                                 <td>${environment.port}</td>
+                                                                                <td>
+                                                                                    <a class="btn btn-xs btn-danger" href="<c:url value="/promotion/deploy?promotionId=${promotion.id}&projectId=${promotion.project.id}&environmentId=${document.id}" />">
+                                                                                        <i class="icon-bolt bigger-110"></i>
+                                                                                        Deploy
+                                                                                        <i class="icon-arrow-right icon-on-right"></i>
+                                                                                    </a>
+                                                                                </td>
                                                                             </tr>
                                                                         </c:forEach>
                                                                     </tbody>
