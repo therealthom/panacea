@@ -234,12 +234,10 @@
                                                 <tbody>     
                                                     <c:forEach items="${logs}" var="log">
                                                     <tr>
-                                                        <td>
-                                                           ${log.username}
-                                                        </td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
+                                                        <td>${log.project.name}</td>
+                                                        <td>${log.username}</td>
+                                                        <td>${log.description}</td>
+                                                        <td>${log.dateCreated}</td>
                                                         <td>
                                                             <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
                                                                 <button class="btn btn-xs btn-success">
