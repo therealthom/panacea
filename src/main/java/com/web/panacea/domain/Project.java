@@ -59,7 +59,7 @@ public class Project implements Serializable {
     }
 
     public static List<Project> findAllProjects() {
-        return entityManager().createQuery("SELECT o FROM Project o", Project.class).getResultList();
+        return entityManager().createQuery("SELECT o FROM Project o ORDER BY o.name", Project.class).getResultList();
     }
 
     public static Project findProject(Long id) {
