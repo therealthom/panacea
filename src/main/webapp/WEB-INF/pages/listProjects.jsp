@@ -248,9 +248,11 @@
                                                                     </c:if>
                                                                 </td>
                                                                 <td style="text-align: center;">
-                                                                    <a href="buildAndPromote?projectId=${project.id}" class="btn btn-purple btn-minier">
-                                                                        <i class="icon-external-link-sign"></i> Build and promote
-                                                                    </a>
+                                                                    <c:if test="${project.environments != null}">
+                                                                        <a href="../promotionRequest/createPromotionRequest?projectId=${project.id}" class="btn btn-purple btn-minier">
+                                                                            <i class="icon-external-link-sign"></i> Build and promote
+                                                                        </a>
+                                                                    </c:if>
                                                                 </td>
                                                             </tr>
                                                         </c:forEach>
