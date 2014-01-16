@@ -46,24 +46,23 @@ public class EnvironmentController {
         Project project = projectServiceImpl.findProject(projectId);
         model.addAttribute("project",project);
         Environment environment = new Environment();
-        //environment.setProject(project);
         model.addAttribute("environment", environment);
         return "createEnvironment";
     }
     
     @RequestMapping(value = "/saveEnvironment", method = RequestMethod.POST)
     public String save(@RequestParam Long projectId, ModelMap model, Environment environment) {
-        Project project2 = projectServiceImpl.findProject(projectId);
+        Project project = projectServiceImpl.findProject(projectId);
         Environment newEnvironment = new Environment();
         newEnvironment.setName(environment.getName());
         newEnvironment.setHost(environment.getHost());
         newEnvironment.setPort(environment.getPort());
         newEnvironment.setUsername(environment.getUsername());
         newEnvironment.setPassword(environment.getPassword());
-        newEnvironment.setProject(project2);
+        newEnvironment.setProject(project);
         environmentServiceImpl.saveEnvironment(newEnvironment);
-        model.addAttribute("project",project2);
-        model.addAttribute("environments", environmentServiceImpl.findAllByProject(project2));
+        model.addAttribute("project",project);
+        model.addAttribute("environments", environmentServiceImpl.findAllByProject(project));
         return "listEnvironments";
     }
     

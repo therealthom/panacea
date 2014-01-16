@@ -237,18 +237,18 @@
                                                                 </td>
                                                                 <td style="text-align: center;">
                                                                     <c:if test="${project.active == true}">
-                                                                        <a href="/environment/edit?projectId=${project.id}" class="btn btn-danger btn-minier">
+                                                                        <a href="disbleProject?projectId=${project.id}" class="btn btn-danger btn-minier">
                                                                             <i class="icon-trash"></i> Disable
                                                                         </a>
                                                                     </c:if>
                                                                     <c:if test="${project.active == false}">
-                                                                        <a href="/environment/edit?projectId=${project.id}" class="btn btn-success btn-minier">
+                                                                        <a href="enableProject?projectId=${project.id}" class="btn btn-success btn-minier">
                                                                             <i class="icon-check"></i> Enable
                                                                         </a>
                                                                     </c:if>
                                                                 </td>
                                                                 <td style="text-align: center;">
-                                                                    <a href="/promotion/new?projectId=${project.id}" class="btn btn-purple btn-minier">
+                                                                    <a href="buildAndPromote?projectId=${project.id}" class="btn btn-purple btn-minier">
                                                                         <i class="icon-external-link-sign"></i> Build and promote
                                                                     </a>
                                                                 </td>
