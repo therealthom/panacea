@@ -32,7 +32,7 @@ public class Phase implements Serializable {
     private Boolean promotionResult;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 

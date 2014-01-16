@@ -197,10 +197,10 @@
                                                 <tbody>                                                    
                                                     <c:forEach items="${promotions}" var="promotion">
                                                         <tr>
-                                                            <td>${promotion}</td>
-                                                            <td></td>
-                                                            <td></td>
-                                                            <td></td>
+                                                            <td>${promotion.project.name}</td>
+                                                            <td>${promotion.username}</td>
+                                                            <td>${promotion.comments}</td>
+                                                            <td>${promotion.dateCreated}</td>
                                                             <td>
                                                                 <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
                                                                     <a href="<c:url value="/promotion/show?promotionId=${promotion.id}" />" class="btn btn-xs btn-info">

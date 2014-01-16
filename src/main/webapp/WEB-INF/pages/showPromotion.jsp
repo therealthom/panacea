@@ -192,9 +192,9 @@
                                             <div class="widget-body">
                                                 <div class="widget-main padding-24">
                                                     <div class="row">
-                                                        <div class="col-sm-6">
+                                                        <div class="col-sm-3">
                                                             <div class="row">
-                                                                <div class="col-xs-11 label label-lg label-info arrowed-in arrowed-right">
+                                                                <div class="col-xs-12 label label-lg label-info arrowed-in arrowed-right">
                                                                     <b>Project Info</b>
                                                                 </div>
                                                             </div>
@@ -209,20 +209,28 @@
                                                             </div>
                                                         </div><!-- /span -->
 
-                                                        <div class="col-sm-6">
+                                                        <div class="col-sm-9">
                                                             <div class="row">
-                                                                <div class="col-xs-11 label label-lg label-success arrowed-in arrowed-right">
+                                                                <div class="col-xs-12 label label-lg label-success arrowed-in arrowed-right">
                                                                     <b>Environmens</b>
                                                                 </div>
                                                             </div>
 
                                                             <div>
                                                                 <table class="table table-striped table-bordered">
-                                                                    <tbody>
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Name</td>
+                                                                            <td>Host</td>
+                                                                            <td>Port</td>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>    
                                                                         <c:forEach items="${promotion.project.environments}" var="environment">
                                                                             <tr>
                                                                                 <td>${environment.name}</td>
-                                                                                <td></td>
+                                                                                <td>${environment.host}</td>
+                                                                                <td>${environment.port}</td>
                                                                             </tr>
                                                                         </c:forEach>
                                                                     </tbody>
@@ -248,11 +256,12 @@
                                                     <div>
                                                         <table class="table table-striped table-bordered">
                                                             <tbody>
-
                                                                 <c:forEach items="${promotion.documents}" var="document">
                                                                     <tr>
                                                                         <td>
-                                                                            <a href="#">${document.filename}</a>
+                                                                            <a href="<c:url value="/document/download?promotionId=${promotion.id}&documentId=${document.id}" />">
+                                                                                ${document.filename}
+                                                                            </a>
                                                                         </td>                                                                    
                                                                     </tr>
                                                                 </c:forEach>    
