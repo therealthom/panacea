@@ -259,6 +259,10 @@
                                                                 <c:forEach items="${promotion.documents}" var="document">
                                                                     <tr>
                                                                         <td>
+                                                                            <a href="<c:url value="/document/delete?promotionId=${promotion.id}&documentId=${document.id}" />">
+                                                                                <i class="icon-trash red"></i> 
+                                                                            </a>
+                                                                            -
                                                                             <a href="<c:url value="/document/download?promotionId=${promotion.id}&documentId=${document.id}" />">
                                                                                 ${document.filename}
                                                                             </a>
