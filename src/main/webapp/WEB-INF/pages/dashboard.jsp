@@ -75,7 +75,7 @@
                             <a data-toggle="dropdown" href="#" class="dropdown-toggle">
                                 <span class="user-info">
                                     <i class="icon-th"></i>
-                                    Actions <c:out value="${pageContext.request.remoteUser}"/>
+                                    Actions
                                 </span>
 
                                 <i class="icon-caret-down"></i>
@@ -92,11 +92,10 @@
                                 <li class="divider"></li>
 
                                 <li>
-                                    <c:url var="logoutUrl" value="/logout"/>
-                                    <form class="form-inline" action="${logoutUrl}" method="post">
-                                        <input type="submit" value="Log out" />
-                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                    </form>
+                                    <a href="#">
+                                        <i class="icon-off"></i>
+                                        Logout
+                                    </a>
                                 </li>
                             </ul>
                         </li>
