@@ -1,55 +1,51 @@
-<%-- 
-    Document   : systemSettings.jsp
-    Created on : 15-ene-2014, 10:51:44
-    Author     : oscar
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>Panacea Web</title>
+        <title>Add New Document</title>
 
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <!-- basic styles -->
 
-        <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-        <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+        <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="../assets/css/font-awesome.min.css" />
 
         <!--[if IE 7]>
-          <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
+          <link rel="stylesheet" href="../assets/css/font-awesome-ie7.min.css" />
         <![endif]-->
 
         <!-- page specific plugin styles -->
 
         <!-- fonts -->
 
-        <link rel="stylesheet" href="assets/css/ace-fonts.css" />
+        <link rel="stylesheet" href="../assets/css/ace-fonts.css" />
 
         <!-- ace styles -->
 
-        <link rel="stylesheet" href="assets/css/ace.min.css" />
-        <link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
-        <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+        <link rel="stylesheet" href="../assets/css/ace.min.css" />
+        <link rel="stylesheet" href="../assets/css/ace-rtl.min.css" />
+        <link rel="stylesheet" href="../assets/css/ace-skins.min.css" />
 
         <!--[if lte IE 8]>
-          <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+          <link rel="stylesheet" href="../assets/css/ace-ie.min.css" />
         <![endif]-->
 
         <!-- inline styles related to this page -->
 
         <!-- ace settings handler -->
 
-        <script src="assets/js/ace-extra.min.js"></script>
+        <script src="../assets/js/ace-extra.min.js"></script>
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
         <!--[if lt IE 9]>
-        <script src="assets/js/html5shiv.js"></script>
-        <script src="assets/js/respond.min.js"></script>
+        <script src="../assets/js/html5shiv.js"></script>
+        <script src="../assets/js/respond.min.js"></script>
         <![endif]-->
     </head>
 
@@ -132,9 +128,9 @@
 
                     <div class="sidebar-shortcuts" id="sidebar-shortcuts">
                         <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-                            <button class="btn btn-success">
+                            <a class="btn btn-success" href="<c:url value="/home/dashboard" />">
                                 <i class="icon-desktop"></i>
-                            </button>
+                            </a>
                         </div>
 
                         <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
@@ -142,37 +138,7 @@
                         </div>
                     </div><!-- #sidebar-shortcuts -->
 
-                    <ul class="nav nav-list">
-                        <li>
-                            <a href="systemSettings.html">
-                                <i class="icon-wrench"></i>
-                                <span class="menu-text"> System settings </span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="userAdmin.html">
-                                <i class="icon-group"></i>
-                                <span class="menu-text"> User admin </span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="projects.html">
-                                <i class="icon-briefcase"></i>
-                                <span class="menu-text"> Projects </span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="promotions.html">
-                                <i class="icon-thumbs-up"></i>
-                                <span class="menu-text"> Promotions </span>
-                            </a>
-                        </li>
-
-                    </ul><!-- /.nav-list -->
-
+                    <jsp:include page="menu.jsp" />
                     <div class="sidebar-collapse" id="sidebar-collapse">
                         <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
                     </div>
@@ -195,15 +161,9 @@
                         </script>
 
                         <ul class="breadcrumb">
-                            <li>
-                                <a href="#">
-                                    <i class="icon-desktop"></i>
-                                    &nbsp;Welcome
-                                </a>
-                            </li>
                             <li class="active">
-                                <i class="icon-inbox"></i>
-                                Promotion request Inbox
+                                <i class="icon-desktop"></i>
+                                &nbsp;Welcome
                             </li>
                         </ul><!-- .breadcrumb -->
                     </div>
@@ -212,9 +172,31 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <!-- PAGE CONTENT BEGINS -->
-                                <h4>  
-                                    <a href="home/user">User</a>  
-                                </h4>
+                                <div class="page-header">
+                                    <h1>
+                                        New Document
+                                        <small>
+                                            <i class="icon-double-angle-right"></i>
+                                        </small>
+                                    </h1>
+                                </div><!-- /.page-header -->
+
+                                <form class="form-horizontal" method="post" action="upload" enctype="multipart/form-data">
+                                    <input type="hidden" name="promotionId" value="${promotionId}"/>
+                                    <div class="form-group">
+                                        <label for="file" class="col-sm-3 control-label no-padding-right">Name</label>
+                                        <div class="col-sm-9">
+                                            <input id="file" type="file" name="file" />        
+                                        </div>
+                                    </div>    
+                                    <div class="clearfix form-actions">
+                                        <div class="col-md-offset-3 col-md-9">
+                                            <button class="btn btn-info" type="submit">
+                                                <i class="icon-ok"></i> Upload
+                                             </button>
+                                        </div>
+                                    </div>
+                                </form>
                                 <!-- PAGE CONTENT ENDS -->
                             </div><!-- /.col -->
                         </div><!-- /.row -->
@@ -231,29 +213,29 @@
 
         <!--[if !IE]> -->
         <script type="text/javascript">
-            window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
+            window.jQuery || document.write("<script src='../assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
         </script>
         <!-- <![endif]-->
 
         <!--[if IE] -->
         <script type="text/javascript">
-            window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+            window.jQuery || document.write("<script src='../assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
         </script>
         <!--[endif]-->
 
         <script type="text/javascript">
             if ("ontouchend" in document)
-                document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+                document.write("<script src='../assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
         </script>
-        <script src="assets/js/bootstrap.min.js"></script>
-        <script src="assets/js/typeahead-bs2.min.js"></script>
+        <script src="../assets/js/bootstrap.min.js"></script>
+        <script src="../assets/js/typeahead-bs2.min.js"></script>
 
         <!-- page specific plugin scripts -->
 
         <!-- ace scripts -->
 
-        <script src="assets/js/ace-elements.min.js"></script>
-        <script src="assets/js/ace.min.js"></script>
+        <script src="../assets/js/ace-elements.min.js"></script>
+        <script src="../assets/js/ace.min.js"></script>
 
         <!-- inline scripts related to this page -->
     </body>

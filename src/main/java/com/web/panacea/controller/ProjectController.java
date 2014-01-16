@@ -10,8 +10,11 @@ package com.web.panacea.controller;
  *
  * @author oscar
  */
+import com.web.panacea.domain.Log;
 import com.web.panacea.domain.Project;
+import com.web.panacea.service.LogService;
 import com.web.panacea.service.ProjectService;
+import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,6 +28,9 @@ public class ProjectController {
 
     @Autowired
     ProjectService projectServiceImpl;
+    
+    @Autowired
+    LogService logServiceImpl;
     
     @RequestMapping(value = "/listProjects", method = RequestMethod.GET)
     public String list(ModelMap model) {
@@ -41,7 +47,14 @@ public class ProjectController {
     
     @RequestMapping(value = "/saveProject", method = RequestMethod.POST)
     public String save(ModelMap model, Project project) {
-        projectServiceImpl.saveProject(project);
+        projectServiceImpl.saveProject(project);        
+        //Inserta en el log
+        Log log = new Log();        
+        log.setProject(Project.findProject(project.getId()));
+        log.setDateCreated(new Date());
+        log.setUsername("admin");
+        log.setDescription("Se creó el proyecto");
+        logServiceImpl.saveLog(log);        
         model.addAttribute("projects",projectServiceImpl.findAllProjects());
         return "listProjects";
     }

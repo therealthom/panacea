@@ -63,7 +63,7 @@
                     <a href="#" class="navbar-brand">
                         <small>
                             <i class="icon-tasks"></i>
-                            Panacea-web: Continuous Integration for everyone - System Configs
+                            Panacea-web: Continuous Integration for everyone
                         </small>
                     </a><!-- /.brand -->
                 </div><!-- /.navbar-header -->
@@ -140,7 +140,6 @@
                     </div><!-- #sidebar-shortcuts -->
 
                     <jsp:include page="menu.jsp" />
-
                     <div class="sidebar-collapse" id="sidebar-collapse">
                         <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
                     </div>
