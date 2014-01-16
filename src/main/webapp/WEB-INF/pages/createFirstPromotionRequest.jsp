@@ -1,8 +1,9 @@
 <%-- 
-    Document   : createEnvironment
-    Created on : 15-ene-2014, 17:58:22
+    Document   : createPromotionRequest
+    Created on : 15-ene-2014, 22:57:02
     Author     : oscar
 --%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
@@ -25,7 +26,7 @@
         <![endif]-->
 
         <!-- page specific plugin styles -->
-
+        <link rel="stylesheet" href="../assets/css/chosen.css" />
         <!-- fonts -->
 
         <link rel="stylesheet" href="../assets/css/ace-fonts.css" />
@@ -179,22 +180,16 @@
                                     &nbsp;Projects
                                 </a>
                             </li>
-                            <li>
-                                <a href="../environment/listEnvironments?projectId=${project.id}">
-                                    <i class="icon-cogs"></i>
-                                    &nbsp;Environments
-                                </a>
-                            </li>
                             <li class="active">
-                                <i class="icon-cog"></i>
-                                New environment
+                                <i class="icon-external-link-sign"></i>
+                                New promotion request
                             </li>
                         </ul><!-- .breadcrumb -->
                     </div>
                     <div class="page-content">
                         <div class="page-header">
                             <h1>
-                                New environment for project: ${project.name}
+                                New promotion request for project: ${project.name}
                                 <small>
                                     <i class="icon-double-angle-right"></i>
                                 </small>
@@ -203,53 +198,28 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <!-- PAGE CONTENT BEGINS -->
-                                <form:form method="post" action="saveEnvironment" modelAttribute="environment" class="form-horizontal" >  
+                                <form:form method="post" action="saveFirstPromotionRequest" modelAttribute="promotionRequest" class="form-horizontal" >  
                                     <div class="form-group">
-                                        <label for="name" class="col-sm-3 control-label no-padding-right">New environment name:</label>
+                                        <label for="comments" class="col-sm-3 control-label no-padding-right">Comments:</label>
                                         <div class="col-sm-9">
                                             <span class="block input-icon input-icon-right">
                                                 <input type='hidden' name='projectId' id='projectId' value='${project.id}' />
-                                                <select id="name" name="name" path="name" class="form-control">
-                                                    <option value="Development">Development</option>
-                                                    <option value="UAT">UAT</option>
-                                                    <option value="QA">QA</option>
-                                                    <option value="Production">Production</option>
-                                                </select>
+                                                <textarea class="form-control" id="comments" name="comments" path="comments" >${promotionRequest.comments}</textarea>
                                             </span>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="host" class="col-sm-3 control-label no-padding-right">New environment host:</label>
-                                        <div class="col-sm-3">
+                                        <label for="file" class="col-sm-3 control-label no-padding-right">File:</label>
+                                        <div class="col-sm-9">
                                             <span class="block input-icon input-icon-right">
-                                                <form:input name="host" id="host" path="host" value="${environment.host}" class="form-control" />
-                                            </span>
-                                        </div>
-                                        <label for="port" class="col-sm-3 control-label no-padding-right">New environment port:</label>
-                                        <div class="col-sm-3">
-                                            <span class="block input-icon input-icon-right">
-                                                <form:input name="port" id="port" path="port" value="${environment.port}" class="form-control" />
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="username" class="col-sm-3 control-label no-padding-right">New environment admin username:</label>
-                                        <div class="col-sm-3">
-                                            <span class="block input-icon input-icon-right">
-                                                <form:input name="username" id="username" path="username" value="${environment.username}" class="form-control" />
-                                            </span>
-                                        </div>
-                                        <label for="password" class="col-sm-3 control-label no-padding-right">New environment admin password:</label>
-                                        <div class="col-sm-3">
-                                            <span class="block input-icon input-icon-right">
-                                                <form:input name="password" id="$password" path="password" value="${environment.password}" class="form-control" />
+                                                <input type="file" id="file" name="file" />
                                             </span>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 clearfix form-actions">
                                         <button class="btn btn-sm btn-success" type="submit">
                                             <i class="icon-ok bigger-sm"></i>
-                                            Save new environment
+                                            Submit request promotion
                                         </button>
                                     </div>
                                 </form:form>
@@ -294,5 +264,21 @@
         <script src="../assets/js/ace.min.js"></script>
 
         <!-- inline scripts related to this page -->
+        <script type="text/javascript">
+            jQuery(function($) {
+                $('#file').ace_file_input({
+                    no_file:'No File ...',
+                    btn_choose:'Choose',
+                    btn_change:'Change',
+                    droppable:false,
+                    onchange:null,
+                    thumbnail:false //| true | large
+                    //whitelist:'gif|png|jpg|jpeg'
+                    //blacklist:'exe|php'
+                    //onchange:''
+                    //
+                 });
+             });
+        </script>
     </body>
 </html>
