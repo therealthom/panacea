@@ -249,7 +249,7 @@
                                                                 </td>
                                                                 <td style="text-align: center;">
                                                                     <c:if test="${project.environments != null}">
-                                                                        <a href="../promotionRequest/createPromotionRequest?projectId=${project.id}" class="btn btn-purple btn-minier">
+                                                                        <a href="../promotion/createFirstPromotionRequest?projectId=${project.id}" class="btn btn-purple btn-minier">
                                                                             <i class="icon-external-link-sign"></i> Build and promote
                                                                         </a>
                                                                     </c:if>
