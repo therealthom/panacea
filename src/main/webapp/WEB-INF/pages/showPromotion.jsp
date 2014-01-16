@@ -203,30 +203,7 @@
                                                                 <ul class="list-unstyled spaced">
                                                                     <li>
                                                                         <i class="icon-caret-right blue"></i>
-                                                                        Street, City
-                                                                    </li>
-
-                                                                    <li>
-                                                                        <i class="icon-caret-right blue"></i>
-                                                                        Zip Code
-                                                                    </li>
-
-                                                                    <li>
-                                                                        <i class="icon-caret-right blue"></i>
-                                                                        State, Country
-                                                                    </li>
-
-                                                                    <li>
-                                                                        <i class="icon-caret-right blue"></i>
-                                                                        Phone:
-                                                                        <b class="red">111-111-111</b>
-                                                                    </li>
-
-                                                                    <li class="divider"></li>
-
-                                                                    <li>
-                                                                        <i class="icon-caret-right blue"></i>
-                                                                        Paymant Info
+                                                                        Name : ${promotion.project.name}
                                                                     </li>
                                                                 </ul>
                                                             </div>
@@ -240,29 +217,16 @@
                                                             </div>
 
                                                             <div>
-                                                                <ul class="list-unstyled  spaced">
-                                                                    <li>
-                                                                        <i class="icon-caret-right green"></i>
-                                                                        Street, City
-                                                                    </li>
-
-                                                                    <li>
-                                                                        <i class="icon-caret-right green"></i>
-                                                                        Zip Code
-                                                                    </li>
-
-                                                                    <li>
-                                                                        <i class="icon-caret-right green"></i>
-                                                                        State, Country
-                                                                    </li>
-
-                                                                    <li class="divider"></li>
-
-                                                                    <li>
-                                                                        <i class="icon-caret-right green"></i>
-                                                                        Contact Info
-                                                                    </li>
-                                                                </ul>
+                                                                <table class="table table-striped table-bordered">
+                                                                    <tbody>
+                                                                        <c:forEach items="${promotion.project.environments}" var="environment">
+                                                                            <tr>
+                                                                                <td>${environment.name}</td>
+                                                                                <td></td>
+                                                                            </tr>
+                                                                        </c:forEach>
+                                                                    </tbody>
+                                                                </table>
                                                             </div>
                                                         </div><!-- /span -->
                                                     </div><!-- row -->

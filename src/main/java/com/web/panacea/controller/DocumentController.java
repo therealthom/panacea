@@ -5,8 +5,6 @@ import com.web.panacea.domain.PromotionRequest;
 import com.web.panacea.service.DocumentService;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
