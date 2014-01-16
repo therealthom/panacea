@@ -1,15 +1,8 @@
 <%-- 
-    Document   : listProjects
-    Created on : 15-ene-2014, 13:17:31
+    Document   : createEnvironment
+    Created on : 15-ene-2014, 17:58:22
     Author     : oscar
 --%>
-
-<%-- 
-    Document   : systemSettings.jsp
-    Created on : 15-ene-2014, 10:51:44
-    Author     : oscar
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
@@ -180,88 +173,83 @@
                                     &nbsp;Home
                                 </a>
                             </li>
+                            <li>
+                                <a href="<c:url value="/project/listProjects" />">
+                                    <i class="icon-bars"></i>
+                                    &nbsp;Projects
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../environment/listEnvironments?projectId=${project.id}">
+                                    <i class="icon-cogs"></i>
+                                    &nbsp;Environments
+                                </a>
+                            </li>
                             <li class="active">
-                                <i class="icon-bars"></i>
-                                Projects
+                                <i class="icon-cog"></i>
+                                New environment
                             </li>
                         </ul><!-- .breadcrumb -->
                     </div>
-
                     <div class="page-content">
+                        <div class="page-header">
+                            <h1>
+                                New environment for project: ${project.name}
+                                <small>
+                                    <i class="icon-double-angle-right"></i>
+                                </small>
+                            </h1>
+                        </div>
                         <div class="row">
                             <div class="col-xs-12">
                                 <!-- PAGE CONTENT BEGINS -->
-                                <div class="widget-box">
-                                    <div class="widget-header">
-                                        <h4 class="lighter"><i class="icon-bars"></i> Project list </h4>
-                                        <div class="widget-toolbar">
-                                            <a href="<c:url value="/project/createProject" />" class="btn btn-minier btn-inverse" >
-                                                <i class="icon-plus"></i>
-                                                New project&nbsp;
-                                                <i class="icon-briefcase"></i>
-                                            </a>
+                                <form:form method="post" action="saveEnvironment" modelAttribute="environment" class="form-horizontal" >  
+                                    <div class="form-group">
+                                        <label for="name" class="col-sm-3 control-label no-padding-right">New environment name:</label>
+                                        <div class="col-sm-9">
+                                            <span class="block input-icon input-icon-right">
+                                                <input type='hidden' name='projectId' id='projectId' value='${project.id}' />
+                                                <form:input name="name" id="name" path="name" value="${environement.name}" class="form-control" />
+                                            </span>
                                         </div>
                                     </div>
-                                    <div class="widget-body">
-                                        <div class="widget-main">
-                                            <form:form method="post" action="showProject" modelAttribute="projects">
-                                                <table class="table table-striped table-bordered table-hover">
-                                                    <thead class="thin-border-bottom">
-                                                        <tr>
-                                                            <th>
-                                                                <i class="icon-briefcase"></i>
-                                                                Project name
-                                                            </th>
-                                                            <th>
-                                                                <i class="icon-cogs"></i>
-                                                                Environments
-                                                            </th>
-                                                            <th>
-                                                                <i class="icon-check"></i>
-                                                                Change status
-                                                            </th>
-                                                            <th>
-                                                                <i class="icon-external-link-sign"></i>
-                                                                Build and promote
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <c:forEach var="project" items="${projects}" varStatus="status">
-                                                            <tr>
-                                                                <td>${project.name}</td>
-                                                                <td style="text-align: center;">
-                                                                    <a href="../environment/listEnvironments?projectId=${project.id}" class="btn btn-info btn-minier">
-                                                                        <i class="icon-cogs"></i> Edit environments
-                                                                    </a>
-                                                                </td>
-                                                                <td style="text-align: center;">
-                                                                    <c:if test="${project.active == true}">
-                                                                        <a href="disbleProject?projectId=${project.id}" class="btn btn-danger btn-minier">
-                                                                            <i class="icon-trash"></i> Disable
-                                                                        </a>
-                                                                    </c:if>
-                                                                    <c:if test="${project.active == false}">
-                                                                        <a href="enableProject?projectId=${project.id}" class="btn btn-success btn-minier">
-                                                                            <i class="icon-check"></i> Enable
-                                                                        </a>
-                                                                    </c:if>
-                                                                </td>
-                                                                <td style="text-align: center;">
-                                                                    <a href="buildAndPromote?projectId=${project.id}" class="btn btn-purple btn-minier">
-                                                                        <i class="icon-external-link-sign"></i> Build and promote
-                                                                    </a>
-                                                                </td>
-                                                            </tr>
-                                                        </c:forEach>
-                                                    </tbody>
-                                                </table>
-                                            </form:form>
+                                    <div class="form-group">
+                                        <label for="host" class="col-sm-3 control-label no-padding-right">New environment host:</label>
+                                        <div class="col-sm-3">
+                                            <span class="block input-icon input-icon-right">
+                                                <form:input name="host" id="host" path="host" value="${environment.host}" class="form-control" />
+                                            </span>
+                                        </div>
+                                        <label for="port" class="col-sm-3 control-label no-padding-right">New environment port:</label>
+                                        <div class="col-sm-3">
+                                            <span class="block input-icon input-icon-right">
+                                                <form:input name="port" id="port" path="port" value="${environment.port}" class="form-control" />
+                                            </span>
                                         </div>
                                     </div>
-                                </div>
+                                    <div class="form-group">
+                                        <label for="username" class="col-sm-3 control-label no-padding-right">New environment admin username:</label>
+                                        <div class="col-sm-3">
+                                            <span class="block input-icon input-icon-right">
+                                                <form:input name="username" id="username" path="username" value="${environment.username}" class="form-control" />
+                                            </span>
+                                        </div>
+                                        <label for="password" class="col-sm-3 control-label no-padding-right">New environment admin password:</label>
+                                        <div class="col-sm-3">
+                                            <span class="block input-icon input-icon-right">
+                                                <form:input name="password" id="$password" path="password" value="${environment.password}" class="form-control" />
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 clearfix form-actions">
+                                        <button class="btn btn-sm btn-success" type="submit">
+                                            <i class="icon-ok bigger-sm"></i>
+                                            Save new environment
+                                        </button>
+                                    </div>
+                                </form:form>
                                 <!-- PAGE CONTENT ENDS -->
-                            </div><!-- /.col -->
+                            </div>
                         </div><!-- /.row -->
                     </div><!-- /.page-content -->
                 </div><!-- /.main-content -->

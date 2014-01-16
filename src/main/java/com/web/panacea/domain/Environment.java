@@ -80,6 +80,10 @@ public class Environment implements Serializable {
     public static List<Environment> findAllEnvironments() {
         return entityManager().createQuery("SELECT o FROM Environment o", Environment.class).getResultList();
     }
+    
+    public static List<Environment> findAllByProject(Project project) {
+        return entityManager().createQuery("SELECT o FROM Environment o WHERE o.project.id = " + project.getId().toString() + " ORDER BY o.name", Environment.class).getResultList();
+    }
 
     public static Environment findEnvironment(Long id) {
         if (id == null) {

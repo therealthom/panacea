@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/project")
@@ -54,6 +55,24 @@ public class ProjectController {
         log.setUsername("admin");
         log.setDescription("Se creó el proyecto");
         logServiceImpl.saveLog(log);        
+        model.addAttribute("projects",projectServiceImpl.findAllProjects());
+        return "listProjects";
+    }
+    
+    @RequestMapping(value = "/disbleProject", method = RequestMethod.GET)
+    public String disable(@RequestParam Long projectId, ModelMap model) {
+        Project project = projectServiceImpl.findProject(projectId);
+        project.setActive(false);
+        project = projectServiceImpl.updateProject(project);
+        model.addAttribute("projects",projectServiceImpl.findAllProjects());
+        return "listProjects";
+    }
+    
+    @RequestMapping(value = "/enableProject", method = RequestMethod.GET)
+    public String enable(@RequestParam Long projectId, ModelMap model) {
+        Project project = projectServiceImpl.findProject(projectId);
+        project.setActive(true);
+        project = projectServiceImpl.updateProject(project);
         model.addAttribute("projects",projectServiceImpl.findAllProjects());
         return "listProjects";
     }

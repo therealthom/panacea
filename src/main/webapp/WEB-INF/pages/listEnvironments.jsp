@@ -1,4 +1,10 @@
 <%-- 
+    Document   : listEnvironments
+    Created on : 15-ene-2014, 17:00:52
+    Author     : oscar
+--%>
+
+<%-- 
     Document   : listProjects
     Created on : 15-ene-2014, 13:17:31
     Author     : oscar
@@ -180,9 +186,15 @@
                                     &nbsp;Home
                                 </a>
                             </li>
+                            <li>
+                                <a href="<c:url value="/project/listProjects" />">
+                                    <i class="icon-bars"></i>
+                                    &nbsp;Projects
+                                </a>
+                            </li>
                             <li class="active">
-                                <i class="icon-bars"></i>
-                                Projects
+                                <i class="icon-cogs"></i>
+                                Environments
                             </li>
                         </ul><!-- .breadcrumb -->
                     </div>
@@ -193,70 +205,63 @@
                                 <!-- PAGE CONTENT BEGINS -->
                                 <div class="widget-box">
                                     <div class="widget-header">
-                                        <h4 class="lighter"><i class="icon-bars"></i> Project list </h4>
+                                        <h4 class="lighter"><i class="icon-bars"></i> Project: ${project.name} </h4>
                                         <div class="widget-toolbar">
-                                            <a href="<c:url value="/project/createProject" />" class="btn btn-minier btn-inverse" >
+                                            <a href="<c:url value="../environment/createEnvironment?projectId=${project.id}" />" class="btn btn-minier btn-inverse">
                                                 <i class="icon-plus"></i>
-                                                New project&nbsp;
-                                                <i class="icon-briefcase"></i>
+                                                New environment&nbsp;
+                                                <i class="icon-cog"></i>
                                             </a>
                                         </div>
                                     </div>
                                     <div class="widget-body">
                                         <div class="widget-main">
-                                            <form:form method="post" action="showProject" modelAttribute="projects">
-                                                <table class="table table-striped table-bordered table-hover">
-                                                    <thead class="thin-border-bottom">
+                                            <table class="table table-striped table-bordered table-hover">
+                                                <thead class="thin-border-bottom">
+                                                    <tr>
+                                                        <th>
+                                                            <i class="icon-cog"></i>
+                                                            Environment name
+                                                        </th>
+                                                        <th>
+                                                            <i class="icon-home"></i>
+                                                            Environment host
+                                                        </th>
+                                                        <th>
+                                                            <i class="icon-anchor"></i>
+                                                            Environment port
+                                                        </th>
+                                                        <th>
+                                                            <i class="icon-user"></i>
+                                                            Environment admin
+                                                        </th>
+                                                        <th>
+                                                            <i class="icon-key"></i>
+                                                            Environment password
+                                                        </th>
+                                                        <th>
+                                                            <i class="icon-edit"></i>
+                                                            Edit
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach var="environment" items="${environments}" varStatus="status">
                                                         <tr>
-                                                            <th>
-                                                                <i class="icon-briefcase"></i>
-                                                                Project name
-                                                            </th>
-                                                            <th>
-                                                                <i class="icon-cogs"></i>
-                                                                Environments
-                                                            </th>
-                                                            <th>
-                                                                <i class="icon-check"></i>
-                                                                Change status
-                                                            </th>
-                                                            <th>
-                                                                <i class="icon-external-link-sign"></i>
-                                                                Build and promote
-                                                            </th>
+                                                            <td>${environment.name}</td>
+                                                            <td>${environment.host}</td>
+                                                            <td>${environment.port}</td>
+                                                            <td>${environment.username}</td>
+                                                            <td>${environment.password}</td>
+                                                            <td style="text-align: center;">
+                                                                <a href="edit?projectId=${project.id}&environmentId=${environmentId}" class="btn btn-purple btn-minier">
+                                                                    <i class="icon-edit"></i> Edit
+                                                                </a>
+                                                            </td>
                                                         </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <c:forEach var="project" items="${projects}" varStatus="status">
-                                                            <tr>
-                                                                <td>${project.name}</td>
-                                                                <td style="text-align: center;">
-                                                                    <a href="../environment/listEnvironments?projectId=${project.id}" class="btn btn-info btn-minier">
-                                                                        <i class="icon-cogs"></i> Edit environments
-                                                                    </a>
-                                                                </td>
-                                                                <td style="text-align: center;">
-                                                                    <c:if test="${project.active == true}">
-                                                                        <a href="disbleProject?projectId=${project.id}" class="btn btn-danger btn-minier">
-                                                                            <i class="icon-trash"></i> Disable
-                                                                        </a>
-                                                                    </c:if>
-                                                                    <c:if test="${project.active == false}">
-                                                                        <a href="enableProject?projectId=${project.id}" class="btn btn-success btn-minier">
-                                                                            <i class="icon-check"></i> Enable
-                                                                        </a>
-                                                                    </c:if>
-                                                                </td>
-                                                                <td style="text-align: center;">
-                                                                    <a href="buildAndPromote?projectId=${project.id}" class="btn btn-purple btn-minier">
-                                                                        <i class="icon-external-link-sign"></i> Build and promote
-                                                                    </a>
-                                                                </td>
-                                                            </tr>
-                                                        </c:forEach>
-                                                    </tbody>
-                                                </table>
-                                            </form:form>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>

@@ -59,7 +59,7 @@ public class Project implements Serializable {
     }
 
     public static List<Project> findAllProjects() {
-        return entityManager().createQuery("SELECT o FROM Project o", Project.class).getResultList();
+        return entityManager().createQuery("SELECT o FROM Project o ORDER BY o.name", Project.class).getResultList();
     }
 
     public static Project findProject(Long id) {
@@ -159,5 +159,19 @@ public class Project implements Serializable {
 
     public void setEnvironments(Set<Environment> environments) {
         this.environments = environments;
+    }
+
+    /**
+     * @return the active
+     */
+    public Boolean getActive() {
+        return active;
+    }
+
+    /**
+     * @param active the active to set
+     */
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }
