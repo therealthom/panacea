@@ -24,6 +24,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -56,12 +57,12 @@ public class PromotionRequest implements Serializable {
 
     /**
      */
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "promotionRequest")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "promotionRequest")
     private Set<Phase> phases = new HashSet<Phase>();
 
     /**
      */
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "promotionRequest")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "promotionRequest")
     private Set<Document> documents = new HashSet<Document>();
 
     public Project getProject() {
@@ -113,7 +114,7 @@ public class PromotionRequest implements Serializable {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 

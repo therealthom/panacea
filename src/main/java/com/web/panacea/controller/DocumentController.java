@@ -3,18 +3,19 @@ package com.web.panacea.controller;
 import com.web.panacea.domain.Document;
 import com.web.panacea.domain.PromotionRequest;
 import com.web.panacea.service.DocumentService;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/document")
@@ -42,14 +43,19 @@ public class DocumentController {
     }
 
     @RequestMapping(value = "/download", method = RequestMethod.GET)
-    public void downloadDocument(@RequestParam Long documentId) {
-        try {
-            Document document = Document.findDocument(documentId);
-            FileOutputStream fos = new FileOutputStream(document.getFilename());
-            fos.write(document.getFile());
-            fos.close();
-        } catch (IOException e) {
-            System.out.println(e.toString());
-        }
+    public ModelAndView download(@RequestParam Long documentId, HttpServletRequest request,
+        HttpServletResponse response) throws Exception {
+        Document document = documentServiceImpl.findDocument(documentId);
+        response.setContentLength(document.getFile().length);
+        response.setHeader("Content-Disposition","attachment; filename=\"" + document.getFilename() +"\"");
+        FileCopyUtils.copy(document.getFile(), response.getOutputStream());
+        return null; 
+    }
+    
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public String delete(@RequestParam Long documentId, @RequestParam Long promotionId) {
+        Document document = documentServiceImpl.findDocument(documentId);
+        documentServiceImpl.deleteDocument(document);        
+        return "redirect:/promotion/show?promotionId=" + promotionId;
     }
 }

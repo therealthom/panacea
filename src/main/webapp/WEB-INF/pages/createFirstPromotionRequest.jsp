@@ -208,14 +208,6 @@
                                             </span>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="file" class="col-sm-3 control-label no-padding-right">File:</label>
-                                        <div class="col-sm-9">
-                                            <span class="block input-icon input-icon-right">
-                                                <input type="file" id="file" name="file" />
-                                            </span>
-                                        </div>
-                                    </div>
                                     <div class="col-sm-12 clearfix form-actions">
                                         <button class="btn btn-sm btn-success" type="submit">
                                             <i class="icon-ok bigger-sm"></i>

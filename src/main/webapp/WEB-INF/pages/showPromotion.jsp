@@ -192,9 +192,9 @@
                                             <div class="widget-body">
                                                 <div class="widget-main padding-24">
                                                     <div class="row">
-                                                        <div class="col-sm-6">
+                                                        <div class="col-sm-3">
                                                             <div class="row">
-                                                                <div class="col-xs-11 label label-lg label-info arrowed-in arrowed-right">
+                                                                <div class="col-xs-12 label label-lg label-info arrowed-in arrowed-right">
                                                                     <b>Project Info</b>
                                                                 </div>
                                                             </div>
@@ -203,66 +203,38 @@
                                                                 <ul class="list-unstyled spaced">
                                                                     <li>
                                                                         <i class="icon-caret-right blue"></i>
-                                                                        Street, City
-                                                                    </li>
-
-                                                                    <li>
-                                                                        <i class="icon-caret-right blue"></i>
-                                                                        Zip Code
-                                                                    </li>
-
-                                                                    <li>
-                                                                        <i class="icon-caret-right blue"></i>
-                                                                        State, Country
-                                                                    </li>
-
-                                                                    <li>
-                                                                        <i class="icon-caret-right blue"></i>
-                                                                        Phone:
-                                                                        <b class="red">111-111-111</b>
-                                                                    </li>
-
-                                                                    <li class="divider"></li>
-
-                                                                    <li>
-                                                                        <i class="icon-caret-right blue"></i>
-                                                                        Paymant Info
+                                                                        Name : ${promotion.project.name}
                                                                     </li>
                                                                 </ul>
                                                             </div>
                                                         </div><!-- /span -->
 
-                                                        <div class="col-sm-6">
+                                                        <div class="col-sm-9">
                                                             <div class="row">
-                                                                <div class="col-xs-11 label label-lg label-success arrowed-in arrowed-right">
+                                                                <div class="col-xs-12 label label-lg label-success arrowed-in arrowed-right">
                                                                     <b>Environmens</b>
                                                                 </div>
                                                             </div>
 
                                                             <div>
-                                                                <ul class="list-unstyled  spaced">
-                                                                    <li>
-                                                                        <i class="icon-caret-right green"></i>
-                                                                        Street, City
-                                                                    </li>
-
-                                                                    <li>
-                                                                        <i class="icon-caret-right green"></i>
-                                                                        Zip Code
-                                                                    </li>
-
-                                                                    <li>
-                                                                        <i class="icon-caret-right green"></i>
-                                                                        State, Country
-                                                                    </li>
-
-                                                                    <li class="divider"></li>
-
-                                                                    <li>
-                                                                        <i class="icon-caret-right green"></i>
-                                                                        Contact Info
-                                                                    </li>
-                                                                </ul>
+                                                                <table class="table table-striped table-bordered">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Name</td>
+                                                                            <td>Host</td>
+                                                                            <td>Port</td>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>    
+                                                                        <c:forEach items="${promotion.project.environments}" var="environment">
+                                                                            <tr>
+                                                                                <td>${environment.name}</td>
+                                                                                <td>${environment.host}</td>
+                                                                                <td>${environment.port}</td>
+                                                                            </tr>
+                                                                        </c:forEach>
+                                                                    </tbody>
+                                                                </table>
                                                             </div>
                                                         </div><!-- /span -->
                                                     </div><!-- row -->
@@ -284,11 +256,16 @@
                                                     <div>
                                                         <table class="table table-striped table-bordered">
                                                             <tbody>
-
                                                                 <c:forEach items="${promotion.documents}" var="document">
                                                                     <tr>
                                                                         <td>
-                                                                            <a href="#">${document.filename}</a>
+                                                                            <a href="<c:url value="/document/delete?promotionId=${promotion.id}&documentId=${document.id}" />">
+                                                                                <i class="icon-trash red"></i> 
+                                                                            </a>
+                                                                            -
+                                                                            <a href="<c:url value="/document/download?promotionId=${promotion.id}&documentId=${document.id}" />">
+                                                                                ${document.filename}
+                                                                            </a>
                                                                         </td>                                                                    
                                                                     </tr>
                                                                 </c:forEach>    
