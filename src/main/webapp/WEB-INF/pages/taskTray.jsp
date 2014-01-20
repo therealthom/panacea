@@ -1,9 +1,8 @@
 <%-- 
-    Document   : createProject
-    Created on : 15-ene-2014, 14:44:04
+    Document   : taskTray
+    Created on : 19-ene-2014, 23:58:02
     Author     : oscar
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
@@ -174,46 +173,59 @@
                                     &nbsp;Home
                                 </a>
                             </li>
-                            <li>
-                                <a href="<c:url value="/project/listProjects" />">
-                                    <i class="icon-bars"></i>
-                                    &nbsp;Projects
-                                </a>
-                            </li>
                             <li class="active">
-                                <i class="icon-briefcase"></i>
-                                New Project
+                                <i class="icon-bars"></i>
+                                Tasks
                             </li>
                         </ul><!-- .breadcrumb -->
                     </div>
+
                     <div class="page-content">
-                        <div class="row-fluid">
+                        <div class="row">
                             <div class="col-xs-12">
                                 <!-- PAGE CONTENT BEGINS -->
-                                <form:form method="post" action="saveProject" modelAttribute="project">
-                                    <div class="form-group">
-                                        <label for="name" class="col-xs-2 control-label no-padding-right">New project name:</label>
-                                        <div class="col-xs-10">
-                                            <span class="block input-icon input-icon-right">
-                                                <input type='hidden' name='taskId' id='projectId' value='${taskId}' />
-                                                <form:input name="name" id="name" path="name" value="${project.name}" class="form-control" />
-                                            </span>
+                                <div class="widget-box">
+                                    <div class="widget-header">
+                                        <h4 class="lighter"><i class="icon-bars"></i> Task list </h4>
+                                    </div>
+                                    <div class="widget-body">
+                                        <div class="widget-main">
+                                            <table class="table table-striped table-bordered table-hover">
+                                                <thead class="thin-border-bottom">
+                                                    <tr>
+                                                        <th>Id</th>
+                                                        <th>Name</th>
+                                                        <th>Description</th>
+                                                        <th>Subject</th>
+                                                        <th>Start</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach var="taskSummary" items="${tareas}" varStatus="status">
+                                                        <tr>
+                                                            <td>${taskSummary.id}</td>
+                                                            <td>${taskSummary.name}</td>
+                                                            <td>${taskSummary.description}</td>
+                                                            <td>${taskSummary.subject}</td>
+                                                            <td style="text-align: center;">
+                                                                <a href="../project/createProject?taskId=${taskSummary.id}" class="btn btn-info btn-minier">
+                                                                    <i class="icon-plus-sign"></i> Set project name
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
-                                    <div class="col-xs-12 clearfix form-actions">
-                                        <button class="btn btn-success" type="submit">
-                                            <i class="icon-ok bigger-sm"></i>
-                                            Save new project
-                                        </button>
-                                    </div>
-                                </form:form>
+                                </div>
                                 <!-- PAGE CONTENT ENDS -->
                             </div><!-- /.col -->
                         </div><!-- /.row -->
                     </div><!-- /.page-content -->
                 </div><!-- /.main-content -->
             </div><!-- /.main-container-inner -->
-
+            
             <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
                 <i class="icon-double-angle-up icon-only bigger-110"></i>
             </a>

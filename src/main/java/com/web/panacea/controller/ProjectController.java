@@ -12,9 +12,21 @@ package com.web.panacea.controller;
  */
 import com.web.panacea.domain.Log;
 import com.web.panacea.domain.Project;
+import com.web.panacea.domain.Setup;
 import com.web.panacea.service.LogService;
 import com.web.panacea.service.ProjectService;
+import com.web.panacea.service.SetupServiceImpl;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import javax.xml.ws.Holder;
+import mx.redhat.brms.ws.procesos.impl.ProcessService;
+import mx.redhat.brms.ws.procesos.impl.ProcessServiceService;
+import mx.redhat.brms.ws.tareas.impl.HumanTaskService;
+import mx.redhat.brms.ws.tareas.impl.HumanTaskServiceService;
+import mx.redhat.brms.ws.tareas.impl.Parametro;
+import mx.redhat.brms.ws.tareas.impl.TaskSummary;
+import mx.redhat.brms.ws.tareas.impl.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -32,21 +44,39 @@ public class ProjectController {
     @Autowired
     LogService logServiceImpl;
     
+    @Autowired
+    SetupServiceImpl setupServiceImpl;
+    
     @RequestMapping(value = "/listProjects", method = RequestMethod.GET)
     public String list(ModelMap model) {
         model.addAttribute("projects",projectServiceImpl.findAllProjects());
         return "listProjects";
     }
     
+    @RequestMapping(value = "/setupProject", method = RequestMethod.GET)
+    public String setup(ModelMap model) {
+        ProcessServiceService pss = new ProcessServiceService();
+        ProcessService processService = pss.getProcessServicePort();
+        long idProceso = processService.iniciaProceso("mx.redhat.ci.CISetupProcess");
+        HumanTaskServiceService hts = new HumanTaskServiceService();
+        HumanTaskService service = hts.getHumanTaskServicePort();
+        User user = new User();
+        user.setId("admin");
+        List<TaskSummary> tareas = service.obtenerTareasGrupos(user, null);
+        model.addAttribute("tareas", tareas);
+        return "taskTray";
+    }
+    
     @RequestMapping(value = "/createProject", method = RequestMethod.GET)
-    public String create(ModelMap model) {
+    public String create(@RequestParam Long taskId, ModelMap model) {
         Project project = new Project();
+        model.addAttribute("taskId",taskId);
         model.addAttribute("project",project);
         return "createProject";
     }
     
     @RequestMapping(value = "/saveProject", method = RequestMethod.POST)
-    public String save(ModelMap model, Project project) {
+    public String save(@RequestParam Long taskId, ModelMap model, Project project) {
         projectServiceImpl.saveProject(project);        
         //Inserta en el log
         Log log = new Log();        
@@ -55,6 +85,61 @@ public class ProjectController {
         log.setUsername("admin");
         log.setDescription("Se creó el proyecto");
         logServiceImpl.saveLog(log);        
+        List<Parametro> parametros = new ArrayList<Parametro>();
+        Setup setup = setupServiceImpl.findSetup(1L); 
+        Parametro parametro = new Parametro();
+        parametro.setLlave("svnHost_");
+        parametro.setValor(setup.getSvnHost());
+        parametros.add(parametro);
+        parametro = new Parametro();
+        parametro.setLlave("svnPort_");
+        parametro.setValor(setup.getSvnPort());
+        parametros.add(parametro);
+        parametro = new Parametro();
+        parametro.setLlave("svnUser_");
+        parametro.setValor(setup.getSvnUsername());
+        parametros.add(parametro);
+        parametro = new Parametro();
+        parametro.setLlave("svnPassword_");
+        parametro.setValor(setup.getSvnPassword());
+        parametros.add(parametro);
+        parametro = new Parametro();
+        parametro.setLlave("svnRepo_");
+        parametro.setValor("repo");
+        parametros.add(parametro);
+        parametro = new Parametro();
+        parametro.setLlave("jenkinsHost_");
+        parametro.setValor(setup.getJenkinsHost());
+        parametros.add(parametro);
+        parametro = new Parametro();
+        parametro.setLlave("jenkinsPort_");
+        parametro.setValor(setup.getJenkinsPort());
+        parametros.add(parametro);
+        parametro = new Parametro();
+        parametro.setLlave("jenkinsUser_");
+        parametro.setValor(setup.getJenkinsUsername());
+        parametros.add(parametro);
+        parametro = new Parametro();
+        parametro.setLlave("jenkinsPassword_");
+        parametro.setValor(setup.getJenkinsPassword());
+        parametros.add(parametro);
+        parametro = new Parametro();
+        parametro.setLlave("operacion_");
+        parametro.setValor("crear");
+        parametros.add(parametro);
+        parametro = new Parametro();
+        parametro.setLlave("proyecto_");
+        parametro.setValor(project.getName());
+        parametros.add(parametro);
+        HumanTaskServiceService hts = new HumanTaskServiceService();
+        HumanTaskService service = hts.getHumanTaskServicePort();
+        User user = new User();
+        user.setId("admin");
+        Holder<TaskSummary> tarea = new Holder<TaskSummary>();
+        tarea.value = new TaskSummary();
+        tarea.value.setId(taskId);
+        service.iniciarTarea(tarea, user);
+        service.completarTarea(tarea, user, parametros);
         model.addAttribute("projects",projectServiceImpl.findAllProjects());
         return "listProjects";
     }

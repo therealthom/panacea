@@ -39,9 +39,10 @@ public class EnvironmentController {
     }
     
     @RequestMapping(value = "/createEnvironment", method = RequestMethod.GET)
-    public String create(@RequestParam Long projectId, ModelMap model) {
+    public String create(@RequestParam Long projectId, @RequestParam Long taskId, ModelMap model) {
         Project project = projectServiceImpl.findProject(projectId);
         model.addAttribute("project",project);
+        model.addAttribute("taskId",taskId);
         Environment environment = new Environment();
         model.addAttribute("environment", environment);
         return "createEnvironment";
