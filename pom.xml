@@ -22,6 +22,16 @@
     <dependencies>
         <!-- General dependencies for standard applications -->
         <dependency>
+            <groupId>mx.redhat.brms.ws</groupId>
+            <artifactId>procesos-ws-client</artifactId>
+            <version>1.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>mx.redhat.brms.ws</groupId>
+            <artifactId>tareas-ws-client</artifactId>
+            <version>1.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>
