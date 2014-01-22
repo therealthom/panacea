@@ -236,7 +236,7 @@
                                                                                 <td>${environment.host}</td>
                                                                                 <td>${environment.port}</td>
                                                                                 <td>
-                                                                                    <a class="btn btn-xs btn-danger" href="<c:url value="/promotion/deploy?promotionId=${promotion.id}&projectId=${promotion.project.id}&environmentId=${document.id}" />">
+                                                                                    <a class="btn btn-xs btn-danger" href="<c:url value="/promotion/deploy?promotionId=${promotion.id}&projectId=${promotion.project.id}&environmentId=${document.id}" />" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
                                                                                         <i class="icon-bolt bigger-110"></i>
                                                                                         Deploy
                                                                                         <i class="icon-arrow-right icon-on-right"></i>
@@ -259,7 +259,7 @@
                                                     </div>
 
                                                     <div class="space"></div>
-                                                    <a class="btn btn-purple btn-sm pull-right" href="<c:url value="/document/new?promotionId=${promotion.id}" />">
+                                                    <a class="btn btn-purple btn-sm pull-right" href="<c:url value="/document/new?promotionId=${promotion.id}" />" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
                                                         <i class="icon-cloud-upload"></i>
                                                         Upload Document
                                                     </a>
@@ -320,6 +320,9 @@
             if ("ontouchend" in document)
                 document.write("<script src='../assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
         </script>
+        
+        <script src="../assets/js/jquery-blockUI.js"></script>
+        
         <script src="../assets/js/bootstrap.min.js"></script>
         <script src="../assets/js/typeahead-bs2.min.js"></script>
 

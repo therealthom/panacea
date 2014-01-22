@@ -207,7 +207,7 @@
                                     <div class="widget-header">
                                         <h4 class="lighter"><i class="icon-bars"></i> Project: ${project.name} </h4>
                                         <div class="widget-toolbar">
-                                            <a href="<c:url value="../environment/createEnvironment?projectId=${project.id}" />" class="btn btn-minier btn-inverse">
+                                            <a href="<c:url value="../environment/createEnvironment?projectId=${project.id}" />" class="btn btn-minier btn-inverse" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });" >
                                                 <i class="icon-plus"></i>
                                                 New environment&nbsp;
                                                 <i class="icon-cog"></i>
@@ -254,7 +254,7 @@
                                                             <td>${environment.username}</td>
                                                             <td>${environment.password}</td>
                                                             <td style="text-align: center;">
-                                                                <a href="edit?projectId=${project.id}&environmentId=${environmentId}" class="btn btn-purple btn-minier">
+                                                                <a href="editEnvironment?projectId=${project.id}&environmentId=${environment.id}" class="btn btn-purple btn-minier" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
                                                                     <i class="icon-edit"></i> Edit
                                                                 </a>
                                                             </td>
@@ -295,6 +295,9 @@
             if ("ontouchend" in document)
                 document.write("<script src='../assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
         </script>
+        
+        <script src="../assets/js/jquery-blockUI.js"></script>
+        
         <script src="../assets/js/bootstrap.min.js"></script>
         <script src="../assets/js/typeahead-bs2.min.js"></script>
 

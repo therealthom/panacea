@@ -190,7 +190,7 @@
                         <div class="row-fluid">
                             <div class="col-xs-12">
                                 <!-- PAGE CONTENT BEGINS -->
-                                <form:form method="post" action="saveProject" modelAttribute="project">
+                                <form:form method="post" action="saveProject" modelAttribute="project" onsubmit="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' }); return true;">
                                     <div class="form-group">
                                         <label for="name" class="col-xs-2 control-label no-padding-right">New project name:</label>
                                         <div class="col-xs-10">
@@ -237,6 +237,9 @@
             if ("ontouchend" in document)
                 document.write("<script src='../assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
         </script>
+        
+        <script src="../assets/js/jquery-blockUI.js"></script>
+        
         <script src="../assets/js/bootstrap.min.js"></script>
         <script src="../assets/js/typeahead-bs2.min.js"></script>
 

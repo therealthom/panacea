@@ -203,7 +203,7 @@
                                                             <td>${promotion.dateCreated}</td>
                                                             <td>
                                                                 <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
-                                                                    <a href="<c:url value="/promotion/show?promotionId=${promotion.id}" />" class="btn btn-xs btn-info">
+                                                                    <a href="<c:url value="/promotion/show?promotionId=${promotion.id}" />" class="btn btn-xs btn-info" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
                                                                         <i class="icon-edit bigger-120"></i>
                                                                         Ver Detalle
                                                                     </a>
@@ -245,6 +245,9 @@
             if ("ontouchend" in document)
                 document.write("<script src='../assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
         </script>
+        
+        <script src="../assets/js/jquery-blockUI.js"></script>
+        
         <script src="../assets/js/bootstrap.min.js"></script>
         <script src="../assets/js/typeahead-bs2.min.js"></script>
 

@@ -39,13 +39,21 @@ public class EnvironmentController {
     }
     
     @RequestMapping(value = "/createEnvironment", method = RequestMethod.GET)
-    public String create(@RequestParam Long projectId, @RequestParam Long taskId, ModelMap model) {
+    public String create(@RequestParam Long projectId, ModelMap model) {
         Project project = projectServiceImpl.findProject(projectId);
         model.addAttribute("project",project);
-        model.addAttribute("taskId",taskId);
         Environment environment = new Environment();
         model.addAttribute("environment", environment);
         return "createEnvironment";
+    }
+    
+    @RequestMapping(value = "/editEnvironment", method = RequestMethod.GET)
+    public String edit(@RequestParam Long projectId, @RequestParam Long environmentId, ModelMap model) {
+        Project project = projectServiceImpl.findProject(projectId);
+        model.addAttribute("project",project);
+        Environment environment = environmentServiceImpl.findEnvironment(environmentId);
+        model.addAttribute("environment", environment);
+        return "editEnvironment";
     }
     
     @RequestMapping(value = "/saveEnvironment", method = RequestMethod.POST)
@@ -59,6 +67,22 @@ public class EnvironmentController {
         newEnvironment.setPassword(environment.getPassword());
         newEnvironment.setProject(project);
         environmentServiceImpl.saveEnvironment(newEnvironment);
+        model.addAttribute("project",project);
+        model.addAttribute("environments", environmentServiceImpl.findAllByProject(project));
+        return "listEnvironments";
+    }
+    
+    @RequestMapping(value = "/saveChangesEnvironment", method = RequestMethod.POST)
+    public String saveChanges(@RequestParam Long projectId, @RequestParam Long environmentId, ModelMap model, Environment environment) {
+        Project project = projectServiceImpl.findProject(projectId);
+        Environment newEnvironment = environmentServiceImpl.findEnvironment(environmentId);
+        newEnvironment.setName(environment.getName());
+        newEnvironment.setHost(environment.getHost());
+        newEnvironment.setPort(environment.getPort());
+        newEnvironment.setUsername(environment.getUsername());
+        newEnvironment.setPassword(environment.getPassword());
+        newEnvironment.setProject(project);
+        environment = environmentServiceImpl.updateEnvironment(newEnvironment);
         model.addAttribute("project",project);
         model.addAttribute("environments", environmentServiceImpl.findAllByProject(project));
         return "listEnvironments";
