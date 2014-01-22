@@ -144,6 +144,64 @@ public class ProjectController {
         return "listProjects";
     }
     
+    @RequestMapping(value = "/buildProject", method = RequestMethod.GET)
+    public String build(@RequestParam Long projectId, ModelMap model) {
+        Project project = projectServiceImpl.findProject(projectId);
+        ProcessServiceService pss = new ProcessServiceService();
+        ProcessService processService = pss.getProcessServicePort();
+        long idProceso = processService.iniciaProceso("mx.redhat.ci.CIBuildProcess");
+        HumanTaskServiceService hts = new HumanTaskServiceService();
+        HumanTaskService service = hts.getHumanTaskServicePort();
+        User user = new User();
+        user.setId("admin");
+        List<TaskSummary> tareas = service.obtenerTareasGrupos(user, null);
+        model.addAttribute("tareas", tareas);
+        model.addAttribute("project", project);
+        return "taskTray";
+    }
+    
+    @RequestMapping(value = "/executeBuildProject", method = RequestMethod.GET)
+    public String executeBuild(@RequestParam Long projectId, @RequestParam Long taskId, ModelMap model) {
+        Project project = projectServiceImpl.findProject(projectId);
+        List<Parametro> parametros = new ArrayList<Parametro>();
+        Setup setup = setupServiceImpl.findSetup(1L);
+        Parametro parametro = new Parametro();
+        parametro.setLlave("jenkinsHost_");
+        parametro.setValor(setup.getJenkinsHost());
+        parametros.add(parametro);
+        parametro = new Parametro();
+        parametro.setLlave("jenkinsPort_");
+        parametro.setValor(setup.getJenkinsPort());
+        parametros.add(parametro);
+        parametro = new Parametro();
+        parametro.setLlave("jenkinsUser_");
+        parametro.setValor(setup.getJenkinsUsername());
+        parametros.add(parametro);
+        parametro = new Parametro();
+        parametro.setLlave("jenkinsPassword_");
+        parametro.setValor(setup.getJenkinsPassword());
+        parametros.add(parametro);
+        parametro = new Parametro();
+        parametro.setLlave("operacion_");
+        parametro.setValor("ejecutar");
+        parametros.add(parametro);
+        parametro = new Parametro();
+        parametro.setLlave("proyecto_");
+        parametro.setValor(project.getName());
+        parametros.add(parametro);
+        HumanTaskServiceService hts = new HumanTaskServiceService();
+        HumanTaskService service = hts.getHumanTaskServicePort();
+        User user = new User();
+        user.setId("admin");
+        Holder<TaskSummary> tarea = new Holder<TaskSummary>();
+        tarea.value = new TaskSummary();
+        tarea.value.setId(taskId);
+        service.iniciarTarea(tarea, user);
+        service.completarTarea(tarea, user, parametros);
+        model.addAttribute("projects",projectServiceImpl.findAllProjects());
+        return "listProjects";
+    }
+    
     @RequestMapping(value = "/disbleProject", method = RequestMethod.GET)
     public String disable(@RequestParam Long projectId, ModelMap model) {
         Project project = projectServiceImpl.findProject(projectId);

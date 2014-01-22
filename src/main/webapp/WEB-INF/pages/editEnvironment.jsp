@@ -187,7 +187,7 @@
                             </li>
                             <li class="active">
                                 <i class="icon-cog"></i>
-                                New environment
+                                Edit environment
                             </li>
                         </ul><!-- .breadcrumb -->
                     </div>

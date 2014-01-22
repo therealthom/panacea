@@ -25,6 +25,18 @@ import javax.persistence.Version;
 @Entity
 @Configurable
 public class Project implements Serializable {
+    
+    /**
+     */
+    @NotNull
+    @Size(min = 1, max = 100)
+    private String packaging;
+            
+    /**
+     */
+    @NotNull
+    @Size(min = 1, max = 100)
+    private String groupId;
 
     /**
      */
@@ -174,5 +186,33 @@ public class Project implements Serializable {
      */
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    /**
+     * @return the packaging
+     */
+    public String getPackaging() {
+        return packaging;
+    }
+
+    /**
+     * @param packaging the packaging to set
+     */
+    public void setPackaging(String packaging) {
+        this.packaging = packaging;
+    }
+
+    /**
+     * @return the groupId
+     */
+    public String getGroupId() {
+        return groupId;
+    }
+
+    /**
+     * @param groupId the groupId to set
+     */
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
     }
 }

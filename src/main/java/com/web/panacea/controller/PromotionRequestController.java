@@ -12,10 +12,21 @@ package com.web.panacea.controller;
  */
 import com.web.panacea.domain.Project;
 import com.web.panacea.domain.PromotionRequest;
+import com.web.panacea.domain.Setup;
 import com.web.panacea.service.ProjectService;
 import com.web.panacea.service.PromotionRequestService;
+import com.web.panacea.service.SetupServiceImpl;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.xml.ws.Holder;
+import mx.redhat.brms.ws.procesos.impl.ProcessService;
+import mx.redhat.brms.ws.procesos.impl.ProcessServiceService;
+import mx.redhat.brms.ws.tareas.impl.HumanTaskService;
+import mx.redhat.brms.ws.tareas.impl.HumanTaskServiceService;
+import mx.redhat.brms.ws.tareas.impl.Parametro;
+import mx.redhat.brms.ws.tareas.impl.TaskSummary;
+import mx.redhat.brms.ws.tareas.impl.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -31,24 +42,86 @@ public class PromotionRequestController {
     ProjectService projectServiceImpl;
     @Autowired
     PromotionRequestService promotionRequestServiceImpl;
+    @Autowired
+    SetupServiceImpl setupServiceImpl;
+    
+    @RequestMapping(value = "/startPromotionProcess", method = RequestMethod.GET)
+    public String startPromotionProcess(@RequestParam Long projectId, ModelMap model) {
+        Project project = projectServiceImpl.findProject(projectId);
+        ProcessServiceService pss = new ProcessServiceService();
+        ProcessService processService = pss.getProcessServicePort();
+        long idProceso = processService.iniciaProceso("mx.redhat.ci.CIPromocionProcess");
+        HumanTaskServiceService hts = new HumanTaskServiceService();
+        HumanTaskService service = hts.getHumanTaskServicePort();
+        User user = new User();
+        user.setId("admin");
+        List<TaskSummary> tareas = service.obtenerTareasGrupos(user, null);
+        model.addAttribute("tareas", tareas);
+        model.addAttribute("project", project);
+        return "taskTray";
+    }
     
     @RequestMapping(value = "/createFirstPromotionRequest", method = RequestMethod.GET)
-    public String createFirst(@RequestParam Long projectId, ModelMap model) {
+    public String createFirst(@RequestParam Long taskId, @RequestParam Long projectId, ModelMap model) {
         Project project = projectServiceImpl.findProject(projectId);
         model.addAttribute("project",project);
+        model.addAttribute("taskId",taskId);
         PromotionRequest promotionRequest = new PromotionRequest();
         model.addAttribute("promotionRequest", promotionRequest);
         return "createFirstPromotionRequest";
     }
     
     @RequestMapping(value = "/saveFirstPromotionRequest", method = RequestMethod.POST)
-    public String saveFirst(@RequestParam Long projectId, ModelMap model, PromotionRequest promotionRequest) {
+    public String saveFirst(@RequestParam Long taskId, @RequestParam Long projectId, ModelMap model, PromotionRequest promotionRequest) {
         Project project = projectServiceImpl.findProject(projectId);
         PromotionRequest newPromotionRequest = new PromotionRequest();
         newPromotionRequest.setComments(promotionRequest.getComments());
         newPromotionRequest.setDateCreated(new Date());
         newPromotionRequest.setProject(project);
         promotionRequestServiceImpl.savePromotionRequest(newPromotionRequest);
+        List<Parametro> parametros = new ArrayList<Parametro>();
+        Setup setup = setupServiceImpl.findSetup(1L);
+        Parametro parametro = new Parametro();
+        parametro.setLlave("proyecto_");
+        parametro.setValor(project.getName());
+        parametros.add(parametro);
+        parametro = new Parametro();
+        parametro.setLlave("jenkinsHost_");
+        parametro.setValor(setup.getJenkinsHost());
+        parametros.add(parametro);
+        parametro = new Parametro();
+        parametro.setLlave("jenkinsPort_");
+        parametro.setValor(setup.getJenkinsPort());
+        parametros.add(parametro);
+        parametro = new Parametro();
+        parametro.setLlave("jenkinsUser_");
+        parametro.setValor(setup.getJenkinsUsername());
+        parametros.add(parametro);
+        parametro = new Parametro();
+        parametro.setLlave("jenkinsPassword_");
+        parametro.setValor(setup.getJenkinsPassword());
+        parametros.add(parametro);
+        parametro = new Parametro();
+        parametro.setLlave("outcome_");
+        parametro.setValor(null);
+        parametros.add(parametro);
+        parametro = new Parametro();
+        parametro.setLlave("version_");
+        parametro.setValor("1.1");
+        parametros.add(parametro);
+        parametro = new Parametro();
+        parametro.setLlave("comentarios_");
+        parametro.setValor(newPromotionRequest.getComments());
+        parametros.add(parametro);
+        HumanTaskServiceService hts = new HumanTaskServiceService();
+        HumanTaskService service = hts.getHumanTaskServicePort();
+        User user = new User();
+        user.setId("admin");
+        Holder<TaskSummary> tarea = new Holder<TaskSummary>();
+        tarea.value = new TaskSummary();
+        tarea.value.setId(taskId);
+        service.iniciarTarea(tarea, user);
+        service.completarTarea(tarea, user, parametros);
         model.addAttribute("projects",projectServiceImpl.findAllProjects());
         return "listProjects";
     }

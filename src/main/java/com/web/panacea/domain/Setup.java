@@ -20,7 +20,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Configurable
 public class Setup implements Serializable {
-
+    
     /**
      */
     @NotNull
@@ -59,14 +59,10 @@ public class Setup implements Serializable {
 
     /**
      */
-    @NotNull
-    @Size(min = 1, max = 100)
     private String jenkinsUsername;
 
     /**
      */
-    @NotNull
-    @Size(min = 1, max = 100)
     private String jenkinsPassword;
 
     @Id

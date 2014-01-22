@@ -190,13 +190,34 @@
                         <div class="row-fluid">
                             <div class="col-xs-12">
                                 <!-- PAGE CONTENT BEGINS -->
-                                <form:form method="post" action="saveProject" modelAttribute="project" onsubmit="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' }); return true;">
+                                <form:form method="post" action="saveProject" modelAttribute="project" onsubmit="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' }); return true;" >
                                     <div class="form-group">
                                         <label for="name" class="col-xs-2 control-label no-padding-right">New project name:</label>
                                         <div class="col-xs-10">
                                             <span class="block input-icon input-icon-right">
                                                 <input type='hidden' name='taskId' id='projectId' value='${taskId}' />
                                                 <form:input name="name" id="name" path="name" value="${project.name}" class="form-control" />
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="packaging" class="col-xs-2 control-label no-padding-right">New project packaging:</label>
+                                        <div class="col-xs-10">
+                                            <span class="block input-icon input-icon-right">
+                                                <select id="packaging" name="packaging" path="packaging" class="form-control">
+                                                    <option value="OTRO">SELECCIONE</option>
+                                                    <option value="war">WAR</option>
+                                                    <option value="jar">JAR</option>
+                                                    <option value="ear">EAR</option>
+                                                </select>
+                                            </span>
+                                        </div>
+                                    </div>
+                                            <div class="form-group">
+                                        <label for="groupId" class="col-xs-2 control-label no-padding-right">New project group id:</label>
+                                        <div class="col-xs-10">
+                                            <span class="block input-icon input-icon-right">
+                                                <form:input name="groupId" id="groupId" path="groupId" value="${project.groupId}" class="form-control" />
                                             </span>
                                         </div>
                                     </div>

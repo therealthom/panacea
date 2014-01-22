@@ -4,8 +4,10 @@
     Author     : oscar
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.Date" %> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -194,9 +196,8 @@
                                                 <thead class="thin-border-bottom">
                                                     <tr>
                                                         <th>Id</th>
-                                                        <th>Name</th>
-                                                        <th>Description</th>
-                                                        <th>Subject</th>
+                                                        <th>Type</th>
+                                                        <th>Created On</th>
                                                         <th>Start</th>
                                                     </tr>
                                                 </thead>
@@ -204,13 +205,24 @@
                                                     <c:forEach var="taskSummary" items="${tareas}" varStatus="status">
                                                         <tr>
                                                             <td>${taskSummary.id}</td>
-                                                            <td>${taskSummary.name}</td>
-                                                            <td>${taskSummary.description}</td>
-                                                            <td>${taskSummary.subject}</td>
+                                                            <td>${taskSummary.processId}</td>
+                                                            <td><fmt:formatDate value="${taskSummary.createdOn.toGregorianCalendar().getTime()}" pattern="dd/MM/yyyy HH:mm:ss" /></td>
                                                             <td style="text-align: center;">
-                                                                <a href="../project/createProject?taskId=${taskSummary.id}" class="btn btn-info btn-minier" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
-                                                                    <i class="icon-plus-sign"></i> Set project name
-                                                                </a>
+                                                                <c:if test="${taskSummary.processId.contains('CISetupProcess')}">
+                                                                    <a href="../project/createProject?taskId=${taskSummary.id}" class="btn btn-info btn-minier" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
+                                                                        <i class="icon-plus-sign"></i> Set project name
+                                                                    </a>
+                                                                </c:if>
+                                                                <c:if test="${taskSummary.processId.contains('CIBuildProcess')}">
+                                                                    <a href="../project/executeBuildProject?taskId=${taskSummary.id}&projectId=${project.id}" class="btn btn-inverse btn-minier" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
+                                                                        <i class="icon-plus-sign"></i> Construir
+                                                                    </a>
+                                                                </c:if>
+                                                                <c:if test="${taskSummary.processId.contains('CIPromocionProcess')}">
+                                                                    <a href="../promotion/createFirstPromotionRequest?taskId=${taskSummary.id}&projectId=${project.id}" class="btn btn-warning btn-minier" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
+                                                                        <i class="icon-plus-sign"></i> Promocionar
+                                                                    </a>
+                                                                </c:if>
                                                             </td>
                                                         </tr>
                                                     </c:forEach>

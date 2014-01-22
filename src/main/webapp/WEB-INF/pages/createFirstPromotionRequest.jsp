@@ -204,6 +204,7 @@
                                         <div class="col-sm-9">
                                             <span class="block input-icon input-icon-right">
                                                 <input type='hidden' name='projectId' id='projectId' value='${project.id}' />
+                                                <input type='hidden' name='taskId' id='taskId' value='${taskId}' />
                                                 <textarea class="form-control" id="comments" name="comments" path="comments" >${promotionRequest.comments}</textarea>
                                             </span>
                                         </div>

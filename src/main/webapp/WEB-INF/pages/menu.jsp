@@ -3,6 +3,13 @@
 <ul class="nav nav-list">
     
     <li>
+        <a href="<c:url value="/task/taskTray" />" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
+           <i class="icon-tasks"></i>
+            <span class="menu-text"> Tasks </span>
+        </a>
+    </li>
+    
+    <li>
         <a href="<c:url value="/setup/init" />" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
            <i class="icon-wrench"></i>
             <span class="menu-text"> System settings </span>

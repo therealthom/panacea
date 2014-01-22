@@ -215,8 +215,12 @@
                                                             Change status
                                                         </th>
                                                         <th>
+                                                            <i class="icon-briefcase"></i>
+                                                            Build
+                                                        </th>
+                                                        <th>
                                                             <i class="icon-external-link-sign"></i>
-                                                            Build and promote
+                                                            Promote
                                                         </th>
                                                     </tr>
                                                 </thead>
@@ -242,10 +246,19 @@
                                                                 </c:if>
                                                             </td>
                                                             <td style="text-align: center;">
-                                                                <c:if test="${project.environments != null}">
-                                                                    <a href="../promotion/createFirstPromotionRequest?projectId=${project.id}" class="btn btn-purple btn-minier" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
-                                                                        <i class="icon-external-link-sign"></i> Build and promote
+                                                                <c:if test="${project.active == true}">
+                                                                    <a href="../project/buildProject?projectId=${project.id}" class="btn btn-yellow btn-minier" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
+                                                                        <i class="icon-briefcase"></i> Construir
                                                                     </a>
+                                                                </c:if>
+                                                            </td>
+                                                            <td style="text-align: center;">
+                                                                <c:if test="${project.active == true}">
+                                                                    <c:if test="${project.environments != null}">
+                                                                        <a href="../promotion/startPromotionProcess?projectId=${project.id}" class="btn btn-purple btn-minier" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
+                                                                            <i class="icon-external-link-sign"></i> Promote
+                                                                        </a>
+                                                                    </c:if>
                                                                 </c:if>
                                                             </td>
                                                         </tr>
