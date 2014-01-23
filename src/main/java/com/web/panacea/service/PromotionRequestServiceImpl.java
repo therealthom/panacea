@@ -1,5 +1,6 @@
 package com.web.panacea.service;
 
+import com.web.panacea.domain.Project;
 import com.web.panacea.domain.PromotionRequest;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -35,5 +36,9 @@ public class PromotionRequestServiceImpl implements PromotionRequestService {
 
     public PromotionRequest updatePromotionRequest(PromotionRequest promotionRequest) {
         return promotionRequest.merge();
+    }
+    
+    public PromotionRequest findByProject(Project project) {
+        return PromotionRequest.findByProject(project);
     }
 }

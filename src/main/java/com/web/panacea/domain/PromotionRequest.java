@@ -1,5 +1,6 @@
 package com.web.panacea.domain;
 
+import static com.web.panacea.domain.Project.entityManager;
 import java.io.Serializable;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -26,6 +27,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
+import javax.persistence.TypedQuery;
 
 @Entity
 @Configurable
@@ -162,6 +164,11 @@ public class PromotionRequest implements Serializable {
             return null;
         }
         return entityManager().find(PromotionRequest.class, id);
+    }
+    
+    public static PromotionRequest findByProject(Project project) {
+        TypedQuery<PromotionRequest> query = entityManager().createQuery("SELECT o FROM PromotionRequest o WHERE o.project = :thisProject", PromotionRequest.class);
+        return query.setParameter("thisProject", project).getSingleResult();
     }
 
     public static List<PromotionRequest> findPromotionRequestEntries(int firstResult, int maxResults) {

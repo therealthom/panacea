@@ -211,41 +211,18 @@
                                                         <div class="col-sm-9">
                                                             <div class="row">
                                                                 <div class="col-xs-12 label label-lg label-success arrowed-in arrowed-right">
-                                                                    <b>Environmens</b>
+                                                                    <b>Actions</b>
                                                                 </div>
                                                             </div>
 
-                                                            <div>
-                                                                <table class="table table-striped table-bordered">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>Name</th>
-                                                                            <th>Host</th>
-                                                                            <th>Port</th>
-                                                                            <th></th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>    
-                                                                        <c:forEach items="${promotion.project.environments}" var="environment">
-                                                                            <tr>
-                                                                                <td>
-                                                                                    <span class="label label-xlg label-light arrowed-in-right">
-                                                                                        ${environment.name}
-                                                                                    </span>
-                                                                                </td>
-                                                                                <td>${environment.host}</td>
-                                                                                <td>${environment.port}</td>
-                                                                                <td>
-                                                                                    <a class="btn btn-xs btn-danger" href="<c:url value="/promotion/deploy?promotionId=${promotion.id}&projectId=${promotion.project.id}&environmentId=${document.id}" />" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
-                                                                                        <i class="icon-bolt bigger-110"></i>
-                                                                                        Deploy
-                                                                                        <i class="icon-arrow-right icon-on-right"></i>
-                                                                                    </a>
-                                                                                </td>
-                                                                            </tr>
-                                                                        </c:forEach>
-                                                                    </tbody>
-                                                                </table>
+                                                            <div style="text-align: center;">
+                                                                <br />
+                                                                <br />
+                                                                <br />
+                                                                <br />
+                                                                <a href="../promotion/promoteToNextLevel?taskId=${taskId}&projectId=${promotion.project.id}" class="btn btn-success btn-sm" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
+                                                                    <i class="icon-external-link-sign"></i> Promocionar
+                                                                </a>
                                                             </div>
                                                         </div><!-- /span -->
                                                     </div><!-- row -->
@@ -259,7 +236,7 @@
                                                     </div>
 
                                                     <div class="space"></div>
-                                                    <a class="btn btn-purple btn-sm pull-right" href="<c:url value="/document/new?promotionId=${promotion.id}" />" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
+                                                    <a class="btn btn-purple btn-sm pull-right" href="<c:url value="/document/new?promotionId=${promotion.id}&taskId=${taskId}" />" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
                                                         <i class="icon-cloud-upload"></i>
                                                         Upload Document
                                                     </a>

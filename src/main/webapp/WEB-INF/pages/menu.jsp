@@ -32,7 +32,7 @@
 
     <li>
         <a href="<c:url value="/log/list" />" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
-           <i class="icon-group"></i>
+           <i class="icon-archive"></i>
             <span class="menu-text"> Log </span>
         </a>
     </li>

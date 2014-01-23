@@ -61,6 +61,83 @@ public class PromotionRequestController {
         return "taskTray";
     }
     
+    @RequestMapping(value = "/generateFirst", method = RequestMethod.GET)
+    public String generateFirst(@RequestParam Long taskId, @RequestParam Long projectId, ModelMap model) {
+        Project project = projectServiceImpl.findProject(projectId);
+        PromotionRequest newPromotionRequest = new PromotionRequest();
+        newPromotionRequest.setComments("Promovido desde desarrollo");
+        newPromotionRequest.setDateCreated(new Date());
+        newPromotionRequest.setProject(project);
+        promotionRequestServiceImpl.savePromotionRequest(newPromotionRequest);
+        model.addAttribute("taskId",taskId);
+        model.addAttribute("promotion", newPromotionRequest);
+        return "showPromotion"; 
+    }
+    
+    @RequestMapping(value = "/promoteToNextLevel", method = RequestMethod.GET)
+    public String nextLEvel(@RequestParam Long projectId, @RequestParam Long taskId, ModelMap model) {
+        Project project = projectServiceImpl.findProject(projectId);
+        List<Parametro> parametros = new ArrayList<Parametro>();
+        Setup setup = setupServiceImpl.findSetup(1L);
+        Parametro parametro = new Parametro();
+        parametro.setLlave("proyecto_");
+        parametro.setValor(project.getName());
+        parametros.add(parametro);
+        parametro = new Parametro();
+        parametro.setLlave("jenkinsHost_");
+        parametro.setValor(setup.getJenkinsHost());
+        parametros.add(parametro);
+        parametro = new Parametro();
+        parametro.setLlave("jenkinsPort_");
+        parametro.setValor(setup.getJenkinsPort());
+        parametros.add(parametro);
+        parametro = new Parametro();
+        parametro.setLlave("jenkinsUser_");
+        parametro.setValor(setup.getJenkinsUsername());
+        parametros.add(parametro);
+        parametro = new Parametro();
+        parametro.setLlave("jenkinsPassword_");
+        parametro.setValor(setup.getJenkinsPassword());
+        parametros.add(parametro);
+        parametro = new Parametro();
+        parametro.setLlave("outcome_");
+        parametro.setValor(null);
+        parametros.add(parametro);
+        parametro = new Parametro();
+        parametro.setLlave("version_");
+        parametro.setValor("1.1");
+        parametros.add(parametro);
+        parametro = new Parametro();
+        parametro.setLlave("comentarios_");
+        parametro.setValor("Promovido desde desarrollo");
+        parametros.add(parametro);
+        HumanTaskServiceService hts = new HumanTaskServiceService();
+        HumanTaskService service = hts.getHumanTaskServicePort();
+        User user = new User();
+        user.setId("admin");
+        Holder<TaskSummary> tarea = new Holder<TaskSummary>();
+        tarea.value = new TaskSummary();
+        tarea.value.setId(taskId);
+        service.iniciarTarea(tarea, user);
+        service.completarTarea(tarea, user, parametros);
+        List<TaskSummary> tareas = service.obtenerTareasGrupos(user, null);
+        model.addAttribute("tareas", tareas);
+        return "taskTray";  
+    }
+    
+    @RequestMapping(value = "/evaluatePromotion", method = RequestMethod.GET)
+    public String evaluate(@RequestParam Long processId, @RequestParam Long taskId, ModelMap model) {
+        ProcessServiceService pss = new ProcessServiceService();
+        ProcessService processService = pss.getProcessServicePort();
+        String nombreProyecto = (String) processService.obtenVariableNodo(processId, "_proyecto");
+        Project project = projectServiceImpl.findProjectByName(nombreProyecto);
+        PromotionRequest promotionRequest = promotionRequestServiceImpl.findByProject(project);
+        model.addAttribute("promotion", promotionRequest);
+        return "showPromotion";  
+    }
+    
+    
+    
     @RequestMapping(value = "/createFirstPromotionRequest", method = RequestMethod.GET)
     public String createFirst(@RequestParam Long taskId, @RequestParam Long projectId, ModelMap model) {
         Project project = projectServiceImpl.findProject(projectId);
@@ -134,9 +211,10 @@ public class PromotionRequestController {
     }
     
     @RequestMapping(value = "/show", method = RequestMethod.GET)
-    public String show(@RequestParam Long promotionId, ModelMap model) {
+    public String show(@RequestParam Long taskId, @RequestParam Long promotionId, ModelMap model) {
         PromotionRequest promotion = PromotionRequest.findPromotionRequest(promotionId);
         model.addAttribute("promotion", promotion);
+        model.addAttribute("taskId", taskId);
         return "showPromotion";   
     }
 }

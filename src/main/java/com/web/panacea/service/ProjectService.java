@@ -18,5 +18,7 @@ public interface ProjectService {
     public abstract void saveProject(Project project);
 
     public abstract Project updateProject(Project project);
+    
+    public abstract Project findProjectByName(String name);
 
 }

@@ -20,6 +20,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.persistence.Version;
 
 @Entity
@@ -80,6 +81,11 @@ public class Project implements Serializable {
             return null;
         }
         return entityManager().find(Project.class, id);
+    }
+    
+    public static Project findProjectByName(String name) {
+        TypedQuery<Project> query = entityManager().createQuery("SELECT o FROM Project o WHERE o.name = :thisName", Project.class);
+        return query.setParameter("thisName", name).getSingleResult();
     }
 
     public static List<Project> findProjectEntries(int firstResult, int maxResults) {

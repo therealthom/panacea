@@ -183,6 +183,7 @@
 
                                 <form class="form-horizontal" method="post" action="upload" enctype="multipart/form-data" onsubmit="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' }); return true;">
                                     <input type="hidden" name="promotionId" value="${promotionId}"/>
+                                    <input type="hidden" name="taskId" value="${taskId}"/>
                                     <div class="form-group">
                                         <label for="file" class="col-sm-3 control-label no-padding-right">Name</label>
                                         <div class="col-sm-9">

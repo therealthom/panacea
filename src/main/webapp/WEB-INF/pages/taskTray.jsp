@@ -219,9 +219,16 @@
                                                                     </a>
                                                                 </c:if>
                                                                 <c:if test="${taskSummary.processId.contains('CIPromocionProcess')}">
-                                                                    <a href="../promotion/createFirstPromotionRequest?taskId=${taskSummary.id}&projectId=${project.id}" class="btn btn-warning btn-minier" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
-                                                                        <i class="icon-plus-sign"></i> Promocionar
-                                                                    </a>
+                                                                    <c:if test="${project != null}">
+                                                                        <a href="../promotion/generateFirst?taskId=${taskSummary.id}&projectId=${project.id}" class="btn btn-warning btn-minier" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
+                                                                            <i class="icon-plus-sign"></i> Promocionar
+                                                                        </a>
+                                                                    </c:if>
+                                                                    <c:if test="${project == null}">
+                                                                        <a href="../promotion/evaluatePromotion?taskId=${taskSummary.id}&processId=${taskSummary.processInstanceId}" class="btn btn-success btn-minier" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
+                                                                            <i class="icon-plus-sign"></i> Promocionar
+                                                                        </a>
+                                                                    </c:if>
                                                                 </c:if>
                                                             </td>
                                                         </tr>
