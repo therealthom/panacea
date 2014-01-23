@@ -74,8 +74,8 @@ public class PromotionRequestController {
         return "showPromotion"; 
     }
     
-    @RequestMapping(value = "/promoteToNextLevel", method = RequestMethod.GET)
-    public String nextLEvel(@RequestParam Long projectId, @RequestParam Long taskId, ModelMap model) {
+    @RequestMapping(value = "/promoteToNextLevel", method = RequestMethod.POST)
+    public String nextLEvel(@RequestParam String comments, @RequestParam String outcome, @RequestParam Long projectId, @RequestParam Long taskId, ModelMap model) {
         Project project = projectServiceImpl.findProject(projectId);
         List<Parametro> parametros = new ArrayList<Parametro>();
         Setup setup = setupServiceImpl.findSetup(1L);
@@ -101,7 +101,7 @@ public class PromotionRequestController {
         parametros.add(parametro);
         parametro = new Parametro();
         parametro.setLlave("outcome_");
-        parametro.setValor(null);
+        parametro.setValor(outcome);
         parametros.add(parametro);
         parametro = new Parametro();
         parametro.setLlave("version_");
@@ -109,7 +109,7 @@ public class PromotionRequestController {
         parametros.add(parametro);
         parametro = new Parametro();
         parametro.setLlave("comentarios_");
-        parametro.setValor("Promovido desde desarrollo");
+        parametro.setValor(comments);
         parametros.add(parametro);
         HumanTaskServiceService hts = new HumanTaskServiceService();
         HumanTaskService service = hts.getHumanTaskServicePort();
@@ -133,6 +133,7 @@ public class PromotionRequestController {
         Project project = projectServiceImpl.findProjectByName(nombreProyecto);
         PromotionRequest promotionRequest = promotionRequestServiceImpl.findByProject(project);
         model.addAttribute("promotion", promotionRequest);
+        model.addAttribute("taskId",taskId);
         return "showPromotion";  
     }
     

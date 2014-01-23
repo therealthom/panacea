@@ -215,14 +215,32 @@
                                                                 </div>
                                                             </div>
 
-                                                            <div style="text-align: center;">
-                                                                <br />
-                                                                <br />
-                                                                <br />
-                                                                <br />
-                                                                <a href="../promotion/promoteToNextLevel?taskId=${taskId}&projectId=${promotion.project.id}" class="btn btn-success btn-sm" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
-                                                                    <i class="icon-external-link-sign"></i> Promocionar
-                                                                </a>
+                                                            <div>
+                                                                <form class="form-horizontal" method="post" action="promoteToNextLevel" enctype="multipart/form-data" onsubmit="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' }); return true;">
+                                                                    <div class="form-group">
+                                                                        <label for="comments" class="col-sm-3 control-label no-padding-right">Comments:</label>
+                                                                        <div class="col-sm-9">
+                                                                            <input type='hidden' name='projectId' id='projectId' value='${promotion.project.id}' />
+                                                                            <input type='hidden' name='taskId' id='taskId' value='${taskId}' />
+                                                                            <textarea class="form-control" id="comments" name="comments" ></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="outcome" class="col-sm-3 control-label no-padding-right">Aprobación:</label>
+                                                                        <div class="col-sm-9">
+                                                                            <select id="outcome" name="outcome">
+                                                                                <option value="ACEPTAR">Aceptar</option>
+                                                                                <option value="RECHAZAR">Rechazar</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-12 clearfix form-actions">
+                                                                        <button class="btn btn-sm btn-success" type="submit">
+                                                                            <i class="icon-external-link-sign"></i>
+                                                                            Promocionar
+                                                                        </button>
+                                                                    </div>
+                                                                </form>
                                                             </div>
                                                         </div><!-- /span -->
                                                     </div><!-- row -->
