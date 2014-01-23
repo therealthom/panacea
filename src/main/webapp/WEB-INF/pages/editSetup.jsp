@@ -31,6 +31,7 @@
         <link rel="stylesheet" href="../assets/css/ace-rtl.min.css" />
         <link rel="stylesheet" href="../assets/css/ace-skins.min.css" />
 
+        <link rel="stylesheet" href="../assets/css/validationEngine.jquery.css" />        
         <!--[if lte IE 8]>
           <link rel="stylesheet" href="../assets/css/ace-ie.min.css" />
         <![endif]-->
@@ -182,24 +183,24 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <!-- PAGE CONTENT BEGINS -->
-                                <form:form class="form-horizontal" method="post" modelAttribute="setup" action="editSetup">
+                                <form:form id="myForm" name="myForm" class="form-horizontal" method="post" modelAttribute="setup" action="editSetup">
                                     <form:hidden path="id" value="${setup.id}"/>                                    
                                     <div class="form-group">
                                         <form:label path="svnHost" class="col-sm-3 control-label no-padding-right">SVN Host</form:label>
                                             <div class="col-sm-9">
-                                            <form:input path="svnHost" value="${setup.svnHost}" class="col-xs-10 col-sm-5" />
+                                            <form:input path="svnHost" value="${setup.svnHost}" class="validate[required,custom[ipv4]] col-xs-10 col-sm-5" />
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <form:label path="svnPort" class="col-sm-3 control-label no-padding-right">SVN Port</form:label>
                                             <div class="col-sm-9">
-                                            <form:input path="svnPort" value="${setup.svnPort}" class="col-xs-10 col-sm-5" />
+                                            <form:input path="svnPort" value="${setup.svnPort}" class="validate[required,maxSize[5]] col-xs-10 col-sm-5" />
                                         </div>
                                     </div>
                                     <div class="form-group">    
                                         <form:label path="svnUsername" class="col-sm-3 control-label no-padding-right">SVN Username</form:label>
                                             <div class="col-sm-9">
-                                            <form:input path="svnUsername" value="${setup.svnUsername}" class="col-xs-10 col-sm-5" />
+                                            <form:input path="svnUsername" value="${setup.svnUsername}" class="validate[required,custom[onlyLetterNumber]] col-xs-10 col-sm-5" />
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -211,19 +212,19 @@
                                     <div class="form-group">
                                         <form:label path="jenkinsHost" class="col-sm-3 control-label no-padding-right">Jenkins Host</form:label>
                                             <div class="col-sm-9">
-                                            <form:input path="jenkinsHost" value="${setup.jenkinsHost}" class="col-xs-10 col-sm-5" />
+                                            <form:input path="jenkinsHost" value="${setup.jenkinsHost}" class="validate[required,custom[ipv4]] col-xs-10 col-sm-5" />
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <form:label path="jenkinsPort" class="col-sm-3 control-label no-padding-right">Jenkins Port</form:label>
                                             <div class="col-sm-9">
-                                            <form:input path="jenkinsPort" value="${setup.jenkinsPort}" class="col-xs-10 col-sm-5" />
+                                            <form:input path="jenkinsPort" value="${setup.jenkinsPort}" class="validate[required,maxSize[5]] col-xs-10 col-sm-5" />
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <form:label path="jenkinsUsername" class="col-sm-3 control-label no-padding-right">Jenkins Username</form:label>
                                             <div class="col-sm-9">
-                                            <form:input path="jenkinsUsername" value="${setup.jenkinsUsername}" class="col-xs-10 col-sm-5" />
+                                            <form:input path="jenkinsUsername" value="${setup.jenkinsUsername}" class="validate[required,custom[onlyLetterNumber]] col-xs-10 col-sm-5" />
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -275,7 +276,9 @@
         </script>
         <script src="../assets/js/bootstrap.min.js"></script>
         <script src="../assets/js/typeahead-bs2.min.js"></script>
-
+        <script src="../assets/js/jquery.validationEngine-es.js"></script>
+        <script src="../assets/js/jquery.validationEngine.js"></script>
+        
         <!-- page specific plugin scripts -->
 
         <!-- ace scripts -->
@@ -284,5 +287,12 @@
         <script src="../assets/js/ace.min.js"></script>
 
         <!-- inline scripts related to this page -->
+        <script>
+		$(document).ready(function(){
+			// binds form submission and fields to the validation engine
+			$("#myForm").validationEngine('attach');
+		});
+	</script>
+
     </body>
 </html>
