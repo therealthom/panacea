@@ -22,6 +22,16 @@
     <dependencies>
         <!-- General dependencies for standard applications -->
         <dependency>
+            <groupId>mx.redhat.brms.ws</groupId>
+            <artifactId>procesos-ws-client</artifactId>
+            <version>1.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>mx.redhat.brms.ws</groupId>
+            <artifactId>tareas-ws-client</artifactId>
+            <version>1.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>
@@ -207,11 +217,6 @@
                     <artifactId>commons-logging</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>commons-fileupload</groupId>
-            <artifactId>commons-fileupload</artifactId>
-            <version>1.2.2</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet.jsp.jstl</groupId>

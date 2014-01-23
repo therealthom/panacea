@@ -25,13 +25,14 @@ public class DocumentController {
     DocumentService documentServiceImpl;
 
     @RequestMapping(value = "/new", method = RequestMethod.GET)
-    public String newDocument(@RequestParam Long promotionId, ModelMap model) {
+    public String newDocument(@RequestParam Long taskId, @RequestParam Long promotionId, ModelMap model) {
         model.addAttribute("promotionId", promotionId);
+        model.addAttribute("taskId", taskId);
         return "newDocument";
     }
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public String uploadDocument(@RequestParam MultipartFile file, @RequestParam Long promotionId, Model model) throws IOException {
+    public String uploadDocument(@RequestParam Long taskId, @RequestParam MultipartFile file, @RequestParam Long promotionId, Model model) throws IOException {
         System.out.println("filename >>> " + file.getOriginalFilename());
         System.out.println("size >>> " + file.getSize());
         Document document = new Document();
@@ -39,7 +40,7 @@ public class DocumentController {
         document.setFilename(file.getOriginalFilename());
         document.setFile(file.getBytes());
         documentServiceImpl.saveDocument(document);
-        return "redirect:/promotion/show?promotionId=" + promotionId;
+        return "redirect:/promotion/show?promotionId=" + promotionId + "&taskId=" + taskId;
     }
 
     @RequestMapping(value = "/download", method = RequestMethod.GET)

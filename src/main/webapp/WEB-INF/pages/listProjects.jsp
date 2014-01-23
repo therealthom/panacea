@@ -4,12 +4,6 @@
     Author     : oscar
 --%>
 
-<%-- 
-    Document   : systemSettings.jsp
-    Created on : 15-ene-2014, 10:51:44
-    Author     : oscar
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
@@ -51,14 +45,15 @@
 
         <!-- ace settings handler -->
 
-        <script src="../assets/js/ace-extra.min.js"></script>
-
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
         <!--[if lt IE 9]>
         <script src="../assets/js/html5shiv.js"></script>
         <script src="../assets/js/respond.min.js"></script>
         <![endif]-->
+        
+        <script src="../assets/js/.js"></script>
+        
     </head>
 
     <body>
@@ -195,7 +190,7 @@
                                     <div class="widget-header">
                                         <h4 class="lighter"><i class="icon-bars"></i> Project list </h4>
                                         <div class="widget-toolbar">
-                                            <a href="<c:url value="/project/createProject" />" class="btn btn-minier btn-inverse" >
+                                            <a href="<c:url value="/project/setupProject" />" class="btn btn-minier btn-inverse" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
                                                 <i class="icon-plus"></i>
                                                 New project&nbsp;
                                                 <i class="icon-briefcase"></i>
@@ -204,61 +199,72 @@
                                     </div>
                                     <div class="widget-body">
                                         <div class="widget-main">
-                                            <form:form method="post" action="showProject" modelAttribute="projects">
-                                                <table class="table table-striped table-bordered table-hover">
-                                                    <thead class="thin-border-bottom">
+                                            <table class="table table-striped table-bordered table-hover">
+                                                <thead class="thin-border-bottom">
+                                                    <tr>
+                                                        <th>
+                                                            <i class="icon-briefcase"></i>
+                                                            Project name
+                                                        </th>
+                                                        <th>
+                                                            <i class="icon-cogs"></i>
+                                                            Environments
+                                                        </th>
+                                                        <th>
+                                                            <i class="icon-check"></i>
+                                                            Change status
+                                                        </th>
+                                                        <th>
+                                                            <i class="icon-briefcase"></i>
+                                                            Build
+                                                        </th>
+                                                        <th>
+                                                            <i class="icon-external-link-sign"></i>
+                                                            Promote
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach var="project" items="${projects}" varStatus="status">
                                                         <tr>
-                                                            <th>
-                                                                <i class="icon-briefcase"></i>
-                                                                Project name
-                                                            </th>
-                                                            <th>
-                                                                <i class="icon-cogs"></i>
-                                                                Environments
-                                                            </th>
-                                                            <th>
-                                                                <i class="icon-check"></i>
-                                                                Change status
-                                                            </th>
-                                                            <th>
-                                                                <i class="icon-external-link-sign"></i>
-                                                                Build and promote
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <c:forEach var="project" items="${projects}" varStatus="status">
-                                                            <tr>
-                                                                <td>${project.name}</td>
-                                                                <td style="text-align: center;">
-                                                                    <a href="../environment/listEnvironments?projectId=${project.id}" class="btn btn-info btn-minier">
-                                                                        <i class="icon-cogs"></i> Edit environments
+                                                            <td>${project.name}</td>
+                                                            <td style="text-align: center;">
+                                                                <a href="../environment/listEnvironments?projectId=${project.id}" class="btn btn-info btn-minier" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
+                                                                    <i class="icon-cogs"></i> Edit environments
+                                                                </a>
+                                                            </td>
+                                                            <td style="text-align: center;">
+                                                                <c:if test="${project.active == true}">
+                                                                    <a href="disbleProject?projectId=${project.id}" class="btn btn-danger btn-minier" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
+                                                                        <i class="icon-trash"></i> Disable
                                                                     </a>
-                                                                </td>
-                                                                <td style="text-align: center;">
-                                                                    <c:if test="${project.active == true}">
-                                                                        <a href="disbleProject?projectId=${project.id}" class="btn btn-danger btn-minier">
-                                                                            <i class="icon-trash"></i> Disable
-                                                                        </a>
-                                                                    </c:if>
-                                                                    <c:if test="${project.active == false}">
-                                                                        <a href="enableProject?projectId=${project.id}" class="btn btn-success btn-minier">
-                                                                            <i class="icon-check"></i> Enable
-                                                                        </a>
-                                                                    </c:if>
-                                                                </td>
-                                                                <td style="text-align: center;">
+                                                                </c:if>
+                                                                <c:if test="${project.active == false}">
+                                                                    <a href="enableProject?projectId=${project.id}" class="btn btn-success btn-minier" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
+                                                                        <i class="icon-check"></i> Enable
+                                                                    </a>
+                                                                </c:if>
+                                                            </td>
+                                                            <td style="text-align: center;">
+                                                                <c:if test="${project.active == true}">
+                                                                    <a href="../project/buildProject?projectId=${project.id}" class="btn btn-yellow btn-minier" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
+                                                                        <i class="icon-briefcase"></i> Construir
+                                                                    </a>
+                                                                </c:if>
+                                                            </td>
+                                                            <td style="text-align: center;">
+                                                                <c:if test="${project.active == true}">
                                                                     <c:if test="${project.environments != null}">
-                                                                        <a href="../promotion/createFirstPromotionRequest?projectId=${project.id}" class="btn btn-purple btn-minier">
-                                                                            <i class="icon-external-link-sign"></i> Build and promote
+                                                                        <a href="../promotion/startPromotionProcess?projectId=${project.id}" class="btn btn-purple btn-minier" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
+                                                                            <i class="icon-external-link-sign"></i> Promote
                                                                         </a>
                                                                     </c:if>
-                                                                </td>
-                                                            </tr>
-                                                        </c:forEach>
-                                                    </tbody>
-                                                </table>
-                                            </form:form>
+                                                                </c:if>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
@@ -292,6 +298,9 @@
             if ("ontouchend" in document)
                 document.write("<script src='../assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
         </script>
+        
+        <script src="../assets/js/jquery-blockUI.js"></script>
+
         <script src="../assets/js/bootstrap.min.js"></script>
         <script src="../assets/js/typeahead-bs2.min.js"></script>
 

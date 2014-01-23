@@ -20,7 +20,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Configurable
 public class Setup implements Serializable {
-
+    
     /**
      */
     @NotNull
@@ -35,14 +35,10 @@ public class Setup implements Serializable {
 
     /**
      */
-    @NotNull
-    @Size(min = 1, max = 100)
     private String svnUsername;
 
     /**
      */
-    @NotNull
-    @Size(min = 1, max = 100)
     private String svnPassword;
 
     /**
@@ -59,15 +55,31 @@ public class Setup implements Serializable {
 
     /**
      */
+    private String jenkinsUsername;
+
+    /**
+     */
+    private String jenkinsPassword;
+    
+    /**
+     */
     @NotNull
     @Size(min = 1, max = 100)
-    private String jenkinsUsername;
+    private String artifactoryHost;
 
     /**
      */
     @NotNull
     @Size(min = 1, max = 100)
-    private String jenkinsPassword;
+    private String artifactoryPort;
+
+    /**
+     */
+    private String artifactoryUsername;
+
+    /**
+     */
+    private String artifactoryPassword;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -237,5 +249,61 @@ public class Setup implements Serializable {
 
     public String toString() {
         return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
+
+    /**
+     * @return the artifactoryHost
+     */
+    public String getArtifactoryHost() {
+        return artifactoryHost;
+    }
+
+    /**
+     * @param artifactoryHost the artifactoryHost to set
+     */
+    public void setArtifactoryHost(String artifactoryHost) {
+        this.artifactoryHost = artifactoryHost;
+    }
+
+    /**
+     * @return the artifactoryPort
+     */
+    public String getArtifactoryPort() {
+        return artifactoryPort;
+    }
+
+    /**
+     * @param artifactoryPort the artifactoryPort to set
+     */
+    public void setArtifactoryPort(String artifactoryPort) {
+        this.artifactoryPort = artifactoryPort;
+    }
+
+    /**
+     * @return the artifactoryUsername
+     */
+    public String getArtifactoryUsername() {
+        return artifactoryUsername;
+    }
+
+    /**
+     * @param artifactoryUsername the artifactoryUsername to set
+     */
+    public void setArtifactoryUsername(String artifactoryUsername) {
+        this.artifactoryUsername = artifactoryUsername;
+    }
+
+    /**
+     * @return the artifactoryPassword
+     */
+    public String getArtifactoryPassword() {
+        return artifactoryPassword;
+    }
+
+    /**
+     * @param artifactoryPassword the artifactoryPassword to set
+     */
+    public void setArtifactoryPassword(String artifactoryPassword) {
+        this.artifactoryPassword = artifactoryPassword;
     }
 }

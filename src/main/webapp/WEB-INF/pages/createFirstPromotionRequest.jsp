@@ -204,6 +204,7 @@
                                         <div class="col-sm-9">
                                             <span class="block input-icon input-icon-right">
                                                 <input type='hidden' name='projectId' id='projectId' value='${project.id}' />
+                                                <input type='hidden' name='taskId' id='taskId' value='${taskId}' />
                                                 <textarea class="form-control" id="comments" name="comments" path="comments" >${promotionRequest.comments}</textarea>
                                             </span>
                                         </div>
@@ -245,6 +246,9 @@
             if ("ontouchend" in document)
                 document.write("<script src='../assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
         </script>
+        
+        <script src="../assets/js/jquery-blockUI.js"></script>
+        
         <script src="../assets/js/bootstrap.min.js"></script>
         <script src="../assets/js/typeahead-bs2.min.js"></script>
 

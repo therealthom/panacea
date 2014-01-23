@@ -211,41 +211,37 @@
                                                         <div class="col-sm-9">
                                                             <div class="row">
                                                                 <div class="col-xs-12 label label-lg label-success arrowed-in arrowed-right">
-                                                                    <b>Environmens</b>
+                                                                    <b>Actions</b>
                                                                 </div>
                                                             </div>
-
                                                             <div>
-                                                                <table class="table table-striped table-bordered">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>Name</th>
-                                                                            <th>Host</th>
-                                                                            <th>Port</th>
-                                                                            <th></th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>    
-                                                                        <c:forEach items="${promotion.project.environments}" var="environment">
-                                                                            <tr>
-                                                                                <td>
-                                                                                    <span class="label label-xlg label-light arrowed-in-right">
-                                                                                        ${environment.name}
-                                                                                    </span>
-                                                                                </td>
-                                                                                <td>${environment.host}</td>
-                                                                                <td>${environment.port}</td>
-                                                                                <td>
-                                                                                    <a class="btn btn-xs btn-danger" href="<c:url value="/promotion/deploy?promotionId=${promotion.id}&projectId=${promotion.project.id}&environmentId=${document.id}" />">
-                                                                                        <i class="icon-bolt bigger-110"></i>
-                                                                                        Deploy
-                                                                                        <i class="icon-arrow-right icon-on-right"></i>
-                                                                                    </a>
-                                                                                </td>
-                                                                            </tr>
-                                                                        </c:forEach>
-                                                                    </tbody>
-                                                                </table>
+                                                                <br />
+                                                                <br />
+                                                                <form class="form-horizontal" method="post" action="promoteToNextLevel" enctype="multipart/form-data" onsubmit="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' }); return true;">
+                                                                    <div class="form-group">
+                                                                        <label for="comments" class="col-sm-3 control-label no-padding-right">Comments:</label>
+                                                                        <div class="col-sm-9">
+                                                                            <input type='hidden' name='projectId' id='projectId' value='${promotion.project.id}' />
+                                                                            <input type='hidden' name='taskId' id='taskId' value='${taskId}' />
+                                                                            <textarea class="form-control" id="comments" name="comments" ></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="outcome" class="col-sm-3 control-label no-padding-right">Aprobación:</label>
+                                                                        <div class="col-sm-9">
+                                                                            <select id="outcome" name="outcome">
+                                                                                <option value="ACEPTAR">Aceptar</option>
+                                                                                <option value="RECHAZAR">Rechazar</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-12 clearfix form-actions">
+                                                                        <button class="btn btn-sm btn-success" type="submit">
+                                                                            <i class="icon-external-link-sign"></i>
+                                                                            Promocionar
+                                                                        </button>
+                                                                    </div>
+                                                                </form>
                                                             </div>
                                                         </div><!-- /span -->
                                                     </div><!-- row -->
@@ -259,7 +255,7 @@
                                                     </div>
 
                                                     <div class="space"></div>
-                                                    <a class="btn btn-purple btn-sm pull-right" href="<c:url value="/document/new?promotionId=${promotion.id}" />">
+                                                    <a class="btn btn-purple btn-sm pull-right" href="<c:url value="/document/new?promotionId=${promotion.id}&taskId=${taskId}" />" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
                                                         <i class="icon-cloud-upload"></i>
                                                         Upload Document
                                                     </a>
@@ -320,6 +316,9 @@
             if ("ontouchend" in document)
                 document.write("<script src='../assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
         </script>
+        
+        <script src="../assets/js/jquery-blockUI.js"></script>
+        
         <script src="../assets/js/bootstrap.min.js"></script>
         <script src="../assets/js/typeahead-bs2.min.js"></script>
 

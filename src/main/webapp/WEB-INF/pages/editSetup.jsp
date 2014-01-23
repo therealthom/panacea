@@ -183,8 +183,10 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <!-- PAGE CONTENT BEGINS -->
-                                <form:form id="myForm" name="myForm" class="form-horizontal" method="post" modelAttribute="setup" action="editSetup">
-                                    <form:hidden path="id" value="${setup.id}"/>                                    
+                                <form:form  id="myForm" name="myForm" class="form-horizontal" method="post" modelAttribute="setup" action="editSetup" onsubmit="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' }); return true;">
+                                    <form:hidden path="id" value="${setup.id}"/>
+                                    <h4 class="header smaller lighter green">SVN Settings</h4>
+
                                     <div class="form-group">
                                         <form:label path="svnHost" class="col-sm-3 control-label no-padding-right">SVN Host</form:label>
                                             <div class="col-sm-9">
@@ -206,9 +208,12 @@
                                     <div class="form-group">
                                         <form:label path="svnPassword" class="col-sm-3 control-label no-padding-right">SVN Password</form:label>
                                             <div class="col-sm-9">
-                                            <form:input path="svnPassword" value="${setup.svnPassword}" class="col-xs-10 col-sm-5" />
+                                            <form:input path="svnPassword" value="${setup.svnPassword}" class="validate[required] col-xs-10 col-sm-5" />
                                         </div>
                                     </div>
+                                        
+                                    <h4 class="header smaller lighter green">Jenkins Settings</h4>
+                                    
                                     <div class="form-group">
                                         <form:label path="jenkinsHost" class="col-sm-3 control-label no-padding-right">Jenkins Host</form:label>
                                             <div class="col-sm-9">
@@ -224,13 +229,40 @@
                                     <div class="form-group">
                                         <form:label path="jenkinsUsername" class="col-sm-3 control-label no-padding-right">Jenkins Username</form:label>
                                             <div class="col-sm-9">
-                                            <form:input path="jenkinsUsername" value="${setup.jenkinsUsername}" class="validate[required,custom[onlyLetterNumber]] col-xs-10 col-sm-5" />
+                                            <form:input path="jenkinsUsername" value="${setup.jenkinsUsername}" class="col-xs-10 col-sm-5" />
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <form:label path="jenkinsPassword" class="col-sm-3 control-label no-padding-right">Jenkins Password</form:label>
                                             <div class="col-sm-9">
                                             <form:input path="jenkinsPassword" value="${setup.jenkinsPassword}" class="col-xs-10 col-sm-5" />
+                                        </div>
+                                    </div>
+
+                                    <h4 class="header smaller lighter green">Artifactory Settings</h4>
+                                        
+                                    <div class="form-group">
+                                        <form:label path="artifactoryHost" class="col-sm-3 control-label no-padding-right">Artifactory Host</form:label>
+                                            <div class="col-sm-9">
+                                            <form:input path="artifactoryHost" value="${setup.artifactoryHost}" class="validate[required,custom[ipv4]] col-xs-10 col-sm-5" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <form:label path="artifactoryPort" class="col-sm-3 control-label no-padding-right">Artifactory Port</form:label>
+                                            <div class="col-sm-9">
+                                            <form:input path="artifactoryPort" value="${setup.artifactoryPort}" class="validate[required,maxSize[5]] col-xs-10 col-sm-5" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <form:label path="artifactoryUsername" class="col-sm-3 control-label no-padding-right">Artifactory Username</form:label>
+                                            <div class="col-sm-9">
+                                            <form:input path="artifactoryUsername" value="${setup.artifactoryUsername}" class="validate[required,custom[onlyLetterNumber]] col-xs-10 col-sm-5" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <form:label path="artifactoryPassword" class="col-sm-3 control-label no-padding-right">Artifactory Password</form:label>
+                                            <div class="col-sm-9">
+                                            <form:input path="artifactoryPassword" value="${setup.artifactoryPassword}" class="validate[required] col-xs-10 col-sm-5" />
                                         </div>
                                     </div>
 
@@ -274,11 +306,14 @@
             if ("ontouchend" in document)
                 document.write("<script src='../assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
         </script>
+
+        <script src="../assets/js/jquery-blockUI.js"></script>
+
         <script src="../assets/js/bootstrap.min.js"></script>
         <script src="../assets/js/typeahead-bs2.min.js"></script>
         <script src="../assets/js/jquery.validationEngine-es.js"></script>
         <script src="../assets/js/jquery.validationEngine.js"></script>
-        
+
         <!-- page specific plugin scripts -->
 
         <!-- ace scripts -->
@@ -288,11 +323,11 @@
 
         <!-- inline scripts related to this page -->
         <script>
-		$(document).ready(function(){
-			// binds form submission and fields to the validation engine
-			$("#myForm").validationEngine('attach');
-		});
-	</script>
+            $(document).ready(function() {
+                // binds form submission and fields to the validation engine
+                $("#myForm").validationEngine('attach');
+            });
+        </script>
 
     </body>
 </html>

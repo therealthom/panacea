@@ -181,8 +181,9 @@
                                     </h1>
                                 </div><!-- /.page-header -->
 
-                                <form class="form-horizontal" method="post" action="upload" enctype="multipart/form-data">
+                                <form class="form-horizontal" method="post" action="upload" enctype="multipart/form-data" onsubmit="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' }); return true;">
                                     <input type="hidden" name="promotionId" value="${promotionId}"/>
+                                    <input type="hidden" name="taskId" value="${taskId}"/>
                                     <div class="form-group">
                                         <label for="file" class="col-sm-3 control-label no-padding-right">Name</label>
                                         <div class="col-sm-9">
@@ -227,6 +228,9 @@
             if ("ontouchend" in document)
                 document.write("<script src='../assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
         </script>
+        
+        <script src="../assets/js/jquery-blockUI.js"></script>
+        
         <script src="../assets/js/bootstrap.min.js"></script>
         <script src="../assets/js/typeahead-bs2.min.js"></script>
 

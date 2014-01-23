@@ -14,12 +14,9 @@ import com.web.panacea.domain.Environment;
 import com.web.panacea.domain.Project;
 import com.web.panacea.service.EnvironmentService;
 import com.web.panacea.service.ProjectService;
-import java.util.HashSet;
-import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,6 +47,15 @@ public class EnvironmentController {
         return "createEnvironment";
     }
     
+    @RequestMapping(value = "/editEnvironment", method = RequestMethod.GET)
+    public String edit(@RequestParam Long projectId, @RequestParam Long environmentId, ModelMap model) {
+        Project project = projectServiceImpl.findProject(projectId);
+        model.addAttribute("project",project);
+        Environment environment = environmentServiceImpl.findEnvironment(environmentId);
+        model.addAttribute("environment", environment);
+        return "editEnvironment";
+    }
+    
     @RequestMapping(value = "/saveEnvironment", method = RequestMethod.POST)
     public String save(@RequestParam Long projectId, ModelMap model, Environment environment) {
         Project project = projectServiceImpl.findProject(projectId);
@@ -61,6 +67,22 @@ public class EnvironmentController {
         newEnvironment.setPassword(environment.getPassword());
         newEnvironment.setProject(project);
         environmentServiceImpl.saveEnvironment(newEnvironment);
+        model.addAttribute("project",project);
+        model.addAttribute("environments", environmentServiceImpl.findAllByProject(project));
+        return "listEnvironments";
+    }
+    
+    @RequestMapping(value = "/saveChangesEnvironment", method = RequestMethod.POST)
+    public String saveChanges(@RequestParam Long projectId, @RequestParam Long environmentId, ModelMap model, Environment environment) {
+        Project project = projectServiceImpl.findProject(projectId);
+        Environment newEnvironment = environmentServiceImpl.findEnvironment(environmentId);
+        newEnvironment.setName(environment.getName());
+        newEnvironment.setHost(environment.getHost());
+        newEnvironment.setPort(environment.getPort());
+        newEnvironment.setUsername(environment.getUsername());
+        newEnvironment.setPassword(environment.getPassword());
+        newEnvironment.setProject(project);
+        environment = environmentServiceImpl.updateEnvironment(newEnvironment);
         model.addAttribute("project",project);
         model.addAttribute("environments", environmentServiceImpl.findAllByProject(project));
         return "listEnvironments";

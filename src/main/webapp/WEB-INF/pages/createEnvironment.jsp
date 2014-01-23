@@ -203,7 +203,7 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <!-- PAGE CONTENT BEGINS -->
-                                <form:form method="post" action="saveEnvironment" modelAttribute="environment" class="form-horizontal" >  
+                                <form:form method="post" action="saveEnvironment" modelAttribute="environment" class="form-horizontal" onsubmit="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' }); return true;">  
                                     <div class="form-group">
                                         <label for="name" class="col-sm-3 control-label no-padding-right">New environment name:</label>
                                         <div class="col-sm-9">
@@ -283,6 +283,9 @@
             if ("ontouchend" in document)
                 document.write("<script src='../assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
         </script>
+        
+        <script src="../assets/js/jquery-blockUI.js"></script>
+        
         <script src="../assets/js/bootstrap.min.js"></script>
         <script src="../assets/js/typeahead-bs2.min.js"></script>
 

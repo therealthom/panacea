@@ -36,4 +36,8 @@ public class ProjectServiceImpl implements ProjectService {
     public Project updateProject(Project project) {
         return project.merge();
     }
+    
+    public Project findProjectByName(String name) {
+        return Project.findProjectByName(name);
+    };
 }

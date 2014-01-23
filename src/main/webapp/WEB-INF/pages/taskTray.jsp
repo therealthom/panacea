@@ -1,24 +1,13 @@
 <%-- 
-    Document   : listEnvironments
-    Created on : 15-ene-2014, 17:00:52
+    Document   : taskTray
+    Created on : 19-ene-2014, 23:58:02
     Author     : oscar
 --%>
-
-<%-- 
-    Document   : listProjects
-    Created on : 15-ene-2014, 13:17:31
-    Author     : oscar
---%>
-
-<%-- 
-    Document   : systemSettings.jsp
-    Created on : 15-ene-2014, 10:51:44
-    Author     : oscar
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.Date" %> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -186,15 +175,9 @@
                                     &nbsp;Home
                                 </a>
                             </li>
-                            <li>
-                                <a href="<c:url value="/project/listProjects" />">
-                                    <i class="icon-bars"></i>
-                                    &nbsp;Projects
-                                </a>
-                            </li>
                             <li class="active">
-                                <i class="icon-cogs"></i>
-                                Environments
+                                <i class="icon-bars"></i>
+                                Tasks
                             </li>
                         </ul><!-- .breadcrumb -->
                     </div>
@@ -205,58 +188,48 @@
                                 <!-- PAGE CONTENT BEGINS -->
                                 <div class="widget-box">
                                     <div class="widget-header">
-                                        <h4 class="lighter"><i class="icon-bars"></i> Project: ${project.name} </h4>
-                                        <div class="widget-toolbar">
-                                            <a href="<c:url value="../environment/createEnvironment?projectId=${project.id}" />" class="btn btn-minier btn-inverse" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });" >
-                                                <i class="icon-plus"></i>
-                                                New environment&nbsp;
-                                                <i class="icon-cog"></i>
-                                            </a>
-                                        </div>
+                                        <h4 class="lighter"><i class="icon-bars"></i> Task list </h4>
                                     </div>
                                     <div class="widget-body">
                                         <div class="widget-main">
                                             <table class="table table-striped table-bordered table-hover">
                                                 <thead class="thin-border-bottom">
                                                     <tr>
-                                                        <th>
-                                                            <i class="icon-cog"></i>
-                                                            Environment name
-                                                        </th>
-                                                        <th>
-                                                            <i class="icon-home"></i>
-                                                            Environment host
-                                                        </th>
-                                                        <th>
-                                                            <i class="icon-anchor"></i>
-                                                            Environment port
-                                                        </th>
-                                                        <th>
-                                                            <i class="icon-user"></i>
-                                                            Environment admin
-                                                        </th>
-                                                        <th>
-                                                            <i class="icon-key"></i>
-                                                            Environment password
-                                                        </th>
-                                                        <th>
-                                                            <i class="icon-edit"></i>
-                                                            Edit
-                                                        </th>
+                                                        <th>Id</th>
+                                                        <th>Type</th>
+                                                        <th>Created On</th>
+                                                        <th>Start</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <c:forEach var="environment" items="${environments}" varStatus="status">
+                                                    <c:forEach var="taskSummary" items="${tareas}" varStatus="status">
                                                         <tr>
-                                                            <td>${environment.name}</td>
-                                                            <td>${environment.host}</td>
-                                                            <td>${environment.port}</td>
-                                                            <td>${environment.username}</td>
-                                                            <td>${environment.password}</td>
+                                                            <td>${taskSummary.id}</td>
+                                                            <td>${taskSummary.processId}</td>
+                                                            <td><fmt:formatDate value="${taskSummary.createdOn.toGregorianCalendar().getTime()}" pattern="dd/MM/yyyy HH:mm:ss" /></td>
                                                             <td style="text-align: center;">
-                                                                <a href="editEnvironment?projectId=${project.id}&environmentId=${environment.id}" class="btn btn-purple btn-minier" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
-                                                                    <i class="icon-edit"></i> Edit
-                                                                </a>
+                                                                <c:if test="${taskSummary.processId.contains('CISetupProcess')}">
+                                                                    <a href="../project/createProject?taskId=${taskSummary.id}" class="btn btn-info btn-minier" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
+                                                                        <i class="icon-plus-sign"></i> Set project name
+                                                                    </a>
+                                                                </c:if>
+                                                                <c:if test="${taskSummary.processId.contains('CIBuildProcess')}">
+                                                                    <a href="../project/executeBuildProject?taskId=${taskSummary.id}&projectId=${project.id}" class="btn btn-inverse btn-minier" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
+                                                                        <i class="icon-plus-sign"></i> Construir
+                                                                    </a>
+                                                                </c:if>
+                                                                <c:if test="${taskSummary.processId.contains('CIPromocionProcess')}">
+                                                                    <c:if test="${project != null}">
+                                                                        <a href="../promotion/generateFirst?taskId=${taskSummary.id}&projectId=${project.id}" class="btn btn-warning btn-minier" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
+                                                                            <i class="icon-plus-sign"></i> Promocionar
+                                                                        </a>
+                                                                    </c:if>
+                                                                    <c:if test="${project == null}">
+                                                                        <a href="../promotion/evaluatePromotion?taskId=${taskSummary.id}&processId=${taskSummary.processInstanceId}" class="btn btn-success btn-minier" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
+                                                                            <i class="icon-plus-sign"></i> Promocionar
+                                                                        </a>
+                                                                    </c:if>
+                                                                </c:if>
                                                             </td>
                                                         </tr>
                                                     </c:forEach>
@@ -271,7 +244,7 @@
                     </div><!-- /.page-content -->
                 </div><!-- /.main-content -->
             </div><!-- /.main-container-inner -->
-
+            
             <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
                 <i class="icon-double-angle-up icon-only bigger-110"></i>
             </a>

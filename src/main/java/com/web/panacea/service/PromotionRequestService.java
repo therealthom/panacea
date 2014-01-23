@@ -1,5 +1,6 @@
 package com.web.panacea.service;
 
+import com.web.panacea.domain.Project;
 import com.web.panacea.domain.PromotionRequest;
 import java.util.List;
 
@@ -18,5 +19,7 @@ public interface PromotionRequestService {
     public abstract void savePromotionRequest(PromotionRequest promotionRequest);
 
     public abstract PromotionRequest updatePromotionRequest(PromotionRequest promotionRequest);
+    
+    public abstract PromotionRequest findByProject(Project project);
 
 }
