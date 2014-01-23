@@ -214,8 +214,9 @@
                                                                     <b>Actions</b>
                                                                 </div>
                                                             </div>
-
                                                             <div>
+                                                                <br />
+                                                                <br />
                                                                 <form class="form-horizontal" method="post" action="promoteToNextLevel" enctype="multipart/form-data" onsubmit="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' }); return true;">
                                                                     <div class="form-group">
                                                                         <label for="comments" class="col-sm-3 control-label no-padding-right">Comments:</label>
