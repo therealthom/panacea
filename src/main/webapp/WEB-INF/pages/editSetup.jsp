@@ -183,10 +183,8 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <!-- PAGE CONTENT BEGINS -->
-                                <form:form  id="myForm" name="myForm" class="form-horizontal" method="post" modelAttribute="setup" action="editSetup" onsubmit="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' }); return true;">
+                                <form:form id="myForm" name="myForm" class="form-horizontal" method="post" modelAttribute="setup" action="editSetup" onsubmit="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' }); return true;">
                                     <form:hidden path="id" value="${setup.id}"/>
-                                    <h4 class="header smaller lighter green">SVN Settings</h4>
-
                                     <div class="form-group">
                                         <form:label path="svnHost" class="col-sm-3 control-label no-padding-right">SVN Host</form:label>
                                             <div class="col-sm-9">
@@ -306,9 +304,7 @@
             if ("ontouchend" in document)
                 document.write("<script src='../assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
         </script>
-
         <script src="../assets/js/jquery-blockUI.js"></script>
-
         <script src="../assets/js/bootstrap.min.js"></script>
         <script src="../assets/js/typeahead-bs2.min.js"></script>
         <script src="../assets/js/jquery.validationEngine-es.js"></script>

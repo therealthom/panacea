@@ -56,11 +56,11 @@ public class Setup implements Serializable {
     /**
      */
     private String jenkinsUsername;
-
+    
     /**
      */
     private String jenkinsPassword;
-    
+
     /**
      */
     @NotNull

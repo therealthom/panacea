@@ -1,7 +1,7 @@
 <html>
 <head>
 <script type="text/javascript">
-    window.location = "/panacea/home/dashboard"
+    window.location = "/panacea/task/taskTray"
 </script>
 </head>
 <body>
