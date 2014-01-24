@@ -37,6 +37,7 @@
         <link rel="stylesheet" href="../assets/css/ace-rtl.min.css" />
         <link rel="stylesheet" href="../assets/css/ace-skins.min.css" />
 
+        <link rel="stylesheet" href="../assets/css/validationEngine.jquery.css" /> 
         <!--[if lte IE 8]>
           <link rel="stylesheet" href="../assets/css/ace-ie.min.css" />
         <![endif]-->
@@ -190,7 +191,7 @@
                         <div class="row-fluid">
                             <div class="col-xs-12">
                                 <!-- PAGE CONTENT BEGINS -->
-                                <form:form method="post" action="saveProject" modelAttribute="project" onsubmit="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' }); return true;" >
+                                <form:form id="myForm" name="myForm" method="post" action="saveProject" modelAttribute="project" onsubmit="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' }); return true;" >
                                     <div class="form-group">
                                         <label for="name" class="col-xs-2 control-label no-padding-right">New project name:</label>
                                         <div class="col-xs-10">
@@ -217,7 +218,7 @@
                                         <label for="groupId" class="col-xs-2 control-label no-padding-right">New project group id:</label>
                                         <div class="col-xs-10">
                                             <span class="block input-icon input-icon-right">
-                                                <form:input name="groupId" id="groupId" path="groupId" value="${project.groupId}" class="form-control" />
+                                                <form:input name="groupId" id="groupId" path="groupId" value="${project.groupId}" class="validate[required] form-control" />
                                             </span>
                                         </div>
                                     </div>
@@ -263,6 +264,8 @@
         
         <script src="../assets/js/bootstrap.min.js"></script>
         <script src="../assets/js/typeahead-bs2.min.js"></script>
+        <script src="../assets/js/jquery.validationEngine-es.js"></script>
+        <script src="../assets/js/jquery.validationEngine.js"></script>
 
         <!-- page specific plugin scripts -->
 
@@ -272,5 +275,11 @@
         <script src="../assets/js/ace.min.js"></script>
 
         <!-- inline scripts related to this page -->
+        <script>
+            $(document).ready(function() {
+                // binds form submission and fields to the validation engine
+                $("#myForm").validationEngine('attach');
+            });
+        </script>
     </body>
 </html>

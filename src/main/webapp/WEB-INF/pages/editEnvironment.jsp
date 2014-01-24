@@ -36,6 +36,7 @@
         <link rel="stylesheet" href="../assets/css/ace-rtl.min.css" />
         <link rel="stylesheet" href="../assets/css/ace-skins.min.css" />
 
+        <link rel="stylesheet" href="../assets/css/validationEngine.jquery.css" />
         <!--[if lte IE 8]>
           <link rel="stylesheet" href="../assets/css/ace-ie.min.css" />
         <![endif]-->
@@ -203,7 +204,7 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <!-- PAGE CONTENT BEGINS -->
-                                <form:form method="post" action="saveChangesEnvironment" modelAttribute="environment" class="form-horizontal" onsubmit="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' }); return true;">  
+                                <form:form id="myForm" name="myForm" method="post" action="saveChangesEnvironment" modelAttribute="environment" class="form-horizontal" onsubmit="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' }); return true;">  
                                     <div class="form-group">
                                         <label for="name" class="col-sm-3 control-label no-padding-right">New environment name:</label>
                                         <div class="col-sm-9">
@@ -223,13 +224,13 @@
                                         <label for="host" class="col-sm-3 control-label no-padding-right">New environment host:</label>
                                         <div class="col-sm-3">
                                             <span class="block input-icon input-icon-right">
-                                                <form:input name="host" id="host" path="host" value="${environment.host}" class="form-control" />
+                                                <form:input name="host" id="host" path="host" value="${environment.host}" class="validate[required,custom[ipv4]] form-control" />
                                             </span>
                                         </div>
                                         <label for="port" class="col-sm-3 control-label no-padding-right">New environment port:</label>
                                         <div class="col-sm-3">
                                             <span class="block input-icon input-icon-right">
-                                                <form:input name="port" id="port" path="port" value="${environment.port}" class="form-control" />
+                                                <form:input name="port" id="port" path="port" value="${environment.port}" class="validate[required,maxSize[5]] form-control" />
                                             </span>
                                         </div>
                                     </div>
@@ -237,13 +238,13 @@
                                         <label for="username" class="col-sm-3 control-label no-padding-right">New environment admin username:</label>
                                         <div class="col-sm-3">
                                             <span class="block input-icon input-icon-right">
-                                                <form:input name="username" id="username" path="username" value="${environment.username}" class="form-control" />
+                                                <form:input name="username" id="username" path="username" value="${environment.username}" class="validate[required,custom[onlyLetterNumber]] form-control" />
                                             </span>
                                         </div>
                                         <label for="password" class="col-sm-3 control-label no-padding-right">New environment admin password:</label>
                                         <div class="col-sm-3">
                                             <span class="block input-icon input-icon-right">
-                                                <form:input name="password" id="$password" path="password" value="${environment.password}" class="form-control" />
+                                                <form:input name="password" id="$password" path="password" value="${environment.password}" class="validate[required] form-control" />
                                             </span>
                                         </div>
                                     </div>
@@ -289,7 +290,9 @@
         
         <script src="../assets/js/bootstrap.min.js"></script>
         <script src="../assets/js/typeahead-bs2.min.js"></script>
-
+        <script src="../assets/js/jquery.validationEngine-es.js"></script>
+        <script src="../assets/js/jquery.validationEngine.js"></script>
+        
         <!-- page specific plugin scripts -->
 
         <!-- ace scripts -->
@@ -298,5 +301,11 @@
         <script src="../assets/js/ace.min.js"></script>
 
         <!-- inline scripts related to this page -->
+        <script>
+            $(document).ready(function() {
+                // binds form submission and fields to the validation engine
+                $("#myForm").validationEngine('attach');
+            });
+        </script>
     </body>
 </html>

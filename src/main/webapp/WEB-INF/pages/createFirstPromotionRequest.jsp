@@ -37,6 +37,7 @@
         <link rel="stylesheet" href="../assets/css/ace-rtl.min.css" />
         <link rel="stylesheet" href="../assets/css/ace-skins.min.css" />
 
+        <link rel="stylesheet" href="../assets/css/validationEngine.jquery.css" /> 
         <!--[if lte IE 8]>
           <link rel="stylesheet" href="../assets/css/ace-ie.min.css" />
         <![endif]-->
@@ -198,14 +199,14 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <!-- PAGE CONTENT BEGINS -->
-                                <form:form method="post" action="saveFirstPromotionRequest" modelAttribute="promotionRequest" class="form-horizontal" >  
+                                <form:form id="myForm" name="myForm" method="post" action="saveFirstPromotionRequest" modelAttribute="promotionRequest" class="form-horizontal" >  
                                     <div class="form-group">
                                         <label for="comments" class="col-sm-3 control-label no-padding-right">Comments:</label>
                                         <div class="col-sm-9">
                                             <span class="block input-icon input-icon-right">
                                                 <input type='hidden' name='projectId' id='projectId' value='${project.id}' />
                                                 <input type='hidden' name='taskId' id='taskId' value='${taskId}' />
-                                                <textarea class="form-control" id="comments" name="comments" path="comments" >${promotionRequest.comments}</textarea>
+                                                <textarea class="validate[required] form-control" id="comments" name="comments" path="comments" >${promotionRequest.comments}</textarea>
                                             </span>
                                         </div>
                                     </div>
@@ -251,6 +252,8 @@
         
         <script src="../assets/js/bootstrap.min.js"></script>
         <script src="../assets/js/typeahead-bs2.min.js"></script>
+        <script src="../assets/js/jquery.validationEngine-es.js"></script>
+        <script src="../assets/js/jquery.validationEngine.js"></script>
 
         <!-- page specific plugin scripts -->
 
@@ -274,6 +277,8 @@
                     //onchange:''
                     //
                  });
+                 
+                 $("#myForm").validationEngine('attach');
              });
         </script>
     </body>
