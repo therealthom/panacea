@@ -1,8 +1,7 @@
 package com.web.panacea.controller;
 
-import java.util.logging.Level;
 import javax.servlet.http.HttpSession;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,13 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/home")
 public class HomeController {
             
-    private static final Logger logger = Logger.getLogger("HomeController");
+    private static final Logger logger = Logger.getLogger(HomeController.class);
     
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
     public String dashboard(HttpSession session) {
-        //return "redirect:/home/user";
-        System.out.println(">>>" + session.getAttribute("login"));
-        logger.log(Level.INFO, "!!! {0}", session.getAttribute("login"));
+        logger.info(">>>" + session.getAttribute("login"));
         return "dashboard";
     }
 }
