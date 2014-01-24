@@ -32,6 +32,11 @@
             <version>1.1-SNAPSHOT</version>
         </dependency>
         <dependency>
+            <groupId>mx.redhat.ci</groupId>
+            <artifactId>artifactory-client</artifactId>
+            <version>1.02-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>
