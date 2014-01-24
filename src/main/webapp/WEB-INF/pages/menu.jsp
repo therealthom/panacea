@@ -24,13 +24,6 @@
     </li>
 
     <li>
-        <a href="<c:url value="/promotion/list" />" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
-            <i class="icon-thumbs-up"></i>
-            <span class="menu-text"> Promotions </span>
-        </a>
-    </li>
-
-    <li>
         <a href="<c:url value="/log/list" />" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
            <i class="icon-archive"></i>
             <span class="menu-text"> Log </span>

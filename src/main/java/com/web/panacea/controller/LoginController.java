@@ -35,6 +35,7 @@ public class LoginController {
             if (login != null) {
                 session.setAttribute("login", login);
                 session.setAttribute("username", login.getUsername());
+                session.setAttribute("role", login.getUserRol());
                 viewName = "redirect:/home/dashboard";
             } else {
                 model.addAttribute("login", new Login());
