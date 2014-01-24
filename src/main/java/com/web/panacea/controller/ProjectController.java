@@ -19,6 +19,7 @@ import com.web.panacea.service.SetupServiceImpl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import javax.xml.ws.Holder;
 import mx.redhat.brms.ws.procesos.impl.ProcessService;
 import mx.redhat.brms.ws.procesos.impl.ProcessServiceService;
@@ -54,7 +55,7 @@ public class ProjectController {
     }
     
     @RequestMapping(value = "/setupProject", method = RequestMethod.GET)
-    public String setup(ModelMap model) {
+    public String setup(HttpSession session, ModelMap model) {
         ProcessServiceService pss = new ProcessServiceService();
         ProcessService processService = pss.getProcessServicePort();
         long idProceso = processService.iniciaProceso("mx.redhat.ci.CISetupProcess");
@@ -64,6 +65,11 @@ public class ProjectController {
         user.setId("admin");
         List<TaskSummary> tareas = service.obtenerTareasGrupos(user, null);
         model.addAttribute("tareas", tareas);
+        if("DEV".equalsIgnoreCase(session.getAttribute("role").toString())){
+            model.addAttribute("firstPromotion", true);
+        } else {
+            model.addAttribute("firstPromotion", false);
+        }
         return "taskTray";
     }
     
@@ -145,7 +151,7 @@ public class ProjectController {
     }
     
     @RequestMapping(value = "/buildProject", method = RequestMethod.GET)
-    public String build(@RequestParam Long projectId, ModelMap model) {
+    public String build(HttpSession session, @RequestParam Long projectId, ModelMap model) {
         Project project = projectServiceImpl.findProject(projectId);
         ProcessServiceService pss = new ProcessServiceService();
         ProcessService processService = pss.getProcessServicePort();
@@ -157,6 +163,11 @@ public class ProjectController {
         List<TaskSummary> tareas = service.obtenerTareasGrupos(user, null);
         model.addAttribute("tareas", tareas);
         model.addAttribute("project", project);
+        if("DEV".equalsIgnoreCase(session.getAttribute("role").toString())){
+            model.addAttribute("firstPromotion", true);
+        } else {
+            model.addAttribute("firstPromotion", false);
+        }
         return "taskTray";
     }
     

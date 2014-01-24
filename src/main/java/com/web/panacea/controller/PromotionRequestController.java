@@ -85,6 +85,23 @@ public class PromotionRequestController {
         return "showPromotion"; 
     }
     
+    @RequestMapping(value = "/generateFirstWithProject", method = RequestMethod.GET)
+    public String generateFirstWP(@RequestParam Long taskId, @RequestParam Long projectId, ModelMap model) {
+        Project project = projectServiceImpl.findProject(projectId);
+        PromotionRequest newPromotionRequest = new PromotionRequest();
+        newPromotionRequest.setComments("Promovido desde desarrollo");
+        newPromotionRequest.setDateCreated(new Date());
+        newPromotionRequest.setProject(project);
+        promotionRequestServiceImpl.savePromotionRequest(newPromotionRequest);
+        Setup setup = setupServiceImpl.findSetup(1L);
+        ArtifactoryClient artifactoryClient = new ArtifactoryClient(setup.getArtifactoryHost(),Integer.parseInt(setup.getArtifactoryPort()), setup.getArtifactoryUsername(), setup.getArtifactoryPassword());
+        List<String> versions = artifactoryClient.getVersions(project.getGroupId().replaceAll("\\.","/"), project.getName());
+        model.addAttribute("versions",versions);
+        model.addAttribute("taskId",taskId);
+        model.addAttribute("promotion", newPromotionRequest);
+        return "showPromotion"; 
+    }
+    
     @RequestMapping(value = "/promoteToNextLevel", method = RequestMethod.POST)
     public String nextLevel(HttpSession session, @RequestParam String version, @RequestParam String comments, @RequestParam String outcome, @RequestParam Long projectId, @RequestParam Long taskId, ModelMap model) {
         Project project = projectServiceImpl.findProject(projectId);
