@@ -213,7 +213,7 @@
                                                                 <c:if test="${taskSummary.processId.contains('CIPromocionProcess')}">
                                                                     <c:if test="${firstPromotion}">
                                                                         <c:if test="${project != null}">
-                                                                            <a href="../promotion/generateFirst?taskId=${taskSummary.id}&projectId=${project.id}" class="btn btn-warning btn-minier" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
+                                                                            <a href="../promotion/generateFirstWithProject?taskId=${taskSummary.id}&projectId=${project.id}" class="btn btn-warning btn-minier" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
                                                                                 <i class="icon-plus-sign"></i> Promocionar
                                                                             </a>
                                                                         </c:if>

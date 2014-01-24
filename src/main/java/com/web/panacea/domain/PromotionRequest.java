@@ -167,8 +167,9 @@ public class PromotionRequest implements Serializable {
     }
     
     public static PromotionRequest findByProject(Project project) {
-        TypedQuery<PromotionRequest> query = entityManager().createQuery("SELECT o FROM PromotionRequest o WHERE o.project = :thisProject", PromotionRequest.class);
-        return query.setParameter("thisProject", project).getSingleResult();
+        TypedQuery<PromotionRequest> query = entityManager().createQuery("SELECT o FROM PromotionRequest o WHERE o.project = :thisProject ORDER BY o.id DESC", PromotionRequest.class);
+        List<PromotionRequest> resultados = query.setParameter("thisProject", project).getResultList();
+        return resultados.get(0);
     }
 
     public static List<PromotionRequest> findPromotionRequestEntries(int firstResult, int maxResults) {

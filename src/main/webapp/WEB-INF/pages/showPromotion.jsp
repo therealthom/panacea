@@ -215,7 +215,7 @@
                                                                         <div class="col-sm-9">
                                                                             <select id="version" name="version">
                                                                                 <c:forEach var="version" items="${versions}">
-                                                                                    <option value="version">version</option>
+                                                                                    <option value="${version}">${version}</option>
                                                                                 </c:forEach>
                                                                             </select>
                                                                         </div>
