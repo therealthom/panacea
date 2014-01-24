@@ -20,19 +20,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Table;
 import javax.persistence.TypedQuery;
+import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
 
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"name"}))
 @Configurable
 public class Project implements Serializable {
-    
+
     /**
      */
     @NotNull
     @Size(min = 1, max = 100)
     private String packaging;
-            
+
     /**
      */
     @NotNull
@@ -44,7 +47,7 @@ public class Project implements Serializable {
     @NotNull
     @Size(min = 1, max = 100)
     private String name;
-    
+
     @NotNull
     private Boolean active = true;
 
@@ -82,7 +85,7 @@ public class Project implements Serializable {
         }
         return entityManager().find(Project.class, id);
     }
-    
+
     public static Project findProjectByName(String name) {
         TypedQuery<Project> query = entityManager().createQuery("SELECT o FROM Project o WHERE o.name = :thisName", Project.class);
         return query.setParameter("thisName", name).getSingleResult();

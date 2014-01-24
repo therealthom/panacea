@@ -83,17 +83,9 @@
                             </a>
 
                             <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-                                <li>
-                                    <a href="#">
-                                        <i class="icon-user"></i>
-                                        Profile
-                                    </a>
-                                </li>
-
-                                <li class="divider"></li>
 
                                 <li>
-                                    <a href="#">
+                                    <a href="<c:url value="/login/exit" />" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
                                         <i class="icon-off"></i>
                                         Logout
                                     </a>
