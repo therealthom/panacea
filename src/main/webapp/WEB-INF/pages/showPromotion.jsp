@@ -219,6 +219,16 @@
                                                                 <br />
                                                                 <form class="form-horizontal" method="post" action="promoteToNextLevel" enctype="multipart/form-data" onsubmit="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' }); return true;">
                                                                     <div class="form-group">
+                                                                        <label for="version" class="col-sm-3 control-label no-padding-right">Versión:</label>
+                                                                        <div class="col-sm-9">
+                                                                            <select id="version" name="version">
+                                                                                <c:forEach var="version" items="${versions}">
+                                                                                    <option value="version">version</option>
+                                                                                </c:forEach>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
                                                                         <label for="comments" class="col-sm-3 control-label no-padding-right">Comments:</label>
                                                                         <div class="col-sm-9">
                                                                             <input type='hidden' name='projectId' id='projectId' value='${promotion.project.id}' />

@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.xml.ws.Holder;
+import mx.redhat.artifactory.ArtifactoryClient;
 import mx.redhat.brms.ws.procesos.impl.ProcessService;
 import mx.redhat.brms.ws.procesos.impl.ProcessServiceService;
 import mx.redhat.brms.ws.tareas.impl.HumanTaskService;
@@ -75,7 +76,7 @@ public class PromotionRequestController {
     }
     
     @RequestMapping(value = "/promoteToNextLevel", method = RequestMethod.POST)
-    public String nextLEvel(@RequestParam String comments, @RequestParam String outcome, @RequestParam Long projectId, @RequestParam Long taskId, ModelMap model) {
+    public String nextLevel(@RequestParam String version, @RequestParam String comments, @RequestParam String outcome, @RequestParam Long projectId, @RequestParam Long taskId, ModelMap model) {
         Project project = projectServiceImpl.findProject(projectId);
         List<Parametro> parametros = new ArrayList<Parametro>();
         Setup setup = setupServiceImpl.findSetup(1L);
@@ -105,7 +106,7 @@ public class PromotionRequestController {
         parametros.add(parametro);
         parametro = new Parametro();
         parametro.setLlave("version_");
-        parametro.setValor("1.1");
+        parametro.setValor(version);
         parametros.add(parametro);
         parametro = new Parametro();
         parametro.setLlave("comentarios_");
@@ -132,8 +133,12 @@ public class PromotionRequestController {
         String nombreProyecto = (String) processService.obtenVariableNodo(processId, "_proyecto");
         Project project = projectServiceImpl.findProjectByName(nombreProyecto);
         PromotionRequest promotionRequest = promotionRequestServiceImpl.findByProject(project);
+        Setup setup = setupServiceImpl.findSetup(1L);
+        ArtifactoryClient artifactoryClient = new ArtifactoryClient(setup.getArtifactoryHost(),Integer.parseInt(setup.getArtifactoryPort()), setup.getArtifactoryUsername(), setup.getArtifactoryPassword());
+        List<String> versions = artifactoryClient.getVersions(project.getGroupId().replaceAll("\\.","/"), nombreProyecto);
         model.addAttribute("promotion", promotionRequest);
         model.addAttribute("taskId",taskId);
+        model.addAttribute("versions",versions);
         return "showPromotion";  
     }
     
