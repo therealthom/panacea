@@ -215,7 +215,7 @@
                                                                         <div class="col-sm-9">
                                                                             <select id="version" name="version">
                                                                                 <c:forEach var="version" items="${versions}">
-                                                                                    <option value="version">version</option>
+                                                                                    <option value="${version}">${version}</option>
                                                                                 </c:forEach>
                                                                             </select>
                                                                         </div>
@@ -268,11 +268,11 @@
                                                                 <c:forEach items="${promotion.documents}" var="document">
                                                                     <tr>
                                                                         <td>
-                                                                            <a href="<c:url value="/document/delete?promotionId=${promotion.id}&documentId=${document.id}" />">
+                                                                            <a href="<c:url value="/document/delete?promotionId=${promotion.id}&documentId=${document.id}&taskId=${taskId}" />">
                                                                                 <i class="icon-trash red"></i> 
                                                                             </a>
                                                                             -
-                                                                            <a href="<c:url value="/document/download?promotionId=${promotion.id}&documentId=${document.id}" />">
+                                                                            <a href="<c:url value="/document/download?promotionId=${promotion.id}&documentId=${document.id}&taskId=${taskId}" />">
                                                                                 ${document.filename}
                                                                             </a>
                                                                         </td>                                                                    

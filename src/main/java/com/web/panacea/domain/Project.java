@@ -46,6 +46,7 @@ public class Project implements Serializable {
      */
     @NotNull
     @Size(min = 1, max = 100)
+    @Column(name = "name", unique=true)
     private String name;
 
     @NotNull
