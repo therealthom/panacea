@@ -54,9 +54,9 @@ public class DocumentController {
     }
     
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public String delete(@RequestParam Long documentId, @RequestParam Long promotionId) {
+    public String delete(@RequestParam Long taskId, @RequestParam Long documentId, @RequestParam Long promotionId) {
         Document document = documentServiceImpl.findDocument(documentId);
         documentServiceImpl.deleteDocument(document);        
-        return "redirect:/promotion/show?promotionId=" + promotionId;
+        return "redirect:/promotion/show?promotionId=" + promotionId + "&taskId=" + taskId;
     }
 }
