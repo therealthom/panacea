@@ -63,7 +63,7 @@ public class ProjectController {
     public String setup(HttpSession session, ModelMap model) {
         ProcessServiceService pss = new ProcessServiceService();
         ProcessService processService = pss.getProcessServicePort();
-        long idProceso = processService.iniciaProceso("mx.redhat.ci.CISetupProcess");
+        long idProceso = processService.iniciaProceso("mx.org.ife.CISetupProcess");
         HumanTaskServiceService hts = new HumanTaskServiceService();
         HumanTaskService service = hts.getHumanTaskServicePort();
         User user = new User();
@@ -160,7 +160,7 @@ public class ProjectController {
         Project project = projectServiceImpl.findProject(projectId);
         ProcessServiceService pss = new ProcessServiceService();
         ProcessService processService = pss.getProcessServicePort();
-        long idProceso = processService.iniciaProceso("mx.redhat.ci.CIBuildProcess");
+        long idProceso = processService.iniciaProceso("mx.org.ife.CIBuildProcess");
         HumanTaskServiceService hts = new HumanTaskServiceService();
         HumanTaskService service = hts.getHumanTaskServicePort();
         User user = new User();

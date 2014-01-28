@@ -56,7 +56,7 @@ public class PromotionRequestController {
         Project project = projectServiceImpl.findProject(projectId);
         ProcessServiceService pss = new ProcessServiceService();
         ProcessService processService = pss.getProcessServicePort();
-        long idProceso = processService.iniciaProceso("mx.redhat.ci.CIPromocionProcess");
+        long idProceso = processService.iniciaProceso("mx.org.ife.CIPromocionProcess");
         processService.asignarVariableNodo(idProceso, "_proyecto", project.getName());
         HumanTaskServiceService hts = new HumanTaskServiceService();
         HumanTaskService service = hts.getHumanTaskServicePort();
