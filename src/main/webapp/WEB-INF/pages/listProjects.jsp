@@ -181,13 +181,15 @@
                                 <div class="widget-box">
                                     <div class="widget-header">
                                         <h4 class="lighter"><i class="icon-bars"></i> Project list </h4>
-                                        <div class="widget-toolbar">
-                                            <a href="<c:url value="/project/setupProject" />" class="btn btn-minier btn-inverse" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
-                                                <i class="icon-plus"></i>
-                                                New project&nbsp;
-                                                <i class="icon-briefcase"></i>
-                                            </a>
-                                        </div>
+                                        <c:if test='${"Development".equals(role) || "ADMIN".equals(role)}'>
+                                            <div class="widget-toolbar">
+                                                <a href="<c:url value="/project/setupProject" />" class="btn btn-minier btn-inverse" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
+                                                    <i class="icon-plus"></i>
+                                                    New project&nbsp;
+                                                    <i class="icon-briefcase"></i>
+                                                </a>
+                                            </div>
+                                        </c:if>
                                     </div>
                                     <div class="widget-body">
                                         <div class="widget-main">
@@ -206,14 +208,16 @@
                                                             <i class="icon-check"></i>
                                                             Change status
                                                         </th>
-                                                        <th>
-                                                            <i class="icon-briefcase"></i>
-                                                            Build
-                                                        </th>
-                                                        <th>
-                                                            <i class="icon-external-link-sign"></i>
-                                                            Promote
-                                                        </th>
+                                                        <c:if test='${"Development".equals(role)}'>
+                                                            <th>
+                                                                <i class="icon-briefcase"></i>
+                                                                Build
+                                                            </th>
+                                                            <th>
+                                                                <i class="icon-external-link-sign"></i>
+                                                                Promote
+                                                            </th>
+                                                        </c:if>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -237,22 +241,24 @@
                                                                     </a>
                                                                 </c:if>
                                                             </td>
-                                                            <td style="text-align: center;">
-                                                                <c:if test="${project.active == true}">
-                                                                    <a href="../project/buildProject?projectId=${project.id}" class="btn btn-yellow btn-minier" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
-                                                                        <i class="icon-briefcase"></i> Construir
-                                                                    </a>
-                                                                </c:if>
-                                                            </td>
-                                                            <td style="text-align: center;">
-                                                                <c:if test="${project.active == true}">
-                                                                    <c:if test="${project.environments != null}">
-                                                                        <a href="../promotion/startPromotionProcess?projectId=${project.id}" class="btn btn-purple btn-minier" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
-                                                                            <i class="icon-external-link-sign"></i> Promote
+                                                            <c:if test='${"Development".equals(role)}'>
+                                                                <td style="text-align: center;">
+                                                                    <c:if test="${project.active == true}">
+                                                                        <a href="../project/buildProject?projectId=${project.id}" class="btn btn-yellow btn-minier" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
+                                                                            <i class="icon-briefcase"></i> Construir
                                                                         </a>
                                                                     </c:if>
-                                                                </c:if>
-                                                            </td>
+                                                                </td>
+                                                                <td style="text-align: center;">
+                                                                    <c:if test="${project.active == true}">
+                                                                        <c:if test="${project.environments != null}">
+                                                                            <a href="../promotion/startPromotionProcess?projectId=${project.id}" class="btn btn-purple btn-minier" onclick="jQuery.blockUI({ message: '<h4><img src=\'../assets/img/busy.gif\' /> Please wait</h4>' });">
+                                                                                <i class="icon-external-link-sign"></i> Promote
+                                                                            </a>
+                                                                        </c:if>
+                                                                    </c:if>
+                                                                </td>
+                                                            </c:if>
                                                         </tr>
                                                     </c:forEach>
                                                 </tbody>

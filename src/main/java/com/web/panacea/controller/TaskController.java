@@ -33,7 +33,7 @@ public class TaskController {
         User user = new User();
         user.setId(session.getAttribute("role").toString());
         List<TaskSummary> tareas = service.obtenerTareasGrupos(user, null);
-        if("DEV".equalsIgnoreCase(session.getAttribute("role").toString())){
+        if("Development".equalsIgnoreCase(session.getAttribute("role").toString())){
             model.addAttribute("firstPromotion", true);
         } else {
             model.addAttribute("firstPromotion", false);

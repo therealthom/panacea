@@ -22,5 +22,4 @@
       <property name="hibernate.hbm2ddl.auto" value="update"/>
     </properties>
   </persistence-unit>
-  <non-jta-data-source>jdbc/resdatasource</non-jta-data-source>
 </persistence>
