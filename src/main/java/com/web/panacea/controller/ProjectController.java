@@ -15,6 +15,7 @@ import com.web.panacea.domain.Project;
 import com.web.panacea.domain.Setup;
 import com.web.panacea.service.LogService;
 import com.web.panacea.service.ProjectService;
+import com.web.panacea.service.SessionService;
 import com.web.panacea.service.SetupServiceImpl;
 import java.util.ArrayList;
 import java.util.Date;
@@ -48,9 +49,13 @@ public class ProjectController {
     @Autowired
     SetupServiceImpl setupServiceImpl;
     
+    @Autowired
+    SessionService sessionServiceImpl;
+    
     @RequestMapping(value = "/listProjects", method = RequestMethod.GET)
-    public String list(ModelMap model) {
+    public String list(HttpSession session, ModelMap model) {
         model.addAttribute("projects",projectServiceImpl.findAllProjects());
+        model.addAttribute("role", sessionServiceImpl.getRole(session));
         return "listProjects";
     }
     
@@ -65,7 +70,7 @@ public class ProjectController {
         user.setId("admin");
         List<TaskSummary> tareas = service.obtenerTareasGrupos(user, null);
         model.addAttribute("tareas", tareas);
-        if("DEV".equalsIgnoreCase(session.getAttribute("role").toString())){
+        if("Development".equalsIgnoreCase(session.getAttribute("role").toString())){
             model.addAttribute("firstPromotion", true);
         } else {
             model.addAttribute("firstPromotion", false);
@@ -74,7 +79,7 @@ public class ProjectController {
     }
     
     @RequestMapping(value = "/createProject", method = RequestMethod.GET)
-    public String create(@RequestParam Long taskId, ModelMap model) {
+    public String create(HttpSession session, @RequestParam Long taskId, ModelMap model) {
         Project project = new Project();
         model.addAttribute("taskId",taskId);
         model.addAttribute("project",project);
@@ -82,7 +87,7 @@ public class ProjectController {
     }
     
     @RequestMapping(value = "/saveProject", method = RequestMethod.POST)
-    public String save(@RequestParam Long taskId, ModelMap model, Project project) {
+    public String save(HttpSession session, @RequestParam Long taskId, ModelMap model, Project project) {
         projectServiceImpl.saveProject(project);        
         //Inserta en el log
         Log log = new Log();        
@@ -163,7 +168,7 @@ public class ProjectController {
         List<TaskSummary> tareas = service.obtenerTareasGrupos(user, null);
         model.addAttribute("tareas", tareas);
         model.addAttribute("project", project);
-        if("DEV".equalsIgnoreCase(session.getAttribute("role").toString())){
+        if("Development".equalsIgnoreCase(session.getAttribute("role").toString())){
             model.addAttribute("firstPromotion", true);
         } else {
             model.addAttribute("firstPromotion", false);
@@ -172,7 +177,7 @@ public class ProjectController {
     }
     
     @RequestMapping(value = "/executeBuildProject", method = RequestMethod.GET)
-    public String executeBuild(@RequestParam Long projectId, @RequestParam Long taskId, ModelMap model) {
+    public String executeBuild(HttpSession session, @RequestParam Long projectId, @RequestParam Long taskId, ModelMap model) {
         Project project = projectServiceImpl.findProject(projectId);
         List<Parametro> parametros = new ArrayList<Parametro>();
         Setup setup = setupServiceImpl.findSetup(1L);
@@ -214,7 +219,7 @@ public class ProjectController {
     }
     
     @RequestMapping(value = "/disbleProject", method = RequestMethod.GET)
-    public String disable(@RequestParam Long projectId, ModelMap model) {
+    public String disable(HttpSession session, @RequestParam Long projectId, ModelMap model) {
         Project project = projectServiceImpl.findProject(projectId);
         project.setActive(false);
         project = projectServiceImpl.updateProject(project);
@@ -223,7 +228,7 @@ public class ProjectController {
     }
     
     @RequestMapping(value = "/enableProject", method = RequestMethod.GET)
-    public String enable(@RequestParam Long projectId, ModelMap model) {
+    public String enable(HttpSession session, @RequestParam Long projectId, ModelMap model) {
         Project project = projectServiceImpl.findProject(projectId);
         project.setActive(true);
         project = projectServiceImpl.updateProject(project);

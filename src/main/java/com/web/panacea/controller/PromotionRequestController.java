@@ -10,11 +10,13 @@ package com.web.panacea.controller;
  *
  * @author oscar
  */
+import com.web.panacea.domain.Environment;
 import com.web.panacea.domain.Project;
 import com.web.panacea.domain.PromotionRequest;
 import com.web.panacea.domain.Setup;
 import com.web.panacea.service.ProjectService;
 import com.web.panacea.service.PromotionRequestService;
+import com.web.panacea.service.SessionService;
 import com.web.panacea.service.SetupServiceImpl;
 import java.util.ArrayList;
 import java.util.Date;
@@ -46,6 +48,8 @@ public class PromotionRequestController {
     PromotionRequestService promotionRequestServiceImpl;
     @Autowired
     SetupServiceImpl setupServiceImpl;
+    @Autowired
+    SessionService sessionServiceImpl;
     
     @RequestMapping(value = "/startPromotionProcess", method = RequestMethod.GET)
     public String startPromotionProcess(HttpSession session,@RequestParam Long projectId, ModelMap model) {
@@ -138,6 +142,23 @@ public class PromotionRequestController {
         parametro = new Parametro();
         parametro.setLlave("comentarios_");
         parametro.setValor(comments);
+        parametros.add(parametro);
+        String rol = sessionServiceImpl.getRole(session);
+        Environment environment = null;
+        for(Environment e : project.getEnvironments()){
+            if(rol.equals(e.getName())){
+                environment = e;
+            }
+        }
+        parametro = new Parametro();
+        parametro.setLlave("jbossHost_");
+        parametro.setValor(environment.getHost());
+        parametro.setLlave("jbossPort_");
+        parametro.setValor(environment.getPort());
+        parametro.setLlave("jbossUser_");
+        parametro.setValor(environment.getUsername());
+        parametro.setLlave("jbossPassword_");
+        parametro.setValor(environment.getPassword());
         parametros.add(parametro);
         HumanTaskServiceService hts = new HumanTaskServiceService();
         HumanTaskService service = hts.getHumanTaskServicePort();
